@@ -22,26 +22,30 @@ The `theme/` directory mirrors what Shopify expects:
 
 ## Shopify CLI Workflow
 
-CLI version: 4.1.0 (`/opt/homebrew/bin/shopify`). If outdated, upgrade with `brew upgrade shopify-cli`.
+- **Store handle:** `the-mini-malist-apparel.myshopify.com`
+- **Working theme:** `Relay` (id `139581489246`) — unpublished, this is what we customize
+- **Current live theme:** `VALENTINES SALE` (id `137168650334`) — do not touch from CLI
+- CLI version: 4.1.0 (`/opt/homebrew/bin/shopify`). Upgrade with `brew upgrade shopify-cli`.
 
 ```bash
-# First-time auth (opens browser)
-shopify auth login
+# Pull latest Relay theme state from the store
+cd theme && shopify theme pull \
+  --store the-mini-malist-apparel.myshopify.com \
+  --theme 139581489246
 
-# Pull the live Relay theme into ./theme
-cd theme && shopify theme pull --store <store-handle>.myshopify.com
+# Local dev with hot reload (proxies the store)
+shopify theme dev --store the-mini-malist-apparel.myshopify.com
 
-# Local dev with hot reload (proxies the live store)
-shopify theme dev --store <store-handle>.myshopify.com
-
-# Push edits back as an unpublished theme
-shopify theme push --unpublished --theme-name "minimalist-dev"
+# Push edits back to the Relay theme (it stays unpublished)
+shopify theme push \
+  --store the-mini-malist-apparel.myshopify.com \
+  --theme 139581489246
 
 # List remote themes
-shopify theme list --store <store-handle>.myshopify.com
+shopify theme list --store the-mini-malist-apparel.myshopify.com
 ```
 
-**Always push to an unpublished theme first.** Never `--live` without an explicit review.
+**Launch workflow:** We push edits to the unpublished Relay theme. Ana publishes via the Shopify admin when ready — **never** push `--live` from CLI.
 
 ## Brand Direction
 
