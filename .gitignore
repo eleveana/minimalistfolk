@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Shopify CLI
+.shopify/
+*.shopify
+.env
+.env.local
+
+# Theme dev
+theme/.shopifyignore.local
+theme/config.yml
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (in case of build tooling)
+node_modules/
+dist/
+.cache/
+
+# Asset working files (heavy originals)
+assets/**/*.psd
+assets/**/*.ai
+assets/**/*.sketch
+assets/**/*.fig
+assets/**/_raw/
+
+# Logs
+*.log
+npm-debug.log*
