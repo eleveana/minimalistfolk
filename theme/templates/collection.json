@@ -1,0 +1,190 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section_divider_HPmQRD": {
+      "type": "section-divider",
+      "settings": {
+        "show_line": false,
+        "width": "wrapper--full",
+        "color_scheme": "",
+        "padding_top": 15,
+        "padding_bottom": 15
+      }
+    },
+    "section_hero_taG6ie": {
+      "type": "section-hero",
+      "blocks": {
+        "heading_qhzMmg": {
+          "type": "heading",
+          "settings": {
+            "title": "Staff Picks",
+            "heading_font_size": "heading-large",
+            "heading_tag": "automatic",
+            "padding_bottom": 8
+          }
+        }
+      },
+      "block_order": [
+        "heading_qhzMmg"
+      ],
+      "settings": {
+        "link": "",
+        "width": "wrapper--full-padded",
+        "height": "screen-height-one-third",
+        "flex_align_desktop": "align--middle-center-desktop",
+        "content_width": 50,
+        "mobile_height": "image-height--mobile",
+        "flex_align_mobile": "align--middle-center-mobile",
+        "color_scheme": "scheme-7",
+        "show_text_background": false,
+        "overlay_type": "disabled",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_placeholder": true
+      }
+    },
+    "hero": {
+      "type": "collection-image-with-title",
+      "disabled": true,
+      "settings": {
+        "show_title": true,
+        "show_description": true,
+        "flex_align": "align--middle-left",
+        "color_scheme": "",
+        "show_text_background": false,
+        "overlay_type": "disabled",
+        "show_image": true,
+        "banner_layout": "overlay",
+        "height": "screen-height-one-third",
+        "mobile_height": "screen-height-one-half--mobile",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "subcollections": {
+      "type": "subcollections",
+      "disabled": true,
+      "settings": {
+        "subcollection_layout": "grid",
+        "subcollection_description": false,
+        "select_image": "collection",
+        "color_scheme": "",
+        "color": "#ffffff",
+        "bg_color": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "main": {
+      "type": "collection",
+      "blocks": {
+        "featured_image_CdLUmq": {
+          "type": "featured_image",
+          "settings": {
+            "position": 6,
+            "featured_heading": "New for Spring",
+            "heading_font_size": "heading-small",
+            "featured_text": "<p>Bright colors and soft fabrics, new pieces arriving weekly.</p>",
+            "featured_button_text": "shop now",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "featured_color_text": "#ffffff",
+            "overlay_type": "disabled",
+            "heading_tag": "automatic"
+          }
+        },
+        "featured_image_GDUWgj": {
+          "type": "featured_image",
+          "settings": {
+            "position": 6,
+            "featured_heading": "New customers save 10%",
+            "heading_font_size": "heading-small",
+            "featured_text": "<p>Use code 'GET10' at checkout</p>",
+            "featured_button_text": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--outline",
+            "show_arrow": false,
+            "featured_color_text": "#ffffff",
+            "overlay_type": "disabled",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "featured_image_CdLUmq",
+        "featured_image_GDUWgj"
+      ],
+      "settings": {
+        "enable_sort": true,
+        "enable_filters": true,
+        "filter_layout": "inline-open",
+        "default_open": true,
+        "collection_linklist": "",
+        "grid": 3,
+        "grid_mobile": "2",
+        "products_per_page": 24,
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 60
+      }
+    },
+    "section_newsletter_n38yQU": {
+      "type": "section-newsletter",
+      "blocks": {
+        "newsletter_EJFM4g": {
+          "type": "newsletter",
+          "settings": {
+            "subheading": "Join our mailing list",
+            "heading": "Let's keep in touch",
+            "heading_font_size": "heading-small",
+            "text": "",
+            "text_font_size": "body-medium",
+            "text_columns": 1,
+            "align_text": "text-center",
+            "button_text": "Join",
+            "show_arrow": false,
+            "terms": false,
+            "show_name": false,
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_social_links": false,
+            "bg_color": "",
+            "color": "",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "newsletter_EJFM4g"
+      ],
+      "settings": {
+        "width": "wrapper--full-padded",
+        "height": "three-fifty-height-hero",
+        "mobile_height": "screen-height-one-half--mobile",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "section_divider_HPmQRD",
+    "section_hero_taG6ie",
+    "hero",
+    "subcollections",
+    "main",
+    "section_newsletter_n38yQU"
+  ]
+}

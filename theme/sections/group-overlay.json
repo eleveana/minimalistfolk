@@ -1,0 +1,69 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "aside",
+  "name": "Overlay",
+  "sections": {
+    "cart-drawer": {
+      "type": "cart-drawer",
+      "blocks": {
+        "cart-message": {
+          "type": "cart-message",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "free-shipping": {
+          "type": "free-shipping",
+          "settings": {
+            "message": "You are ||amount|| away from free shipping."
+          }
+        },
+        "order-note": {
+          "type": "order-note",
+          "disabled": true,
+          "settings": {}
+        },
+        "gift-note": {
+          "type": "gift-note",
+          "settings": {}
+        },
+        "products": {
+          "type": "products",
+          "settings": {}
+        },
+        "upsell-products": {
+          "type": "upsell-products",
+          "settings": {}
+        },
+        "checkout-buttons": {
+          "type": "checkout-buttons",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "cart-message",
+        "title",
+        "free-shipping",
+        "products",
+        "upsell-products",
+        "order-note",
+        "gift-note",
+        "checkout-buttons"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "cart-drawer"
+  ]
+}

@@ -1,0 +1,375 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "subheading": "",
+        "show_title": true,
+        "heading_font_size": "heading-large",
+        "show_content": true,
+        "text_font_size": "body-medium",
+        "align_text": "text-left",
+        "width": "wrapper",
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "heading_tag": "automatic"
+      }
+    },
+    "divider": {
+      "type": "section-divider",
+      "disabled": true,
+      "settings": {
+        "show_line": false,
+        "width": "wrapper--full",
+        "color_scheme": "scheme-8",
+        "padding_top": 15,
+        "padding_bottom": 15
+      }
+    },
+    "section_hero_jCKbwA": {
+      "type": "section-hero",
+      "settings": {
+        "link": "",
+        "width": "wrapper--full-padded",
+        "height": "screen-height-one-half",
+        "flex_align_desktop": "align--middle-center-desktop",
+        "content_width": 50,
+        "mobile_height": "image-height--mobile",
+        "flex_align_mobile": "align--middle-center-mobile",
+        "color_scheme": "scheme-1",
+        "show_text_background": false,
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "show_placeholder": true
+      }
+    },
+    "section_timeline_TrbNPA": {
+      "type": "section-timeline",
+      "blocks": {
+        "timeline_qJrEqh": {
+          "type": "timeline",
+          "settings": {
+            "subheading": "0 - 1 years",
+            "title": "For the babies.",
+            "heading_font_size": "heading-small",
+            "text": "<p>We believe that every little one deserves to be wrapped in love and style from the very beginning. Our collection is designed for comfort and cuteness for your precious bundle of joy.</p>",
+            "text_font_size": "body-medium",
+            "button_text": "Shop babies",
+            "button_type": "btn--black",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "heading_tag": "automatic"
+          }
+        },
+        "timeline_FLkzNr": {
+          "type": "timeline",
+          "settings": {
+            "subheading": "1 - 3 years",
+            "title": "For the toddlers.",
+            "heading_font_size": "heading-small",
+            "text": "<p>We understand that toddlers are tiny explorers. That’s why our toddler clothes combines style and durability to keep up with their endless escapades.</p>",
+            "text_font_size": "body-medium",
+            "button_text": "Shop toddlers",
+            "button_type": "btn--black",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "heading_tag": "automatic"
+          }
+        },
+        "timeline_XhUkFq": {
+          "type": "timeline",
+          "settings": {
+            "subheading": "4+ years",
+            "title": "For the big kids.",
+            "heading_font_size": "heading-small",
+            "text": "<p>As kids grow, so does their unique sense of self-expression. Our diverse collection of big kids' clothing is tailored to embrace their individuality and cater to their ever-evolving tastes.</p>",
+            "text_font_size": "body-medium",
+            "button_text": "Shop big kids",
+            "button_type": "btn--black",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "timeline_qJrEqh",
+        "timeline_FLkzNr",
+        "timeline_XhUkFq"
+      ],
+      "settings": {
+        "show_images": true,
+        "title": "Clothes for kids at any age.",
+        "heading_font_size": "heading-medium",
+        "text": "<p>Style your little one in fun clothing that is easy to wear, durable and timeless. </p>",
+        "text_font_size": "body-large",
+        "text_alignment": "text-center",
+        "width": "wrapper--full-padded",
+        "mobile_height": "three-fifty-height-hero--mobile",
+        "color_scheme": "scheme-1",
+        "dot_background": "",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "heading_tag": "automatic"
+      }
+    },
+    "section_text_row_zH4AXW": {
+      "type": "section-text-row",
+      "blocks": {
+        "icon_6hMy33": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-leaf",
+            "icon_size": 50,
+            "icon_color": "",
+            "title": "Environmentally friendly",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>We support the creation and reuse of quality materials</p>",
+            "text_font_size": "body-small",
+            "heading_tag": "automatic"
+          }
+        },
+        "icon_pQFE3A": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-heart",
+            "icon_size": 50,
+            "icon_color": "",
+            "title": "Fair trade certified",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>Ethical and sustainable conditions for all our employees</p>",
+            "text_font_size": "body-small",
+            "heading_tag": "automatic"
+          }
+        },
+        "icon_Lm9tKU": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-donation",
+            "icon_size": 50,
+            "icon_color": "",
+            "title": "Giving back",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>1% of our sales are donated to grassroots organizations</p>",
+            "text_font_size": "body-small",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "icon_6hMy33",
+        "icon_pQFE3A",
+        "icon_Lm9tKU"
+      ],
+      "settings": {
+        "title": "",
+        "heading_font_size": "heading-medium",
+        "align_heading": "text-left",
+        "align_text": "text-center",
+        "icon_alignment": "icon--top",
+        "width": "wrapper--full-padded",
+        "align_columns": "flex-align-center",
+        "layout": "grid",
+        "grid": 3,
+        "layout_mobile": "1",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "heading_tag": "automatic"
+      }
+    },
+    "section_reviews_DN4PYQ": {
+      "type": "section-reviews",
+      "blocks": {
+        "review_a6iyQq": {
+          "type": "review",
+          "settings": {
+            "title": "Tina Lee",
+            "subheading": "Customer",
+            "review_content": "<p>Love this brand! Love the colors and the durable soft materials. Terrific prices and fast shipping. My kid loves wearing their clothing.</p>",
+            "review_url": ""
+          }
+        },
+        "review_Htf4NG": {
+          "type": "review",
+          "settings": {
+            "title": "Cora Tam",
+            "subheading": "Customer",
+            "review_content": "<p>This brand has easily become one of my favorite places to order clothing for my children! I’ve loved every single thing I’ve purchased!</p>",
+            "review_url": ""
+          }
+        },
+        "review_EE48VU": {
+          "type": "review",
+          "settings": {
+            "title": "Tina Lee",
+            "subheading": "Customer",
+            "review_content": "<p>Love this brand! Love the colors and the durable soft materials. Terrific prices and fast shipping. My kid loves wearing their clothing.</p>",
+            "review_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_a6iyQq",
+        "review_Htf4NG",
+        "review_EE48VU"
+      ],
+      "settings": {
+        "show_featured_image": true,
+        "image_aspect_ratio": 1.3,
+        "show_quotation_marks": true,
+        "heading_font_size": "heading-mini",
+        "text_align": "text-left",
+        "color_scheme": "",
+        "card_bg_color": "",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "section_columns_UfANwY": {
+      "type": "section-columns",
+      "blocks": {
+        "image_tPjwgA": {
+          "type": "image",
+          "settings": {
+            "image_width": 100,
+            "image_shape": "normal",
+            "title": "We are committed to bringing you the latest trends in kid’s fashion. We offer a wide selection of apparel, accessories, and shoes for all kiddos.",
+            "heading_font_size": "heading-mini",
+            "text": "",
+            "text_font_size": "body-medium",
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "image_aspect_ratio": 1.2,
+            "mobile_image_aspect_ratio": 1.2,
+            "heading_tag": "automatic"
+          }
+        },
+        "image_pCyef8": {
+          "type": "image",
+          "settings": {
+            "image_width": 100,
+            "image_shape": "normal",
+            "title": "Our goal is to provide quality clothing at affordable prices. We focus on creating stylish and comfortable pieces that your kids will love.",
+            "heading_font_size": "heading-mini",
+            "text": "",
+            "text_font_size": "body-medium",
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "image_aspect_ratio": 1.2,
+            "mobile_image_aspect_ratio": 1.2,
+            "heading_tag": "automatic"
+          }
+        },
+        "image_HijwRL": {
+          "type": "image",
+          "settings": {
+            "image_width": 100,
+            "image_shape": "normal",
+            "title": "We're here to help you find the perfect outfit for any occasion. Shop with us and let us help you create the perfect look for your little one.",
+            "heading_font_size": "heading-mini",
+            "text": "",
+            "text_font_size": "body-medium",
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "image_aspect_ratio": 1.2,
+            "mobile_image_aspect_ratio": 1.2,
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "image_tPjwgA",
+        "image_pCyef8",
+        "image_HijwRL"
+      ],
+      "settings": {
+        "title": "",
+        "heading_font_size": "heading-medium",
+        "align_heading": "text-left",
+        "align_text": "text-center",
+        "width": "wrapper--full-padded",
+        "align_columns": "flex-align-center",
+        "layout": "grid",
+        "grid": 3,
+        "layout_mobile": "1",
+        "color_scheme": "",
+        "padding_top": 80,
+        "padding_bottom": 100,
+        "heading_tag": "automatic"
+      }
+    },
+    "section_rich_text_rVALyd": {
+      "type": "section-rich-text",
+      "blocks": {
+        "heading_zAwNfP": {
+          "type": "heading",
+          "settings": {
+            "title": "Learn more about our team",
+            "heading_font_size": "heading-small",
+            "padding_bottom": 16,
+            "heading_tag": "automatic"
+          }
+        },
+        "buttons_gM7Xz4": {
+          "type": "buttons",
+          "settings": {
+            "button_text": "Discover",
+            "button_type": "btn--white",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "heading_zAwNfP",
+        "buttons_gM7Xz4"
+      ],
+      "settings": {
+        "align_text": "text-center",
+        "width": "wrapper",
+        "color_scheme": "scheme-2",
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": [
+    "main",
+    "divider",
+    "section_hero_jCKbwA",
+    "section_timeline_TrbNPA",
+    "section_text_row_zH4AXW",
+    "section_reviews_DN4PYQ",
+    "section_columns_UfANwY",
+    "section_rich_text_rVALyd"
+  ]
+}

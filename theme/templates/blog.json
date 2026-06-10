@@ -1,0 +1,112 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section_divider_eTrAJ9": {
+      "type": "section-divider",
+      "settings": {
+        "show_line": false,
+        "width": "wrapper--full",
+        "color_scheme": "",
+        "padding_top": 15,
+        "padding_bottom": 15
+      }
+    },
+    "featured": {
+      "type": "featured-posts",
+      "blocks": {
+        "feat": {
+          "type": "featured_post",
+          "settings": {
+            "subheading": "Featured story"
+          }
+        }
+      },
+      "block_order": [
+        "feat"
+      ],
+      "settings": {
+        "show_author": false,
+        "show_date": false,
+        "heading_font_size": "heading-medium",
+        "show_button": true,
+        "width": "wrapper--full",
+        "height": "five-fifty-height-hero",
+        "mobile_height": "screen-height-one-half--mobile",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "main": {
+      "type": "blog",
+      "settings": {
+        "show_title": false,
+        "show_rss": false,
+        "show_tag_nav": true,
+        "aspect_ratio": 1.3,
+        "title_font_size": "heading-x-small",
+        "show_tags": true,
+        "show_author": false,
+        "show_date": false,
+        "show_button": false,
+        "show_comments": false,
+        "grid": 3,
+        "rows": 4,
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 60,
+        "title_tag": "automatic"
+      }
+    },
+    "section_rich_text_FVWhwL": {
+      "type": "section-rich-text",
+      "blocks": {
+        "heading_Wm6yRR": {
+          "type": "heading",
+          "settings": {
+            "title": "Creative, comfy and cute clothes to make the days a little brighter",
+            "heading_font_size": "heading-medium",
+            "padding_bottom": 16,
+            "heading_tag": "automatic"
+          }
+        },
+        "buttons_HwKUik": {
+          "type": "buttons",
+          "settings": {
+            "button_text": "Read more",
+            "button_type": "btn--secondary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": true,
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "heading_Wm6yRR",
+        "buttons_HwKUik"
+      ],
+      "settings": {
+        "align_text": "text-center",
+        "width": "wrapper",
+        "color_scheme": "scheme-2",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "section_divider_eTrAJ9",
+    "featured",
+    "main",
+    "section_rich_text_FVWhwL"
+  ]
+}

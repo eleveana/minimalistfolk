@@ -1,0 +1,332 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "subheading": "",
+        "show_title": true,
+        "heading_font_size": "heading-large",
+        "show_content": true,
+        "text_font_size": "body-medium",
+        "align_text": "text-center",
+        "width": "wrapper",
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "heading_tag": "automatic"
+      }
+    },
+    "section_double_AFiEra": {
+      "type": "section-double",
+      "blocks": {
+        "heading_49J43G": {
+          "type": "heading",
+          "settings": {
+            "title": "FAQs",
+            "heading_font_size": "heading-medium",
+            "padding_bottom": 16,
+            "heading_tag": "automatic"
+          }
+        },
+        "text_3wP9UJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Have a question? Please see below for answers to common questions from customers.</p>",
+            "text_font_size": "body-large",
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "heading_49J43G",
+        "text_3wP9UJ"
+      ],
+      "settings": {
+        "image_width": "one-half",
+        "text_alignment": "text-left",
+        "layout": "",
+        "width": "wrapper--full",
+        "height": "screen-height-three-quarters",
+        "mobile_height": "screen-height-one-half--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_placeholder": true
+      }
+    },
+    "section_sidebar_C7HiA9": {
+      "type": "section-sidebar",
+      "blocks": {
+        "header_XzkyCg": {
+          "type": "header",
+          "settings": {
+            "title": "Shipping"
+          }
+        },
+        "accordion_VWAwaU": {
+          "type": "accordion",
+          "settings": {
+            "title": "How much is shipping?",
+            "content": "<p>We offer free shipping on all US orders, and a flat rate of $10 for all international orders.</p>"
+          }
+        },
+        "accordion_nTXRqX": {
+          "type": "accordion",
+          "settings": {
+            "title": "How long does it take to receive my order?",
+            "content": "<p>We begin shipping orders out within 1 business day. Delivery takes anywhere between 3-5 business days.</p>"
+          }
+        },
+        "accordion_LAfT3Q": {
+          "type": "accordion",
+          "settings": {
+            "title": "Do you ship internationally?",
+            "content": "<p>Yep! For international orders, standard shipping can take up to 30 days, depending on your location</p>"
+          }
+        },
+        "accordion_jt4qQk": {
+          "type": "accordion",
+          "settings": {
+            "title": "Where can I track my order?",
+            "content": "<p>Once your order ships, you'll receive an email with a tracking link to track your order.</p>"
+          }
+        },
+        "header_NNG4NG": {
+          "type": "header",
+          "settings": {
+            "title": "Returns"
+          }
+        },
+        "accordion_HfVfzH": {
+          "type": "accordion",
+          "settings": {
+            "title": "How long do I have to return the item?",
+            "content": "<p>We accept returns within 60 days of the purchase date. Just please make the items are unworn and unwashed!</p>"
+          }
+        },
+        "accordion_Mg9bUt": {
+          "type": "accordion",
+          "settings": {
+            "title": "What if my items are damaged or defective?",
+            "content": "<p>We're here to help! Please email us at help@company.com or call us at 1-888-123-4567 and we’ll take care of you.</p>"
+          }
+        },
+        "accordion_W6x7Bt": {
+          "type": "accordion",
+          "settings": {
+            "title": "When can I expect my refund?",
+            "content": "<p>It takes 2-3 weeks for your refund. We will send you an email once the item has been received and your refund has been processed!</p>"
+          }
+        },
+        "header_Fn6x8F": {
+          "type": "header",
+          "settings": {
+            "title": "Sizing"
+          }
+        },
+        "accordion_eWFc9W": {
+          "type": "accordion",
+          "settings": {
+            "title": "How do I know the correct size to buy?",
+            "content": "<p>Look for our size charts on each product page, which provide measurments for each size. Also - don't hesitate to contact us about your sizing measurments and preferences. We'll give you a recommendation.</p>"
+          }
+        },
+        "accordion_zXL4q9": {
+          "type": "accordion",
+          "settings": {
+            "title": "How do I wash my items?",
+            "content": "<p>It's best to wash in cold water and dry on low.</p>"
+          }
+        },
+        "accordion_M6ahLU": {
+          "type": "accordion",
+          "settings": {
+            "title": "Do your items shrink?",
+            "content": "<p>We pre-wash the clothes so you shouldn't experience a noticable shrinkage. That said, we still recommend washing in cool water to prevent any potential shrinkage.</p>"
+          }
+        },
+        "header_rWCk9E": {
+          "type": "header",
+          "settings": {
+            "title": "Inventory"
+          }
+        },
+        "accordion_rkWAUP": {
+          "type": "accordion",
+          "settings": {
+            "title": "Item is out of stock. How long will it be to get restocked?",
+            "content": "<p>The time it takes to get a particular item back in stock varies. For an estimated time frame please email us at <a href=\"mailto:help@primary.com\">email@company.com</a>!</p>"
+          }
+        },
+        "accordion_taRDiq": {
+          "type": "accordion",
+          "settings": {
+            "title": "I want more colors of the item I love!",
+            "content": "<p>Well, feel free to emails us! We hear our customers and want to know your preferences.</p>"
+          }
+        },
+        "accordion_frYcaH": {
+          "type": "accordion",
+          "settings": {
+            "title": "Have you thought of doing adult sizes? Please do!",
+            "content": "<p>After many similar requests - we have something stylish in the works for you too! Stay tuned...</p>"
+          }
+        },
+        "header_YqztyU": {
+          "type": "header",
+          "settings": {
+            "title": "Discounts"
+          }
+        },
+        "accordion_BwM3Db": {
+          "type": "accordion",
+          "settings": {
+            "title": "Can I use more than one discount code?",
+            "content": "<p>Only one discount code can be used per order and cannot be combined with other promotions.</p>"
+          }
+        },
+        "accordion_e9i9Jd": {
+          "type": "accordion",
+          "settings": {
+            "title": "The sale ended, can I still use the discount code?",
+            "content": "<p>To make things fair to everyone, sales discount codes can only be applied within the timeframe of the sale.</p>"
+          }
+        },
+        "header_FmmqPk": {
+          "type": "header",
+          "settings": {
+            "title": "Payments"
+          }
+        },
+        "accordion_mRj8YJ": {
+          "type": "accordion",
+          "settings": {
+            "title": "What payment methods do you accept?",
+            "content": "<p>We accept all major credit and debit cards, plus PayPal and Apple Pay as alternate methods</p>"
+          }
+        },
+        "accordion_pnYfnE": {
+          "type": "accordion",
+          "settings": {
+            "title": "Do you accept International Cards?",
+            "content": "<p>Currently not, but if you have a Paypal/ApplePay account linked to an international card, just choose this option at checkout and you're good to go!</p>"
+          }
+        },
+        "header_cYMgin": {
+          "type": "header",
+          "settings": {
+            "title": "Contact"
+          }
+        },
+        "text_AzcLpN": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Still have questions? We're happy to help! Please email us at hi@email.com and we will get back to you within 24 hours.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "header_XzkyCg",
+        "accordion_VWAwaU",
+        "accordion_nTXRqX",
+        "accordion_LAfT3Q",
+        "accordion_jt4qQk",
+        "header_NNG4NG",
+        "accordion_HfVfzH",
+        "accordion_Mg9bUt",
+        "accordion_W6x7Bt",
+        "header_Fn6x8F",
+        "accordion_eWFc9W",
+        "accordion_zXL4q9",
+        "accordion_M6ahLU",
+        "header_rWCk9E",
+        "accordion_rkWAUP",
+        "accordion_taRDiq",
+        "accordion_frYcaH",
+        "header_YqztyU",
+        "accordion_BwM3Db",
+        "accordion_e9i9Jd",
+        "header_FmmqPk",
+        "accordion_mRj8YJ",
+        "accordion_pnYfnE",
+        "header_cYMgin",
+        "text_AzcLpN"
+      ],
+      "settings": {
+        "heading_font_size": "heading-small",
+        "width": "wrapper--full-padded",
+        "color_scheme": "scheme-1",
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    },
+    "icons": {
+      "type": "section-text-row",
+      "blocks": {
+        "icon-1": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-email",
+            "icon_size": 40,
+            "icon_color": "",
+            "title": "Chat via Email",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>Still have questions? Get in touch</p>",
+            "text_font_size": "body-medium",
+            "heading_tag": "automatic"
+          }
+        },
+        "icon_GD6QV8": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-phone",
+            "icon_size": 40,
+            "icon_color": "",
+            "title": "Chat via Phone",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>Quickly speak with a helpful team member</p>",
+            "text_font_size": "body-medium",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "icon-1",
+        "icon_GD6QV8"
+      ],
+      "settings": {
+        "title": "",
+        "heading_font_size": "heading-medium",
+        "align_heading": "text-left",
+        "align_text": "text-center",
+        "icon_alignment": "icon--top",
+        "width": "wrapper--full-padded",
+        "align_columns": "flex-align-top",
+        "layout": "grid",
+        "grid": 2,
+        "layout_mobile": "1",
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "heading_tag": "automatic"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_double_AFiEra",
+    "section_sidebar_C7HiA9",
+    "icons"
+  ]
+}

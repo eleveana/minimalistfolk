@@ -1,0 +1,374 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "subheading_option": "none",
+            "heading_font_size": "heading-small",
+            "padding_bottom": 8
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "text_font_size": "body-medium",
+            "padding_bottom": 16
+          }
+        },
+        "inventory_countdown_cTExEk": {
+          "type": "inventory_countdown",
+          "disabled": true,
+          "settings": {
+            "show_notice": "always",
+            "max_inventory": 10,
+            "icon_size": 20,
+            "in_stock_color": "#56ad6a",
+            "low_stock_color": "#f79554",
+            "out_of_stock_color": "#721c24",
+            "padding_bottom": 12
+          }
+        },
+        "variants": {
+          "type": "variants",
+          "settings": {
+            "info_page": "",
+            "size_chart_style": "question",
+            "padding_bottom": 16
+          }
+        },
+        "countdown_qDCpqE": {
+          "type": "countdown",
+          "disabled": true,
+          "settings": {
+            "end_date": "2024-12-30",
+            "end_time": "11:59",
+            "period": "am",
+            "end_message": "<p>Offer has expired</p>",
+            "hide_on_complete": true,
+            "digits_font_size": "heading-x-small",
+            "text_font_size": "body-x-small",
+            "text": "<p>Last chance sale ends</p>",
+            "heading_font_size": "heading-mini",
+            "bg_color": "#f7ddba",
+            "color": "",
+            "text_align": "text-center",
+            "padding_bottom": 28
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "show_quantity": false,
+            "button_type": "btn--primary",
+            "button_style": "btn--outline",
+            "button_type_dynamic": "btn--primary",
+            "button_style_dynamic": "btn--solid",
+            "show_gift_card_recipient": false,
+            "padding_bottom": 32
+          }
+        },
+        "accordion_C3k6Ba": {
+          "type": "accordion",
+          "settings": {
+            "show_description": true,
+            "show_read_more": true,
+            "default_open": true,
+            "heading": "Description",
+            "padding_bottom": 24
+          }
+        },
+        "fit_guide_z4K6g8": {
+          "type": "fit-guide",
+          "disabled": true,
+          "settings": {
+            "heading": "Fit",
+            "left_label": "Small",
+            "middle_label": "True to size",
+            "right_label": "Large",
+            "fit_color": "",
+            "padding_bottom": 24
+          }
+        },
+        "divider_1": {
+          "type": "divider",
+          "disabled": true,
+          "settings": {
+            "show_line": true,
+            "padding_bottom": 24
+          }
+        },
+        "icon_eHBCjF": {
+          "type": "icon",
+          "disabled": true,
+          "settings": {
+            "icon_name": "icon-smile",
+            "icon_size": 20,
+            "icon_color": "#862c46",
+            "text_font_size": "body-small",
+            "width": "full",
+            "padding_bottom": 8
+          }
+        },
+        "icon_zRXJ8m": {
+          "type": "icon",
+          "disabled": true,
+          "settings": {
+            "icon_name": "icon-flower",
+            "icon_size": 20,
+            "icon_color": "#862c46",
+            "text_font_size": "body-small",
+            "width": "full",
+            "padding_bottom": 24
+          }
+        },
+        "divider_Rcq7Up": {
+          "type": "divider",
+          "disabled": true,
+          "settings": {
+            "show_line": true,
+            "padding_bottom": 21
+          }
+        },
+        "upsell": {
+          "type": "upsell",
+          "disabled": true,
+          "settings": {
+            "upsell_product": "",
+            "upsell_product_list": [],
+            "bg_color": "#fcf9ef",
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "inventory_countdown_cTExEk",
+        "variants",
+        "countdown_qDCpqE",
+        "buttons",
+        "accordion_C3k6Ba",
+        "fit_guide_z4K6g8",
+        "divider_1",
+        "icon_eHBCjF",
+        "icon_zRXJ8m",
+        "divider_Rcq7Up",
+        "upsell"
+      ],
+      "settings": {
+        "product_sticky_enable": true,
+        "variant_image_scroll": true,
+        "show_cart_bar": true,
+        "enable_zoom": true,
+        "enable_video_looping": false,
+        "image_layout": "stacked",
+        "image_size": "normal",
+        "mobile_image_style": "thumbs",
+        "color_scheme": "",
+        "padding_top": 30,
+        "padding_bottom": 30
+      }
+    },
+    "section_rich_text_RiAKAx": {
+      "type": "section-rich-text",
+      "blocks": {
+        "heading_RJVAPq": {
+          "type": "heading",
+          "settings": {
+            "title": "Reasons to love Kiddo",
+            "heading_font_size": "heading-small",
+            "padding_bottom": 16,
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "heading_RJVAPq"
+      ],
+      "settings": {
+        "align_text": "text-center",
+        "width": "wrapper",
+        "color_scheme": "",
+        "padding_top": 60,
+        "padding_bottom": 30
+      }
+    },
+    "section_text_row_rineBE": {
+      "type": "section-text-row",
+      "blocks": {
+        "icon_F4Pfwr": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-peace",
+            "icon_size": 40,
+            "icon_color": "",
+            "title": "Made for Play",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>Comfy clothes that are durable</p>",
+            "text_font_size": "body-medium",
+            "heading_tag": "automatic"
+          }
+        },
+        "icon_fcgcFF": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-cloud",
+            "icon_size": 40,
+            "icon_color": "",
+            "title": "Soft & Stretchy",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>Easy and fun styles to wear</p>",
+            "text_font_size": "body-medium",
+            "heading_tag": "automatic"
+          }
+        },
+        "icon_Ca4FK3": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-flower",
+            "icon_size": 40,
+            "icon_color": "",
+            "title": "Sustainable Materials",
+            "heading_font_size": "heading-x-small",
+            "text": "<p>Natural and breathable fabrics</p>",
+            "text_font_size": "body-medium",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "icon_F4Pfwr",
+        "icon_fcgcFF",
+        "icon_Ca4FK3"
+      ],
+      "settings": {
+        "title": "",
+        "heading_font_size": "heading-medium",
+        "align_heading": "text-left",
+        "align_text": "text-center",
+        "icon_alignment": "icon--top",
+        "width": "wrapper--full-padded",
+        "align_columns": "flex-align-top",
+        "layout": "grid",
+        "grid": 3,
+        "layout_mobile": "1",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "heading_tag": "automatic"
+      }
+    },
+    "section_double_R7t4Hk": {
+      "type": "section-double",
+      "blocks": {
+        "heading_rnUPW6": {
+          "type": "heading",
+          "settings": {
+            "title": "Behind the brand",
+            "heading_font_size": "heading-small",
+            "padding_bottom": 16,
+            "heading_tag": "automatic"
+          }
+        },
+        "text_cjbArR": {
+          "type": "text",
+          "settings": {
+            "text": "<p>All of our styles are intentionally designed to wear everyday and be passed down from one kiddo to the next.</p>",
+            "text_font_size": "body-medium",
+            "padding_bottom": 16
+          }
+        },
+        "buttons_hbkyVU": {
+          "type": "buttons",
+          "settings": {
+            "button_text": "Learn more",
+            "button_url": "",
+            "button_type": "btn--secondary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "heading_rnUPW6",
+        "text_cjbArR",
+        "buttons_hbkyVU"
+      ],
+      "settings": {
+        "image_width": "three-quarters",
+        "text_alignment": "text-left",
+        "layout": "is-reversed",
+        "width": "wrapper--full",
+        "height": "five-fifty-height-hero",
+        "mobile_height": "screen-height-one-third--mobile",
+        "reverse_blocks": false,
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_placeholder": true
+      }
+    },
+    "section_divider_RJH9eP": {
+      "type": "section-divider",
+      "settings": {
+        "show_line": false,
+        "width": "wrapper",
+        "color_scheme": "",
+        "padding_top": 30,
+        "padding_bottom": 30
+      }
+    },
+    "related": {
+      "type": "related",
+      "blocks": {
+        "related": {
+          "type": "related",
+          "settings": {
+            "product_recommendations_heading": "Related products"
+          }
+        },
+        "recent": {
+          "type": "recent",
+          "settings": {
+            "product_recently_heading": "Recently viewed"
+          }
+        }
+      },
+      "block_order": [
+        "related",
+        "recent"
+      ],
+      "settings": {
+        "enable_tabs": true,
+        "heading_alignment": "text-center",
+        "heading_font_size": "heading-small",
+        "layout_mobile": "2",
+        "color_scheme": "",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_rich_text_RiAKAx",
+    "section_text_row_rineBE",
+    "section_double_R7t4Hk",
+    "section_divider_RJH9eP",
+    "related"
+  ]
+}
