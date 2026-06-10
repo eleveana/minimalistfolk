@@ -1,26 +1,28 @@
 # minimalist — Design System
 
-Soft & natural aesthetic for a kids clothing brand. Warm, tactile, gentle.
+Crisp warm minimal aesthetic for a kids clothing brand. White canvas, warm accents, gentle motion.
 
 ## Design Principles
 
-1. **Warm over crisp** — cream backgrounds, not white. Charcoal text, not black.
-2. **Generous breath** — whitespace is the loudest design element.
-3. **Real not staged** — natural light, real kids, real wear.
-4. **Soft geometry** — rounded corners (8–16px), nothing sharp.
-5. **Quiet motion** — fades and gentle scrolls; no bounce, no parallax tricks.
+1. **White canvas, warm accents** — pages are white; cream/sand surfaces appear in feature blocks, cards, and section dividers to keep the brand warm.
+2. **Charcoal over black** — text stays `#2B2A26`, never pure black.
+3. **Generous breath** — whitespace is the loudest design element.
+4. **Real not staged** — natural light, real kids, real wear.
+5. **Soft geometry** — rounded corners (8–16px), nothing sharp.
+6. **Quiet motion** — fades and gentle scrolls; no bounce, no parallax tricks.
 
 ---
 
 ## Color Palette
 
-### Core neutrals
+### Core surfaces
 | Token | Hex | Use |
 |---|---|---|
-| `--cream` | `#F7F2EA` | Default page background |
-| `--sand` | `#E8DCC8` | Section dividers, cards, hover states |
-| `--linen` | `#FDFBF7` | Lightest surface, modal/drawer bg |
-| `--clay` | `#C9A98A` | Warm accents, buttons (secondary) |
+| `--canvas` | `#FFFFFF` | Default page background (Scheme 1 `section_bg`) |
+| `--linen` | `#FDFBF7` | Subtle off-white for layered surfaces, modals, drawers |
+| `--cream` | `#F7F2EA` | Warm accent surface — feature blocks, story sections, image backdrops |
+| `--sand` | `#E8DCC8` | Warm dividers, cards, hover states |
+| `--clay` | `#C9A98A` | Warm accent for callouts, secondary buttons |
 
 ### Brand accents
 | Token | Hex | Use |
@@ -135,21 +137,23 @@ These will be customized inside Relay's section/snippet system.
 
 When you pull the Relay theme, override these in `theme/config/settings_data.json`:
 
+Relay uses **color schemes**. The default scheme is `scheme-1`, applied to most sections via `color_scheme: "scheme-1"`. Override these in `theme/config/settings_data.json` under `current.color_schemes.scheme-1.settings`:
+
 ```json
 {
-  "current": {
-    "colors_background_1": "#F7F2EA",
-    "colors_background_2": "#FDFBF7",
-    "colors_accent_1": "#8FA68A",
-    "colors_accent_2": "#C9A98A",
-    "colors_text": "#2B2A26",
-    "type_header_font": "fraunces_n4",
-    "type_body_font": "plus_jakarta_sans_n4",
-    "buttons_radius": 9999,
-    "inputs_radius": 8,
-    "media_radius": 16
-  }
+  "section_text": "#2B2A26",
+  "section_bg": "#FFFFFF",
+  "section_bg_light": "#F7F2EA",
+  "btn_primary_bg": "#8FA68A",
+  "btn_primary_text": "#FFFFFF",
+  "btn_primary_border": "#8FA68A",
+  "btn_secondary_bg": "#C9A98A",
+  "btn_secondary_text": "#2B2A26",
+  "btn_secondary_border": "#C9A98A",
+  "accent": "#8FA68A",
+  "lines_and_border": "#D9D2C5",
+  "links": "#2B2A26"
 }
 ```
 
-(Exact keys depend on Relay version — confirm after `shopify theme pull`.)
+Additional schemes (2–11) cover dark backgrounds, sage feature blocks, and cream accent panels — used per-section via the theme editor's "Color scheme" picker.
