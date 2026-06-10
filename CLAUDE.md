@@ -56,6 +56,22 @@ Soft & natural aesthetic — see `design/DESIGN.md` for the full system.
 - Tone: gentle, tactile, parent-to-parent — not corporate, not loud
 - Imagery: natural light, real kids, organic textures (linen, cotton, wood)
 
+## Time Tracking
+
+Project hours are tracked in **ClickUp** via the `scripts/tt` CLI (Python, stdlib only). Setup once: see `docs/clickup-setup.md`.
+
+```bash
+tt start "what I'm doing"     # start a timer
+tt stop                       # stop
+tt status                     # is something running?
+tt log --today                # today's entries
+tt report --week              # weekly totals grouped by description (invoice-ready)
+tt tasks                      # list ClickUp tasks in the configured list
+tt start "..." --task <id>    # attach time to a specific ClickUp task
+```
+
+Config is in `.env` (gitignored). State for the running timer lives in `~/.config/minimalist-tt/state.json`.
+
 ## Working Conventions
 
 - Theme edits happen in `theme/` only. Source assets stay in `assets/` and get optimized before being copied into `theme/assets/`.
