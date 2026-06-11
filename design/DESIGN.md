@@ -8,7 +8,7 @@ five bold brand colors, multi-color logo, lowercase voice, rounded shapes.
 ## Design Principles
 
 1. **Butter is the canvas** — everything sits on butter `#FBF1CC`. Not white, not cream.
-2. **Joyful color, intentionally placed** — five brand colors are featured, not decorative. Each one carries meaning (teal = grounding, coral = energy, gold = warmth, olive = nature, lilac = softness).
+2. **Joyful color, intentionally placed** — five brand colors are featured, not decorative. Each one carries meaning (petrol = grounding, orange = energy, gold = warmth, olive = nature, lavender = softness).
 3. **Lowercase by default** — headings, nav, buttons. Brand voice is friendly, not formal.
 4. **Pill everything** — buttons and category chips are full pills (radius 30px). Cards are softly rounded (12–14px).
 5. **Quiet motion** — marquee scrolls, gentle fades. No bounce, no parallax tricks.
@@ -28,26 +28,26 @@ five bold brand colors, multi-color logo, lowercase voice, rounded shapes.
 ### Brand colors
 | Token | Hex | Role |
 |---|---|---|
-| `--teal` | `#17404F` | Primary brand. Logo, nav links, primary buttons, announcement bar |
-| `--coral` | `#F15C2E` | Energy. Hero bg, prices, sale callouts, accent dots, "sale" link |
+| `--petrol` | `#17404F` | Primary brand. Logo, nav links, primary buttons, announcement bar |
+| `--orange` | `#F15C2E` | Energy. Hero bg, prices, sale callouts, accent dots, "sale" link |
 | `--gold` | `#F4A21A` | Warmth. Promo codes, "sale" category pill, secondary accents |
 | `--olive` | `#8A9140` | Nature. "Bottoms" category pill, marquee accent |
-| `--lilac` | `#B196CC` | Softness. "Dresses" category pill, marquee accent |
+| `--lavender` | `#B196CC` | Softness. "Dresses" category pill, marquee accent |
 
-### Soft tints (on-coral text and image stand-ins)
+### Soft tints (on-orange text and image stand-ins)
 | Token | Hex | Use |
 |---|---|---|
-| `--peach-100` | `#FFF1EC` | Headline text on coral hero |
-| `--peach-200` | `#FCE0D6` | Subhead text on coral hero |
+| `--peach-100` | `#FFF1EC` | Headline text on orange hero |
+| `--peach-200` | `#FCE0D6` | Subhead text on orange hero |
 | `--cream-shadow` | `#E6D9AD` | Image placeholder, soft inset on butter |
-| `--teal-tint` | `#CFE0E6` | Text on teal pills (e.g. "knits") |
+| `--petrol-tint` | `#CFE0E6` | Text on petrol pills (e.g. "knits") |
 
 ### Functional
 | Token | Hex | Use |
 |---|---|---|
-| `--text-default` | `#17404F` | Primary text on butter (teal, never black) |
+| `--text-default` | `#17404F` | Primary text on butter (petrol, never black) |
 | `--text-soft` | `#6B6B66` | URL bar / meta / captions |
-| `--sale-bg` | `#C64113` | Sale price bg (darker coral for contrast) |
+| `--sale-bg` | `#C64113` | Sale price bg (darker orange for contrast) |
 | `--success` | `#8A9140` | In-stock badges (olive) |
 
 ### Pill recipes (category chips)
@@ -56,9 +56,9 @@ Each chip uses a brand color background with a tinted readable foreground:
 | Chip | Bg | Text |
 |---|---|---|
 | bottoms | `#8A9140` (olive) | `#2F330D` |
-| tops | `#F15C2E` (coral) | `#FFFFFF` |
-| dresses | `#B196CC` (lilac) | `#3D2F55` |
-| knits | `#17404F` (teal) | `#CFE0E6` |
+| tops | `#F15C2E` (orange) | `#FFFFFF` |
+| dresses | `#B196CC` (lavender) | `#3D2F55` |
+| knits | `#17404F` (petrol) | `#CFE0E6` |
 | sale | `#F4A21A` (gold) | `#4A3208` |
 
 ---
@@ -108,7 +108,7 @@ Sans-serif. Owner mockup uses `var(--font-sans)` (DM Sans is the closest free pi
 ## Motion
 
 - **Marquee:** 18s linear infinite, translateX(0 → -50%) — see mockup `@keyframes mfcgold`
-- **Button hover:** 150ms ease-out, slight bg-color shift (e.g. teal → darker teal `#0E2C38`)
+- **Button hover:** 150ms ease-out, slight bg-color shift (e.g. petrol → darker petrol `#0E2C38`)
 - **Page transitions:** fade only, 250ms
 - **No parallax, no bounce.**
 
@@ -138,9 +138,9 @@ The wordmark "minimalist folk co." cycles through the brand palette letter-by-le
 ```
 m i n i m a l i s t   f o l k   c o .
 ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓   ↓ ↓ ↓ ↓   ↓ ↓ ↓
-T C O L G T C O L G   T C O L   G T C
+P O V L G P O V L G   P O V L   G P O
 ```
-(T=teal, C=coral, O=olive, L=lilac, G=gold)
+(P=petrol, O=orange, V=olive, L=lavender, G=gold)
 
 Render as inline SVG or per-character spans in the header snippet — never as a flat image, so the color rhythm survives at any size.
 
@@ -178,8 +178,8 @@ menu_transparent_color:  #FBF1CC
 ```
 
 ### Additional schemes (per-section warmth)
-- **Scheme 2 — Coral hero**: bg `#F15C2E`, text `#FFF1EC`, used for hero
-- **Scheme 3 — Teal feature**: bg `#17404F`, text `#FBF1CC`, used for announcement / dark features
+- **Scheme 2 — Orange hero**: bg `#F15C2E`, text `#FFF1EC`, used for hero
+- **Scheme 3 — Petrol feature**: bg `#17404F`, text `#FBF1CC`, used for announcement / dark features
 - **Scheme 4 — Ribbon marquee**: bg `#F6E8AE`, text `#17404F`, used for ticker strip
 
 Apply via theme editor → each section → "Color scheme" picker.
