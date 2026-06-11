@@ -1,159 +1,185 @@
-# minimalist — Design System
+# minimalist folk co — Design System
 
-Crisp warm minimal aesthetic for a kids clothing brand. White canvas, warm accents, gentle motion.
+Source of truth: the owner's mockup
+(`/Users/anaborba/Downloads/minimalist_folk_co_butter_homepage_with_gold.html`).
+This system describes a **playful, colorful kids brand** — butter-yellow canvas,
+five bold brand colors, multi-color logo, lowercase voice, rounded shapes.
 
 ## Design Principles
 
-1. **White canvas, warm accents** — pages are white; cream/sand surfaces appear in feature blocks, cards, and section dividers to keep the brand warm.
-2. **Charcoal over black** — text stays `#2B2A26`, never pure black.
-3. **Generous breath** — whitespace is the loudest design element.
-4. **Real not staged** — natural light, real kids, real wear.
-5. **Soft geometry** — rounded corners (8–16px), nothing sharp.
-6. **Quiet motion** — fades and gentle scrolls; no bounce, no parallax tricks.
+1. **Butter is the canvas** — everything sits on butter `#FBF1CC`. Not white, not cream.
+2. **Joyful color, intentionally placed** — five brand colors are featured, not decorative. Each one carries meaning (teal = grounding, coral = energy, gold = warmth, olive = nature, lilac = softness).
+3. **Lowercase by default** — headings, nav, buttons. Brand voice is friendly, not formal.
+4. **Pill everything** — buttons and category chips are full pills (radius 30px). Cards are softly rounded (12–14px).
+5. **Quiet motion** — marquee scrolls, gentle fades. No bounce, no parallax tricks.
+6. **Multi-color, not rainbow** — color appears in deliberate clusters (logo, category pills, marquee). Body content stays calm.
 
 ---
 
 ## Color Palette
 
-### Core surfaces
+### Surfaces
 | Token | Hex | Use |
 |---|---|---|
-| `--canvas` | `#FFFFFF` | Default page background (Scheme 1 `section_bg`) |
-| `--linen` | `#FDFBF7` | Subtle off-white for layered surfaces, modals, drawers |
-| `--cream` | `#F7F2EA` | Warm accent surface — feature blocks, story sections, image backdrops |
-| `--sand` | `#E8DCC8` | Warm dividers, cards, hover states |
-| `--clay` | `#C9A98A` | Warm accent for callouts, secondary buttons |
+| `--butter` | `#FBF1CC` | Default page background, header, content sections |
+| `--ribbon` | `#F6E8AE` | Marquee strip, secondary warm surface |
+| `--ribbon-border` | `#ECDFA6` | Hairline divider on butter sections |
 
-### Brand accents
-| Token | Hex | Use |
+### Brand colors
+| Token | Hex | Role |
 |---|---|---|
-| `--sage` | `#8FA68A` | Primary brand accent, CTAs |
-| `--sage-deep` | `#5D7558` | Hover, active state for sage |
-| `--blush` | `#E8C4B8` | Tertiary accent, soft highlights |
+| `--teal` | `#17404F` | Primary brand. Logo, nav links, primary buttons, announcement bar |
+| `--coral` | `#F15C2E` | Energy. Hero bg, prices, sale callouts, accent dots, "sale" link |
+| `--gold` | `#F4A21A` | Warmth. Promo codes, "sale" category pill, secondary accents |
+| `--olive` | `#8A9140` | Nature. "Bottoms" category pill, marquee accent |
+| `--lilac` | `#B196CC` | Softness. "Dresses" category pill, marquee accent |
 
-### Text & lines
+### Soft tints (on-coral text and image stand-ins)
 | Token | Hex | Use |
 |---|---|---|
-| `--charcoal` | `#2B2A26` | Primary text |
-| `--stone` | `#6B675F` | Secondary text, captions |
-| `--mist` | `#D9D2C5` | Borders, hairlines |
+| `--peach-100` | `#FFF1EC` | Headline text on coral hero |
+| `--peach-200` | `#FCE0D6` | Subhead text on coral hero |
+| `--cream-shadow` | `#E6D9AD` | Image placeholder, soft inset on butter |
+| `--teal-tint` | `#CFE0E6` | Text on teal pills (e.g. "knits") |
 
 ### Functional
 | Token | Hex | Use |
 |---|---|---|
-| `--success` | `#7A9B6E` | Cart confirm, in-stock |
-| `--alert` | `#B85C3A` | Errors, low stock |
+| `--text-default` | `#17404F` | Primary text on butter (teal, never black) |
+| `--text-soft` | `#6B6B66` | URL bar / meta / captions |
+| `--sale-bg` | `#C64113` | Sale price bg (darker coral for contrast) |
+| `--success` | `#8A9140` | In-stock badges (olive) |
 
-Map these to Relay theme settings under **Theme settings → Colors**. Replace Relay's defaults with the values above.
+### Pill recipes (category chips)
+Each chip uses a brand color background with a tinted readable foreground:
+
+| Chip | Bg | Text |
+|---|---|---|
+| bottoms | `#8A9140` (olive) | `#2F330D` |
+| tops | `#F15C2E` (coral) | `#FFFFFF` |
+| dresses | `#B196CC` (lilac) | `#3D2F55` |
+| knits | `#17404F` (teal) | `#CFE0E6` |
+| sale | `#F4A21A` (gold) | `#4A3208` |
 
 ---
 
 ## Typography
 
 ### Display / headings
-**Editorial humanist serif** — warmth + a bit of personality.
-- Suggested: **Cormorant Garamond**, **Fraunces** (variable), or **PP Editorial New**
-- Default: **Fraunces** (variable, free on Google Fonts, soft optical sizes)
+**Fraunces**, weight **900** (with 700 for sub-display). Imported from Google Fonts:
+```
+family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900
+```
 
 ### Body / UI
-**Soft geometric sans** — high legibility, friendly.
-- Suggested: **Inter**, **Söhne**, **Plus Jakarta Sans**
-- Default: **Plus Jakarta Sans** (free on Google Fonts)
+Sans-serif. Owner mockup uses `var(--font-sans)` (DM Sans is the closest free pick). Until the owner specifies, default to **DM Sans** (weights 400, 500).
 
-### Type scale (rem, mobile → desktop)
-| Token | Mobile | Desktop | Use |
-|---|---|---|---|
-| `--text-xs` | 0.75 | 0.75 | Caption, micro labels |
-| `--text-sm` | 0.875 | 0.875 | Secondary UI |
-| `--text-base` | 1 | 1 | Body |
-| `--text-lg` | 1.125 | 1.25 | Lead paragraph |
-| `--text-xl` | 1.5 | 1.75 | Section sub-headings |
-| `--text-2xl` | 2 | 2.5 | Section headings |
-| `--text-3xl` | 2.5 | 3.5 | Page titles |
-| `--text-hero` | 3 | 5 | Hero display |
+### Case
+**Lowercase everywhere by default.** Headings, nav, buttons, category chips. Exception: brand names, proper nouns.
 
-Line-heights: headings `1.15`, body `1.6`. Letter-spacing: headings `-0.01em`, body `0`.
+### Letter spacing
+- Headings: `-1px` (tight, per mockup hero)
+- Body: normal
+- Nav / pills: `+0.3px` (subtle airiness on small uppercase-mimicking text)
 
----
-
-## Spacing & Layout
-
-Base unit: `4px`. Scale: `4, 8, 12, 16, 24, 32, 48, 64, 96, 128`.
-
-- Max content width: `1280px`
-- Comfortable reading column: `680px`
-- Section vertical padding: `96px` desktop / `64px` mobile
-- Grid gutter: `24px` desktop / `16px` mobile
+### Scale (from mockup, mobile → desktop)
+| Token | Desktop | Use |
+|---|---|---|
+| `--text-hero` | 46–48px | Hero headline |
+| `--text-display` | 36px | Section heads, marquee |
+| `--text-h2` | 26px | Logo wordmark |
+| `--text-lead` | 15px | Hero subhead |
+| `--text-base` | 14px | Body, nav, buttons |
+| `--text-meta` | 13px | Price, captions, pills |
+| `--text-micro` | 12px | URL bar style copy |
 
 ---
 
-## Shape & Surface
+## Shape
 
-- **Border radius**: `4px` (chips), `8px` (buttons, inputs), `16px` (cards), `24px` (imagery containers, when applicable)
-- **Shadows**: avoid drop shadows. Use `1px solid var(--mist)` borders for elevation.
-- **Dividers**: hairlines only (`1px var(--mist)`), never thick rules.
+- **Pill buttons / chips**: `border-radius: 30px`
+- **Cards / product tiles**: `border-radius: 12–14px`
+- **Container/page chrome**: `border-radius: 0` (full-bleed)
+- **Hairlines**: `0.5px` solid `--ribbon-border` between butter sections
+- **No drop shadows.** Depth comes from color shifts.
 
 ---
 
 ## Motion
 
-- Durations: `150ms` (micro), `250ms` (default), `400ms` (page-level)
-- Easing: `cubic-bezier(0.4, 0, 0.2, 1)` (default), `cubic-bezier(0.2, 0, 0, 1)` (entrances)
-- No bounce. No parallax. Page transitions should fade, not slide.
+- **Marquee:** 18s linear infinite, translateX(0 → -50%) — see mockup `@keyframes mfcgold`
+- **Button hover:** 150ms ease-out, slight bg-color shift (e.g. teal → darker teal `#0E2C38`)
+- **Page transitions:** fade only, 250ms
+- **No parallax, no bounce.**
 
 ---
 
-## Imagery Guidance
+## Voice & copy
 
-- Natural daylight, soft shadows
-- Real kids, candid moments — avoid studio-perfect smiles
-- Texture matters: linen sheets, wood floors, plants in frame
-- Crop: leave breathing room; subjects rarely centered
-- Color grade: lift shadows slightly, warm midtones (~+5 temp)
-- **Avoid**: harsh strobe, stark white seamless, oversaturated brights
+From the mockup, headlines lean **playful + warm + lowercase**:
+- "little people, big personalities" (hero)
+- "new spring arrivals just landed" (hero subhead)
+- "inspired by play" / "inspired by joy" / "inspired by curiosity" (marquee)
+- "shop new in" / "shop the sale" (CTAs)
+- "free shipping on orders over $75 — code **hello10** for 10% off your first order" (announcement)
 
-### Asset specs
-| Use | Dimensions | Format |
-|---|---|---|
-| Hero | 2880×1600 (2x: 1440×800) | WebP + JPG fallback |
-| Product thumb | 1200×1500 (4:5) | WebP |
-| Lifestyle | 2000×1333 (3:2) | WebP |
-| OG / share | 1200×630 | JPG |
+Tone rules:
+- Lowercase default
+- Use `—` (em dash) not hyphens
+- Bold colored words inside sentences sparingly (e.g. `hello10` in gold)
+- Avoid corporate words: prefer "shop new in" over "shop new arrivals," "catalog" over "all products"
 
 ---
 
-## Components (high-level)
+## Multi-color logo
 
-These will be customized inside Relay's section/snippet system.
+The wordmark "minimalist folk co." cycles through the brand palette letter-by-letter:
 
-- **Buttons**: pill-shape (radius 9999px), 14px vertical padding, sage primary, clay secondary, ghost (no fill) tertiary
-- **Inputs**: cream-filled, 1px mist border, 8px radius, charcoal text, sage focus ring
-- **Cards**: linen background, 16px radius, no shadow, hairline border on hover
-- **Navigation**: text-only, no underlines until hover (animated underline grows L→R)
+```
+m i n i m a l i s t   f o l k   c o .
+↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓   ↓ ↓ ↓ ↓   ↓ ↓ ↓
+T C O L G T C O L G   T C O L   G T C
+```
+(T=teal, C=coral, O=olive, L=lilac, G=gold)
+
+Render as inline SVG or per-character spans in the header snippet — never as a flat image, so the color rhythm survives at any size.
 
 ---
 
 ## Relay Theme Mapping
 
-When you pull the Relay theme, override these in `theme/config/settings_data.json`:
+Active preset in `theme/config/settings_data.json` → `presets.Relay`.
 
-Relay uses **color schemes**. The default scheme is `scheme-1`, applied to most sections via `color_scheme: "scheme-1"`. Override these in `theme/config/settings_data.json` under `current.color_schemes.scheme-1.settings`:
-
+### Scheme 1 (default — butter canvas)
 ```json
 {
-  "section_text": "#2B2A26",
-  "section_bg": "#FFFFFF",
-  "section_bg_light": "#F7F2EA",
-  "btn_primary_bg": "#8FA68A",
-  "btn_primary_text": "#FFFFFF",
-  "btn_primary_border": "#8FA68A",
-  "btn_secondary_bg": "#C9A98A",
-  "btn_secondary_text": "#2B2A26",
-  "btn_secondary_border": "#C9A98A",
-  "accent": "#8FA68A",
-  "lines_and_border": "#D9D2C5",
-  "links": "#2B2A26"
+  "section_text": "#17404F",
+  "section_bg": "#FBF1CC",
+  "section_bg_light": "#F6E8AE",
+  "btn_primary_bg": "#17404F",
+  "btn_primary_text": "#FBF1CC",
+  "btn_primary_border": "#17404F",
+  "btn_secondary_bg": "#F15C2E",
+  "btn_secondary_text": "#FFFFFF",
+  "btn_secondary_border": "#F15C2E",
+  "accent": "#F4A21A",
+  "lines_and_border": "#ECDFA6",
+  "links": "#17404F"
 }
 ```
 
-Additional schemes (2–11) cover dark backgrounds, sage feature blocks, and cream accent panels — used per-section via the theme editor's "Color scheme" picker.
+### Header strip
+```
+menu_bg_color:           #FBF1CC
+header_link:             #17404F
+submenu_bg_color:        #FBF1CC
+submenu_link_color:      #17404F
+menu_transparent_color:  #FBF1CC
+```
+
+### Additional schemes (per-section warmth)
+- **Scheme 2 — Coral hero**: bg `#F15C2E`, text `#FFF1EC`, used for hero
+- **Scheme 3 — Teal feature**: bg `#17404F`, text `#FBF1CC`, used for announcement / dark features
+- **Scheme 4 — Ribbon marquee**: bg `#F6E8AE`, text `#17404F`, used for ticker strip
+
+Apply via theme editor → each section → "Color scheme" picker.
