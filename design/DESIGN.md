@@ -66,13 +66,14 @@ Each chip uses a brand color background with a tinted readable foreground:
 ## Typography
 
 ### Display / headings
-**Fraunces**, weight **900** (with 700 for sub-display). Imported from Google Fonts:
+**Fraunces**, weight **800** (extra bold). Imported from Google Fonts:
 ```
-family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900
+family=Fraunces:opsz,wght@9..144,800
 ```
+In the Shopify theme this is the `fraunces_n8` font handle (`type_header_font`).
 
 ### Body / UI
-Sans-serif. Owner mockup uses `var(--font-sans)` (DM Sans is the closest free pick). Until the owner specifies, default to **DM Sans** (weights 400, 500).
+**Poppins**, weight **400** (regular) — owner's pick. Used for body, nav, subheadings, and buttons. In the Shopify theme this is the `poppins_n4` font handle.
 
 ### Case
 **Lowercase everywhere by default.** Headings, nav, buttons, category chips. Exception: brand names, proper nouns.
@@ -181,5 +182,6 @@ menu_transparent_color:  #FBF1CC
 - **Scheme 2 — Orange hero**: bg `#F15C2E`, text `#FFF1EC`, used for hero
 - **Scheme 3 — Petrol feature**: bg `#17404F`, text `#FBF1CC`, used for announcement / dark features
 - **Scheme 4 — Ribbon marquee**: bg `#F6E8AE`, text `#17404F`, used for ticker strip
+- **Scheme 12 — Butter + gold**: bg `#FBF1CC`, text `#17404F`, primary button gold `#F4A21A` on `#4A3208`, secondary petrol, accent orange `#F15C2E`. For butter sections where gold should lead (e.g. Shop by Category) — from `minimalist_folk_co_butter_homepage_with_gold.html`
 
 Apply via theme editor → each section → "Color scheme" picker.

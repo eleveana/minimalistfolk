@@ -43,6 +43,7 @@
         "text_j64yTR",
         "text_WyF3k7"
       ],
+      "disabled": true,
       "settings": {
         "show_border": false,
         "layout": "slider",
@@ -73,6 +74,7 @@
             "show_social_links": true,
             "show_gift_card": true,
             "show_locale_selector": true,
+            "show_locale_code": false,
             "show_globe_icon": true,
             "show_country_selector": true,
             "show_country_name": false,
@@ -80,6 +82,38 @@
             "color_scheme": "",
             "padding_top": 0,
             "padding_bottom": 0
+          }
+        },
+        "image_ziPBtU": {
+          "type": "image",
+          "settings": {
+            "position": "2",
+            "image": "shopify://shop_images/IMG_52292.jpg",
+            "aspect_ratio": 0.8,
+            "wide_image": false,
+            "overlay_type": "text",
+            "title": "4th of July",
+            "heading_font_size": "heading-small",
+            "link_text": "",
+            "text_font_size": "body-medium",
+            "link": "shopify://collections/4th-of-july",
+            "text_color": "#ffffff"
+          }
+        },
+        "image_VLV9hK": {
+          "type": "image",
+          "settings": {
+            "position": "2",
+            "image": "shopify://shop_images/IMG_4439.jpg",
+            "aspect_ratio": 0.8,
+            "wide_image": false,
+            "overlay_type": "text",
+            "title": "Summer 26'",
+            "heading_font_size": "heading-small",
+            "link_text": "",
+            "text_font_size": "body-medium",
+            "link": "shopify://collections/ss26",
+            "text_color": "#ffffff"
           }
         },
         "image_7zBMQt": {
@@ -93,37 +127,43 @@
             "heading_font_size": "heading-medium",
             "link_text": "",
             "text_font_size": "body-medium",
+            "link": "",
             "text_color": "#ffffff"
           }
         }
       },
       "block_order": [
         "toolbar",
+        "image_ziPBtU",
+        "image_VLV9hK",
         "image_7zBMQt"
       ],
       "settings": {
         "header_sticky": false,
         "enable_search": true,
         "header_style": "logo_beside",
-        "show_separator_line": true,
+        "show_separator_line": false,
         "header_border_color": "",
         "separator_opacity": 50,
         "show_icons": true,
         "icon_as_circle": false,
-        "cart_icon_family": "bag",
-        "logo_max_limit": 100,
+        "cart_icon_family": "cart",
+        "logo": "shopify://shop_images/minimalistco-logo.svg",
+        "logo_max_limit": 300,
         "logo_max_limit_mobile": 120,
-        "main_menu_linklist": "main-menu",
+        "main_menu_linklist": "minimalist-menu-v2",
+        "enable_call_to_action": false,
         "button_text": "",
         "button_link": "",
         "button_type": "btn--primary",
-        "show_social_icons": true,
+        "show_social_icons": false,
         "secondary_menu_linklist": "",
-        "show_locale_selector": true,
-        "show_globe_icon": true,
-        "show_country_selector": true,
+        "show_locale_selector": false,
+        "show_locale_code": false,
+        "show_globe_icon": false,
+        "show_country_selector": false,
         "show_country_name": false,
-        "show_country_flag": true,
+        "show_country_flag": false,
         "highlight_item": "Sale",
         "highlight_item_color": "#c64113",
         "transparent_home": false,
@@ -132,7 +172,7 @@
         "transparent_page": false,
         "transparent_product_page": false,
         "padding_top": 15,
-        "padding_bottom": 5
+        "padding_bottom": 17
       }
     },
     "mobile_menu_rCy7M8": {
@@ -141,7 +181,7 @@
         "menu_Y3jfmj": {
           "type": "menu",
           "settings": {
-            "mobile_menu_linklist": "main-menu",
+            "mobile_menu_linklist": "minimalist-menu-v2",
             "text_font_size": "body-large",
             "highlight_item": "Sale",
             "highlight_item_color": "#c64113",
@@ -152,6 +192,7 @@
         "image_AJhnw4": {
           "type": "image",
           "settings": {
+            "image_url": "",
             "image_alignment": "left",
             "image_width": 100,
             "padding_bottom": 14
@@ -161,6 +202,7 @@
           "type": "button",
           "settings": {
             "button_text": "Shop all products",
+            "button_url": "",
             "button_type": "btn--primary",
             "button_size": "",
             "button_style": "btn--solid",
@@ -186,6 +228,7 @@
           "type": "localization",
           "settings": {
             "show_locale_selector": true,
+            "show_locale_code": false,
             "show_globe_icon": true,
             "show_country_selector": true,
             "show_country_name": true,

@@ -19,38 +19,6 @@
         "padding_bottom": 15
       }
     },
-    "section_hero_taG6ie": {
-      "type": "section-hero",
-      "blocks": {
-        "heading_qhzMmg": {
-          "type": "heading",
-          "settings": {
-            "title": "Staff Picks",
-            "heading_font_size": "heading-large",
-            "heading_tag": "automatic",
-            "padding_bottom": 8
-          }
-        }
-      },
-      "block_order": [
-        "heading_qhzMmg"
-      ],
-      "settings": {
-        "link": "",
-        "width": "wrapper--full-padded",
-        "height": "screen-height-one-third",
-        "flex_align_desktop": "align--middle-center-desktop",
-        "content_width": 50,
-        "mobile_height": "image-height--mobile",
-        "flex_align_mobile": "align--middle-center-mobile",
-        "color_scheme": "scheme-7",
-        "show_text_background": false,
-        "overlay_type": "disabled",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "show_placeholder": true
-      }
-    },
     "hero": {
       "type": "collection-image-with-title",
       "disabled": true,
@@ -94,6 +62,7 @@
             "heading_font_size": "heading-small",
             "featured_text": "<p>Bright colors and soft fabrics, new pieces arriving weekly.</p>",
             "featured_button_text": "shop now",
+            "featured_button_link": "",
             "button_type": "btn--primary",
             "button_size": "",
             "button_style": "btn--solid",
@@ -111,6 +80,7 @@
             "heading_font_size": "heading-small",
             "featured_text": "<p>Use code 'GET10' at checkout</p>",
             "featured_button_text": "",
+            "featured_button_link": "",
             "button_type": "btn--primary",
             "button_size": "",
             "button_style": "btn--outline",
@@ -181,7 +151,6 @@
   },
   "order": [
     "section_divider_HPmQRD",
-    "section_hero_taG6ie",
     "hero",
     "subcollections",
     "main",

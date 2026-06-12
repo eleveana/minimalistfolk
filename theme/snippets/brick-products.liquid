@@ -15,8 +15,23 @@
   assign columns_small = 2
   assign columns_mobile = block.settings.layout_mobile | plus: 0
 
+  comment
+    When the products block is the only visible block, span the full width
+    as a slider instead of the half-width 2-column grid
+  endcomment
+  assign slider_enabled = false
+  if section.blocks.size == 1
+    assign slider_enabled = true
+    assign columns_desktop = 4
+    assign columns_medium = 3
+  endif
+
   capture product_grid_classes
     echo 'grid'
+
+    if slider_enabled
+      echo ' grid--slider'
+    endif
 
     if block.settings.layout_mobile == 'slider'
       echo ' grid--mobile-slider'
@@ -35,13 +50,13 @@
 
 <div class="brick__block brick__block--products" style="{{ style }}" {{ block.shopify_attributes }}>
   <div class="grid-outer">
-    <div class="{{ product_grid_classes }}">
+    <div class="{{ product_grid_classes }}"{% if slider_enabled %} data-grid-slider{% endif %}>
       {%- liquid
         if block.settings.product_list.count > 0
           for product in block.settings.product_list
             render 'product-grid-item', product: product, columns_mobile: columns_mobile
           endfor
-        else
+        elsif request.design_mode
           for i in (1..4)
             render 'onboarding-product-grid-item'
           endfor

@@ -17,7 +17,7 @@
         "footer-1": {
           "type": "linklist",
           "settings": {
-            "linklist": "footer-menu-2",
+            "linklist": "",
             "title": "Company",
             "heading_font_size": "heading-x-small",
             "column_width": 22,
@@ -50,6 +50,7 @@
           "settings": {
             "title": "Thank you",
             "heading_font_size": "heading-x-small",
+            "text": "",
             "column_width": 34,
             "enable_follow_on_shop": false,
             "enable_accordion": false
@@ -64,16 +65,17 @@
       ],
       "custom_css": [],
       "settings": {
-        "logo": "{{ shop.brand.logo }}",
-        "logo_image_width": 400,
+        "logo": "shopify://shop_images/Asset_6.svg",
+        "logo_image_width": 95,
         "color_scheme": "scheme-8",
         "border_color": "#dc954d",
-        "padding_top": 60,
-        "padding_bottom": 40
+        "padding_top": 30,
+        "padding_bottom": 30
       }
     },
     "section_anchor_logo_XqKxTk": {
       "type": "section-anchor-logo",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-8",
         "padding_top": 30,
