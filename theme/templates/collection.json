@@ -57,11 +57,12 @@
         "featured_image_UiH3cE": {
           "type": "featured_image",
           "settings": {
+            "featured_image": "shopify://shop_images/78994BA9-0647-44FC-8C6B-7A00A34DB9DA.jpg",
             "position": 1,
-            "featured_heading": "Featured link",
-            "heading_font_size": "heading-large",
-            "featured_text": "<p>Promote products or collections</p>",
-            "featured_button_text": "Learn more",
+            "featured_heading": "curated for life along the coast",
+            "heading_font_size": "heading-small",
+            "featured_text": "",
+            "featured_button_text": "",
             "featured_button_link": "",
             "button_type": "btn--primary",
             "button_size": "",

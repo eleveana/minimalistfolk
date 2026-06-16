@@ -200,8 +200,8 @@
         "highlight_mVXFCt": {
           "type": "highlight",
           "settings": {
-            "heading": "Bottoms",
-            "url": "",
+            "heading": "tees",
+            "url": "shopify://collections/kids-tees",
             "color": "#000000",
             "bg_color": "#ecb935",
             "border_color": "#ecb935"
@@ -210,8 +210,8 @@
         "highlight_NTqw7z": {
           "type": "highlight",
           "settings": {
-            "heading": "Tops",
-            "url": "",
+            "heading": "swim",
+            "url": "shopify://collections/ma-me-mi",
             "color": "#000000",
             "bg_color": "#de8d9b",
             "border_color": "#de8d9b"
@@ -221,7 +221,7 @@
           "type": "highlight",
           "settings": {
             "heading": "Dresses",
-            "url": "",
+            "url": "shopify://collections/dresses",
             "color": "#000000",
             "bg_color": "#d1def9",
             "border_color": "#d1def9"
@@ -230,8 +230,8 @@
         "highlight_MJqykd": {
           "type": "highlight",
           "settings": {
-            "heading": "Sweaters",
-            "url": "",
+            "heading": "Sweatshirts",
+            "url": "shopify://collections/kids-pullovers",
             "color": "",
             "bg_color": "#dc954d",
             "border_color": "#dc954d"
@@ -240,8 +240,8 @@
         "highlight_DKQdEH": {
           "type": "highlight",
           "settings": {
-            "heading": "Outerwear",
-            "url": "",
+            "heading": "sets",
+            "url": "shopify://collections/ss26-part-2",
             "color": "",
             "bg_color": "#be979f",
             "border_color": "#be979f"
@@ -251,7 +251,7 @@
           "type": "highlight",
           "settings": {
             "heading": "Accessories",
-            "url": "",
+            "url": "shopify://collections/two-piece-set",
             "color": "#212121",
             "bg_color": "#eed9c2",
             "border_color": "#eed9c2"
@@ -563,7 +563,6 @@
       "settings": {
         "video": "shopify://files/videos/IMG_6856.mov",
         "show_video_popup": false,
-        "video_popup": "shopify://files/videos/IMG_6856.mov",
         "video_popup_social": "",
         "title": "MA-ME-MI",
         "heading_font_size": "heading-medium",
@@ -812,7 +811,7 @@
             "flex_align": "align--middle-center",
             "overlay_type": "opacity",
             "link_text": "shop now",
-            "link": "",
+            "link": "shopify://collections/just-launched",
             "button_type": "btn--white",
             "button_size": "",
             "button_style": "btn--solid",

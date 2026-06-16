@@ -48,7 +48,7 @@
     "button_small": 7,
     "button_medium": 12,
     "button_large": 16,
-    "grid_style": "compact",
+    "grid_style": "classic",
     "dots_style": "line",
     "icon_style": "1.5",
     "show_image_gray_bg": "none",
@@ -120,7 +120,7 @@
       "scheme-1": {
         "settings": {
           "section_text": "#000000",
-          "section_bg": "#FFF9E1",
+          "section_bg": "#fff9e1",
           "section_bg_light": "#f6e8ae",
           "section_bg_gradient": "",
           "btn_primary_bg": "#ac97c8",
