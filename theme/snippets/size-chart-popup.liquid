@@ -1,0 +1,210 @@
+{% comment %}
+  Renders a size-chart trigger + popup modal.
+
+  Extracted from `product-variant-picker` so the same modal can be opened
+  from more than one place (the Size option legend and, e.g., the Fit guide
+  block heading). The trigger is fully caller-supplied so each call site can
+  style its own link/icon while sharing one modal implementation.
+
+  Accepts:
+  - product: {Object} product object (required).
+  - trigger_content: {String} HTML rendered inside the trigger <a> (required).
+  - trigger_class: {String} extra classes for the trigger <a> (optional).
+  - info_page_handle: {String} handle of a legacy all-in-one size-chart page
+      (optional). Falls back to per-product `size_chart` metaobjects first.
+  - selected_size: {String} currently selected size option value, used to
+      highlight the matching row (optional).
+
+  Usage:
+  {% render 'size-chart-popup', product: product, trigger_content: my_html, selected_size: selected_size %}
+{% endcomment %}
+
+{%- liquid
+  assign size_charts = product.metafields.custom.size_charts.value
+  assign trigger_class = trigger_class | default: ''
+  assign selected_size = selected_size | default: ''
+  assign info_page_handle = info_page_handle | default: ''
+
+  assign size_separator = '_size_'
+  assign specific_pages = ''
+  assign tags_string = product.tags | join: ','
+  if tags_string contains size_separator
+    for tag in product.tags
+      if tag contains size_separator
+        assign page_handle = tag | split: size_separator | last | split: ',' | first
+        assign specific_pages = specific_pages | append: page_handle | append: ','
+      endif
+    endfor
+  endif
+
+  assign info_page = blank
+  if info_page_handle != blank
+    assign info_page = pages[info_page_handle]
+  endif
+-%}
+
+{%- if size_charts != blank and size_charts.size > 0 -%}
+  {%- render 'stylesheet', name: 'tabs.css' -%}
+
+  <popup-component>
+    <a href="#" data-popup-open class="{{ trigger_class }}">
+      {{ trigger_content }}
+    </a>
+
+    <dialog class="product-modal" aria-hidden="true" inert data-scroll-lock-required>
+      <form method="dialog">
+        <button class="visually-hidden" aria-label="{{ 'general.accessibility.close' | t }}"></button>
+      </form>
+
+      <div class="product-modal__outer">
+        <div class="product-modal__content small" data-scroll-lock-scrollable>
+          <button type="button" class="product-modal__close" data-popup-close aria-label="{{ 'general.accessibility.close' | t }}">
+            {%- render 'icon-cancel' -%}
+          </button>
+
+          {%- if size_charts.size > 1 -%}
+            <tabs-component class="rte product-tabs">
+              <native-scrollbar class="tabs__head product-tabs__head">
+                <ul class="tabs product-tabs-title" data-scrollbar data-scrollbar-slider data-scroll-lock-scrollable>
+                  {%- for chart in size_charts -%}
+                    <li class="tab-link tab-link-{{ forloop.index0 }}{% if forloop.first %} current{% endif %}" data-tab="{{ forloop.index0 }}" tabindex="0">
+                      <span>{{ chart.name.value }}</span>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+
+                <button type="button" class="tabs__arrow tabs__arrow--prev is-hidden" data-scrollbar-arrow-prev>
+                  {%- render 'icon-nav-arrow-left' -%}
+                  <span class="visually-hidden">{{ 'products.general.see_all' | t }}</span>
+                </button>
+
+                <button type="button" class="tabs__arrow tabs__arrow--next is-hidden" data-scrollbar-arrow-next>
+                  {%- render 'icon-nav-arrow-right' -%}
+                  <span class="visually-hidden">{{ 'products.general.see_all' | t }}</span>
+                </button>
+              </native-scrollbar>
+
+              {%- for chart in size_charts -%}
+                <div class="tab-content tab-content-{{ forloop.index0 }}{% if forloop.first %} current{% endif %}">
+                  {%- render 'size-chart-table', chart: chart, selected_size: selected_size -%}
+                </div>
+              {%- endfor -%}
+            </tabs-component>
+          {%- else -%}
+            {%- comment -%}
+              Use a loop, not size_charts.first: a list.metaobject_reference
+              value only hydrates its entries during iteration — .first / [0]
+              return blank.
+            {%- endcomment -%}
+            <div class="rte">
+              {%- for chart in size_charts -%}
+                {%- render 'size-chart-table', chart: chart, selected_size: selected_size -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </dialog>
+  </popup-component>
+{%- elsif info_page != blank or specific_pages != '' -%}
+  {%- assign specific_pages_arr = specific_pages | split: ',' -%}
+
+  {%- render 'stylesheet', name: 'tabs.css' -%}
+
+  <popup-component>
+    <a href="{{ info_page.url }}" data-popup-open class="{{ trigger_class }}">
+      {{ trigger_content }}
+    </a>
+
+    <dialog class="product-modal" aria-hidden="true" inert data-scroll-lock-required>
+      <form method="dialog">
+        <button class="visually-hidden" aria-label="{{ 'general.accessibility.close' | t }}"></button>
+      </form>
+
+      <div class="product-modal__outer">
+        <div class="product-modal__content small" data-scroll-lock-scrollable>
+          <button type="button" class="product-modal__close" data-popup-close aria-label="{{ 'general.accessibility.close' | t }}">
+            {%- render 'icon-cancel' -%}
+          </button>
+
+          <tabs-component class="rte product-tabs">
+            {%- liquid
+              assign tabs_navigation = ''
+              assign tabs = ''
+              assign has_current = false
+              assign number_tabs = 0
+            -%}
+
+            {%- for page_handle in specific_pages_arr -%}
+              {%- assign page_size_chart = pages[page_handle] -%}
+
+              {%- if page_size_chart.title != blank -%}
+                {%- capture tabs_navigation -%}
+                  {{ tabs_navigation }}
+
+                  <li class="tab-link tab-link-{{ forloop.index0 }}{% if forloop.index == 1 %} current{% endif %}" data-tab="{{ forloop.index0 }}" tabindex="0">
+                    <span>{{ page_size_chart.title }}</span>
+                  </li>
+                {%- endcapture -%}
+
+                {%- capture tabs -%}
+                  {{ tabs }}
+
+                  <div class="tab-content tab-content-{{ forloop.index0 }}{% unless has_current %} current{% endunless %}">
+                    {{ page_size_chart.content }}
+                  </div>
+                {%- endcapture -%}
+
+                {%- assign has_current = true -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if info_page -%}
+              {%- assign number_tabs = specific_pages_arr.size -%}
+
+              {%- capture tabs_navigation -%}
+                {{ tabs_navigation }}
+
+                <li class="tab-link tab-link-{{ number_tabs }}" data-tab="{{ number_tabs }}" data-lock-scroll tabindex="0">
+                  <span>{{ info_page.title }}</span>
+                </li>
+              {%- endcapture -%}
+
+              {%- capture tabs -%}
+                {{ tabs }}
+
+                <div class="tab-content tab-content-{{ number_tabs }}{% unless has_current %} current{% endunless %}">
+                  {{ info_page.content }}
+                </div>
+              {%- endcapture -%}
+
+              {%- assign has_current = true -%}
+            {%- endif -%}
+
+            {%- if specific_pages_arr.size > 1 -%}
+              <native-scrollbar class="tabs__head product-tabs__head">
+                <ul class="tabs product-tabs-title" data-scrollbar data-scrollbar-slider data-scroll-lock-scrollable>
+                  {{ tabs_navigation }}
+                </ul>
+
+                <button type="button" class="tabs__arrow tabs__arrow--prev is-hidden" data-scrollbar-arrow-prev>
+                  {%- render 'icon-nav-arrow-left' -%}
+                  <span class="visually-hidden">{{ 'products.general.see_all' | t }}</span>
+                </button>
+
+                <button type="button" class="tabs__arrow tabs__arrow--next is-hidden" data-scrollbar-arrow-next>
+                  {%- render 'icon-nav-arrow-right' -%}
+                  <span class="visually-hidden">{{ 'products.general.see_all' | t }}</span>
+                </button>
+              </native-scrollbar>
+            {%- endif -%}
+
+            {%- if tabs != '' -%}
+              {{ tabs }}
+            {%- endif -%}
+          </tabs-component>
+        </div>
+      </div>
+    </dialog>
+  </popup-component>
+{%- endif -%}

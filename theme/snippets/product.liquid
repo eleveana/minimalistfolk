@@ -843,6 +843,20 @@
                           echo '--text:' | append: fit_color
                         endcapture
                       endunless
+
+                      comment
+                        Find the selected size so the popup can highlight the
+                        matching row, mirroring the variant picker's logic.
+                      endcomment
+                      assign fit_selected_size = ''
+                      assign size_translation = 'general.size_chart.size' | t
+                      assign translation_string_size = size_translation | remove: ' ' | replace: ', ', ',' | replace: ' ,', ',' | replace: ',', '____' | handle | replace: '____', ',' | append: ',' | prepend: ','
+                      for option in product.options_with_values
+                        assign option_name = option.name | handle
+                        if translation_string_size contains option_name
+                          assign fit_selected_size = option.selected_value
+                        endif
+                      endfor
                     -%}
 
                     <div
@@ -850,6 +864,18 @@
                       {{ block.shopify_attributes }}
                       {{ block_style }}
                     >
+                      {%- if block.settings.show_size_chart_link and block.settings.size_chart_heading != blank -%}
+                        {%- capture fit_size_chart_trigger -%}
+                          <span class="guide__heading strong">{{ block.settings.size_chart_heading }}</span>
+                        {%- endcapture -%}
+                        {%- render 'size-chart-popup',
+                          product: product,
+                          trigger_content: fit_size_chart_trigger,
+                          trigger_class: 'guide__size-chart-link',
+                          selected_size: fit_selected_size
+                        -%}
+                      {%- endif -%}
+
                       {%- if block.settings.heading != blank -%}
                         <p class="guide__heading strong">{{ block.settings.heading }}</p>
                       {%- endif -%}
