@@ -1946,7 +1946,8 @@
     "custom_css": [
       "#Announcement--template--18512788226142__section_announcement_rLEpbJ > announcement-bar > div > div > ticker-bar > div.announcement__message > div > div:nth-child(2) > div:nth-child(2) > div {color: #8a9140;}",
       "#Announcement--template--18512788226142__section_announcement_rLEpbJ > announcement-bar > div > div > ticker-bar > div.announcement__message > div > div:nth-child(1) > div:nth-child(2) > div {color: #8a9140;}",
-      "#Announcement--template--18512788226142__section_announcement_rLEpbJ > announcement-bar > div > div > ticker-bar > div.announcement__message > div > div:nth-child(2) > div:nth-child(6) > div {color: #f15c2e;}"
+      "#Announcement--template--18512788226142__section_announcement_rLEpbJ > announcement-bar > div > div > ticker-bar > div.announcement__message > div > div:nth-child(2) > div:nth-child(6) > div {color: #f15c2e;}",
+      ".site-footer {background-color: #F6E8AE;}"
     ]
   }
 }

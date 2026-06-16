@@ -45,7 +45,7 @@
           "type": "variants",
           "settings": {
             "info_page": "size-chart",
-            "size_chart_style": "question",
+            "size_chart_style": "ruler",
             "option_font_size": "body-small",
             "value_font_size": "body-small",
             "padding_bottom": 20
@@ -84,7 +84,7 @@
           "type": "buttons",
           "settings": {
             "show_quantity": true,
-            "button_type": "btn--secondary",
+            "button_type": "btn--primary",
             "button_size": "",
             "button_style": "btn--solid",
             "show_dynamic_checkout": false,
@@ -255,7 +255,7 @@
         "ctl_heading_block": {
           "type": "heading",
           "settings": {
-            "title": "Pair with",
+            "title": "Complete the look",
             "heading_font_size": "heading-small",
             "padding_bottom": 30,
             "heading_tag": "automatic"
@@ -303,7 +303,12 @@
         "ctl_products": {
           "type": "products",
           "settings": {
-            "product_list": "{{ product.metafields.custom.pair_with.value }}",
+            "product_list": [
+              "draped-shorts-grandmas-garden-girls",
+              "scrunchie-grandmas-garden",
+              "wide-leg-pants-grandmas-garden-girls",
+              "bow-clip-grandmas-garden"
+            ],
             "layout_mobile": "slider"
           }
         }
@@ -367,12 +372,12 @@
         "icon_F4Pfwr": {
           "type": "icon",
           "settings": {
-            "icon_name": "icon-peace",
+            "icon_name": "icon-pants",
             "icon_size": 40,
             "icon_color": "",
-            "title": "Made for Play",
+            "title": "Oversized by Design",
             "heading_font_size": "heading-x-small",
-            "text": "<p>Comfy clothes that are durable</p>",
+            "text": "<p>A fit they will love longer</p>",
             "text_font_size": "body-medium",
             "heading_tag": "automatic"
           }
@@ -380,12 +385,12 @@
         "icon_fcgcFF": {
           "type": "icon",
           "settings": {
-            "icon_name": "icon-cloud",
+            "icon_name": "icon-donation",
             "icon_size": 40,
             "icon_color": "",
-            "title": "Soft & Stretchy",
+            "title": "Made to Pass Down",
             "heading_font_size": "heading-x-small",
-            "text": "<p>Easy and fun styles to wear</p>",
+            "text": "<p>Quality worth sharing</p>",
             "text_font_size": "body-medium",
             "heading_tag": "automatic"
           }
@@ -393,12 +398,12 @@
         "icon_Ca4FK3": {
           "type": "icon",
           "settings": {
-            "icon_name": "icon-flower",
+            "icon_name": "icon-heart",
             "icon_size": 40,
             "icon_color": "",
-            "title": "Sustainable Materials",
+            "title": "One and Done Outfits",
             "heading_font_size": "heading-x-small",
-            "text": "<p>Natural and breathable fabrics</p>",
+            "text": "<p>Getting dressed, simplified</p>",
             "text_font_size": "body-medium",
             "heading_tag": "automatic"
           }

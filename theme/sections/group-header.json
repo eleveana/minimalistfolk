@@ -17,7 +17,7 @@
         "text_j64yTR": {
           "type": "text",
           "settings": {
-            "text": "<p>Free shipping on orders over $100</p>",
+            "text": "<p>Free shipping on orders over $175</p>",
             "target_url_enabled": false,
             "target_url": "",
             "target_referrer_enabled": false,
@@ -28,6 +28,7 @@
         },
         "text_WyF3k7": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "<p>Get 10% off your first order over $75</p>",
             "target_url_enabled": false,
@@ -196,7 +197,8 @@
         "image_AJhnw4": {
           "type": "image",
           "settings": {
-            "image_url": "",
+            "image": "shopify://shop_images/6A9A2447.jpg",
+            "image_url": "shopify://collections/back-to-school-collection",
             "image_alignment": "left",
             "image_width": 100,
             "padding_bottom": 14
