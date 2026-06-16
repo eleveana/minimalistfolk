@@ -12,36 +12,18 @@
 {%- liquid
   assign form_style = settings.form_style
   assign enable_size_chart = enable_size_chart | default: false
-  assign show_size_chart = false
   assign has_size_option = false
-  assign tags_string = product.tags | join: ','
-  assign size_separator = '_size_'
-  assign specific_pages = ''
   assign show_size_link_separated = true
   assign uniq_id = 'product-' | append: product.id | append: '-' | append: product.handle
   assign size_style = block.settings.size_chart_style
-
-  comment
-    Per-product size charts: a list of `size_chart` metaobjects assigned via the
-    product metafield custom.size_charts. When present these take priority over
-    the legacy all-in-one info_page / `_size_` tag charts below.
-  endcomment
-  assign size_charts = product.metafields.custom.size_charts.value
   assign selected_size = ''
 
-  if block.settings.info_page != blank
-    assign size_translation = 'general.size_chart.size' | t
-    assign info_page = pages[block.settings.info_page]
-  endif
-
-  if tags_string contains size_separator
-    for tag in product.tags
-      if tag contains size_separator
-        assign page_handle = tag | split: size_separator | last | split: ',' | first
-        assign specific_pages = specific_pages | append: page_handle | append: ','
-      endif
-    endfor
-  endif
+  comment
+    The size-chart trigger + modal is rendered by the `size-chart-popup`
+    snippet. It uses the per-product `size_chart` metaobjects assigned via the
+    product metafield custom.size_charts when present, and falls back to the
+    legacy info_page / `_size_` tag charts.
+  endcomment
 
   assign hide_labels_class = ''
   if settings.show_labels == false
@@ -97,175 +79,14 @@
 
 {%- capture size_chart_content -%}
   {%- if enable_size_chart -%}
-    {%- if size_charts != blank and size_charts.size > 0 -%}
-      {%- assign show_size_chart = true -%}
-      {%- render 'stylesheet', name: 'tabs.css' -%}
-
-      <popup-component>
-        <a href="#" data-popup-open class="radio__legend__link body-x-small{% if product.has_only_default_variant %} size-popup-link{% endif %}{% if size_style == 'text' or show_size_link_separated %} text-link{% endif %}">
-          {{ size_button }}
-        </a>
-
-        <dialog class="product-modal" aria-hidden="true" inert data-scroll-lock-required>
-          <form method="dialog">
-            <button class="visually-hidden" aria-label="{{ 'general.accessibility.close' | t }}"></button>
-          </form>
-
-          <div class="product-modal__outer">
-            <div class="product-modal__content small" data-scroll-lock-scrollable>
-              <button type="button" class="product-modal__close" data-popup-close aria-label="{{ 'general.accessibility.close' | t }}">
-                {%- render 'icon-cancel' -%}
-              </button>
-
-              {%- if size_charts.size > 1 -%}
-                <tabs-component class="rte product-tabs">
-                  <native-scrollbar class="tabs__head product-tabs__head">
-                    <ul class="tabs product-tabs-title" data-scrollbar data-scrollbar-slider data-scroll-lock-scrollable>
-                      {%- for chart in size_charts -%}
-                        <li class="tab-link tab-link-{{ forloop.index0 }}{% if forloop.first %} current{% endif %}" data-tab="{{ forloop.index0 }}" tabindex="0">
-                          <span>{{ chart.name.value }}</span>
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-
-                    <button type="button" class="tabs__arrow tabs__arrow--prev is-hidden" data-scrollbar-arrow-prev>
-                      {%- render 'icon-nav-arrow-left' -%}
-                      <span class="visually-hidden">{{ 'products.general.see_all' | t }}</span>
-                    </button>
-
-                    <button type="button" class="tabs__arrow tabs__arrow--next is-hidden" data-scrollbar-arrow-next>
-                      {%- render 'icon-nav-arrow-right' -%}
-                      <span class="visually-hidden">{{ 'products.general.see_all' | t }}</span>
-                    </button>
-                  </native-scrollbar>
-
-                  {%- for chart in size_charts -%}
-                    <div class="tab-content tab-content-{{ forloop.index0 }}{% if forloop.first %} current{% endif %}">
-                      {%- render 'size-chart-table', chart: chart, selected_size: selected_size -%}
-                    </div>
-                  {%- endfor -%}
-                </tabs-component>
-              {%- else -%}
-                {%- comment -%}
-                  Use a loop, not size_charts.first: a list.metaobject_reference
-                  value only hydrates its entries during iteration — .first / [0]
-                  return blank.
-                {%- endcomment -%}
-                <div class="rte">
-                  {%- for chart in size_charts -%}
-                    {%- render 'size-chart-table', chart: chart, selected_size: selected_size -%}
-                  {%- endfor -%}
-                </div>
-              {%- endif -%}
-            </div>
-          </div>
-        </dialog>
-      </popup-component>
-    {%- elsif block.settings.info_page != blank or specific_pages != '' -%}
-      {%- liquid
-        assign show_size_chart = true
-        assign specific_pages_arr = specific_pages | split: ','
-      -%}
-
-      {%- render 'stylesheet', name: 'tabs.css' -%}
-
-      <popup-component>
-        <a href="{{ info_page.url }}" data-popup-open class="radio__legend__link body-x-small{% if product.has_only_default_variant %} size-popup-link{% endif %}{% if size_style == 'text' or show_size_link_separated %} text-link{% endif %}">
-          {{ size_button }}
-        </a>
-
-        <dialog class="product-modal" aria-hidden="true" inert data-scroll-lock-required>
-          <form method="dialog">
-            <button class="visually-hidden" aria-label="{{ 'general.accessibility.close' | t }}"></button>
-          </form>
-
-          <div class="product-modal__outer">
-            <div class="product-modal__content small" data-scroll-lock-scrollable>
-              <button type="button" class="product-modal__close" data-popup-close aria-label="{{ 'general.accessibility.close' | t }}">
-                {%- render 'icon-cancel' -%}
-              </button>
-
-              <tabs-component class="rte product-tabs">
-                {%- liquid
-                  assign tabs_navigation = ''
-                  assign tabs = ''
-                  assign has_current = false
-                  assign number_tabs = 0
-                -%}
-
-                {%- for page_handle in specific_pages_arr -%}
-                  {%- assign page_size_chart = pages[page_handle] -%}
-
-                  {%- if page_size_chart.title != blank -%}
-                    {%- capture tabs_navigation -%}
-                      {{ tabs_navigation }}
-
-                      <li class="tab-link tab-link-{{ forloop.index0 }}{% if forloop.index == 1 %} current{% endif %}" data-tab="{{ forloop.index0 }}" tabindex="0">
-                        <span>{{ page_size_chart.title }}</span>
-                      </li>
-                    {%- endcapture -%}
-
-                    {%- capture tabs -%}
-                      {{ tabs }}
-
-                      <div class="tab-content tab-content-{{ forloop.index0 }}{% unless has_current %} current{% endunless %}">
-                        {{ page_size_chart.content }}
-                      </div>
-                    {%- endcapture -%}
-
-                    {%- assign has_current = true -%}
-                  {%- endif -%}
-                {%- endfor -%}
-
-                {%- if info_page -%}
-                  {%- assign number_tabs = specific_pages_arr.size -%}
-
-                  {%- capture tabs_navigation -%}
-                    {{ tabs_navigation }}
-
-                    <li class="tab-link tab-link-{{ number_tabs }}" data-tab="{{ number_tabs }}" data-lock-scroll tabindex="0">
-                      <span>{{ info_page.title }}</span>
-                    </li>
-                  {%- endcapture -%}
-
-                  {%- capture tabs -%}
-                    {{ tabs }}
-
-                    <div class="tab-content tab-content-{{ number_tabs }}{% unless has_current %} current{% endunless %}">
-                      {{ info_page.content }}
-                    </div>
-                  {%- endcapture -%}
-
-                  {%- assign has_current = true -%}
-                {%- endif -%}
-
-                {%- if specific_pages_arr.size > 1 -%}
-                  <native-scrollbar class="tabs__head product-tabs__head">
-                    <ul class="tabs product-tabs-title" data-scrollbar data-scrollbar-slider data-scroll-lock-scrollable>
-                      {{ tabs_navigation }}
-                    </ul>
-
-                    <button type="button" class="tabs__arrow tabs__arrow--prev is-hidden" data-scrollbar-arrow-prev>
-                      {%- render 'icon-nav-arrow-left' -%}
-                      <span class="visually-hidden">{{ 'products.general.see_all' | t }}</span>
-                    </button>
-
-                    <button type="button" class="tabs__arrow tabs__arrow--next is-hidden" data-scrollbar-arrow-next>
-                      {%- render 'icon-nav-arrow-right' -%}
-                      <span class="visually-hidden">{{ 'products.general.see_all' | t }}</span>
-                    </button>
-                  </native-scrollbar>
-                {%- endif -%}
-
-                {%- if tabs != '' -%}
-                  {{ tabs }}
-                {%- endif -%}
-              </tabs-component>
-            </div>
-          </div>
-        </dialog>
-      </popup-component>
-    {%- endif -%}
+    {%- capture size_chart_trigger_class -%}radio__legend__link body-x-small{% if product.has_only_default_variant %} size-popup-link{% endif %}{% if size_style == 'text' or show_size_link_separated %} text-link{% endif %}{%- endcapture -%}
+    {%- render 'size-chart-popup',
+      product: product,
+      trigger_content: size_button,
+      trigger_class: size_chart_trigger_class,
+      info_page_handle: block.settings.info_page,
+      selected_size: selected_size
+    -%}
   {%- endif -%}
 {%- endcapture -%}
 

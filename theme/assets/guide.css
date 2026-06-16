@@ -1,3 +1,17 @@
+.guide__size-chart-link {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.guide__size-chart-link .guide__heading {
+  margin: 0;
+}
+
 .guide__line {
   display: flex;
   margin: 10px 0;
