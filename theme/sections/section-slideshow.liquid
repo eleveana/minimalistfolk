@@ -102,8 +102,11 @@
             assign second_button_type = block.settings.second_button_type
             assign second_button_link = block.settings.second_button_link
             assign second_button_show_arrow = block.settings.second_button_show_arrow
+            assign label = block.settings.label
+            assign title_color = block.settings.title_color
             assign bg = ''
             assign text = ''
+            assign title_style = ''
 
             if first_button_style == 'btn--text' and block.settings.first_button_show_arrow
               assign first_button_style = first_button_style | append: ' btn--text-no-underline'
@@ -131,6 +134,10 @@
               assign text = '--text:' | append: text_color | append: ';'
             else
               assign text = '--text:' | append: scheme_text_color | append: ';'
+            endif
+
+            if title_color.alpha != 0.0 and title_color != blank
+              assign title_style = 'color:' | append: title_color | append: ';'
             endif
 
             assign animation_order = 2
@@ -187,7 +194,8 @@
               </div>
             {%- endif -%}
 
-            {%- if block.settings.title != blank
+            {%- if label != blank
+              or block.settings.title != blank
               or block.settings.description != blank
               or first_button_text != blank
             -%}
@@ -200,6 +208,18 @@
                 <div
                   class="hero__content{% if hero_transparent %} hero__content--transparent{% endif %}{% if text_underlay %} backdrop--radial{% endif %}"
                 >
+                  {%- if label != blank -%}
+                    <span
+                      class="hero__label"
+                      data-aos="hero"
+                      data-aos-anchor="{{ animation_anchor }}"
+                      data-aos-order="{{ animation_order }}"
+                    >
+                      {{ label | escape }}
+                    </span>
+                    {%- assign animation_order = animation_order | plus: 1 -%}
+                  {%- endif -%}
+
                   {%- unless block.settings.title == '' -%}
                     {%- liquid
                       assign heading_tag = 'h2'
@@ -211,6 +231,7 @@
 
                     <{{ heading_tag }}
                       class="hero__title {{ block.settings.heading_font_size }}"
+                      {% if title_style != blank %}style="{{ title_style }}"{% endif %}
                       data-aos="hero"
                       data-aos-anchor="{{ animation_anchor }}"
                       data-aos-order="{{ animation_order }}"
@@ -463,6 +484,12 @@
           "content": "Typography"
         },
         {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "info": "Small eyebrow shown above the heading, e.g. \"Now Enrolling\"."
+        },
+        {
           "type": "textarea",
           "id": "title",
           "label": "Heading",
@@ -481,6 +508,13 @@
             {"value": "heading-large", "label": "Large"},
             {"value": "heading-x-large", "label": "Extra large"}
           ]
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Heading color",
+          "info": "Overrides the heading color for this slide only. Leave empty to use the scheme/text color.",
+          "alpha": true
         },
         {
           "type": "textarea",
