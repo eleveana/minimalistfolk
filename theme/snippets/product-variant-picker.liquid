@@ -146,8 +146,15 @@
                   {%- endfor -%}
                 </tabs-component>
               {%- else -%}
+                {%- comment -%}
+                  Use a loop, not size_charts.first: a list.metaobject_reference
+                  value only hydrates its entries during iteration — .first / [0]
+                  return blank.
+                {%- endcomment -%}
                 <div class="rte">
-                  {%- render 'size-chart-table', chart: size_charts.first, selected_size: selected_size -%}
+                  {%- for chart in size_charts -%}
+                    {%- render 'size-chart-table', chart: chart, selected_size: selected_size -%}
+                  {%- endfor -%}
                 </div>
               {%- endif -%}
             </div>
