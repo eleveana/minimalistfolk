@@ -1,0 +1,410 @@
+<!-- /sections/section-last-chance.liquid -->
+{%- liquid
+  assign collection = collections[section.settings.collection]
+  assign color_scheme = 'color-' | append: section.settings.color_scheme
+  assign width = section.settings.width
+  assign layout_desktop = section.settings.layout_desktop
+  assign columns_desktop = section.settings.grid | plus: 0
+  assign rows = section.settings.rows | plus: 0
+  assign limit = section.settings.limit
+
+  comment
+    In a fixed grid we fill exact rows; in a slider the limit is the cap on
+    how many "last chance" items we surface.
+  endcomment
+  if layout_desktop == 'grid'
+    assign limit = columns_desktop | times: rows
+  endif
+
+  assign slider_enabled = false
+  if layout_desktop == 'slider'
+    assign slider_enabled = true
+  endif
+
+  # Mobile columns: a number for vertical grids, 1 when it scrolls.
+  if section.settings.layout_mobile == 'slider'
+    assign columns_mobile = 1
+  else
+    assign columns_mobile = section.settings.layout_mobile | plus: 0
+  endif
+
+  assign heading_tag = 'h2'
+  unless section.settings.heading_tag == 'automatic' or section.settings.heading_tag == blank
+    assign heading_tag = section.settings.heading_tag
+  endunless
+-%}
+
+{%- capture products_html -%}
+  {%- if collection != blank and collection.products_count > 0 -%}
+    {%- assign rendered = 0 -%}
+    {%- for product in collection.products -%}
+      {%- if rendered >= limit -%}
+        {%- break -%}
+      {%- endif -%}
+
+      {%- liquid
+        assign include = true
+
+        # Skip anything already gone unless the merchant wants to keep it visible
+        if section.settings.hide_sold_out and product.available == false
+          assign include = false
+        endif
+
+        # The heart of "last chance": only the genuinely-running-low items
+        if include and section.settings.only_low_stock
+          assign total_inventory = 0
+          assign is_tracked = false
+
+          for variant in product.variants
+            if variant.inventory_management != blank
+              assign is_tracked = true
+              assign total_inventory = total_inventory | plus: variant.inventory_quantity
+            endif
+          endfor
+
+          if is_tracked == false or total_inventory <= 0 or total_inventory > section.settings.low_stock_threshold
+            assign include = false
+          endif
+        endif
+      -%}
+
+      {%- if include -%}
+        {%- render 'product-grid-item',
+          product: product,
+          columns_mobile: columns_mobile,
+          index: forloop.index,
+          animation_delay: forloop.index0
+        -%}
+        {%- assign rendered = rendered | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- elsif request.design_mode -%}
+    {%- for i in (1..4) -%}
+      {%- render 'onboarding-product-grid-item' -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- comment -%} Nothing left in stock = nothing to show. Stay quiet unless editing. {%- endcomment -%}
+{%- assign has_products = products_html | strip -%}
+{%- if has_products != blank -%}
+  {%- capture grid_classes -%}
+    grid
+    {%- if slider_enabled %} grid--slider{% endif -%}
+    {%- if section.settings.layout_mobile == 'slider' %} grid--mobile-slider{% else %} grid--mobile-vertical{% endif -%}
+  {%- endcapture -%}
+
+  {%- style -%}
+    #LastChance--{{ section.id }} {
+      --PT: {{ section.settings.padding_top }}px;
+      --PB: {{ section.settings.padding_bottom }}px;
+    }
+    {%- if slider_enabled -%}
+      #LastChance--{{ section.id }} .grid--slider {
+        --item-width: calc((100% - {{ columns_desktop | minus: 1 }} * var(--gap)) / {{ columns_desktop }});
+      }
+    {%- endif -%}
+    #LastChance--{{ section.id }} .last-chance__eyebrow {
+      display: inline-block;
+      font-size: 0.75em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 0.5em;
+    }
+    #LastChance--{{ section.id }} .last-chance__subheading {
+      max-width: 46ch;
+      opacity: 0.8;
+      margin-top: 0.5em;
+    }
+    #LastChance--{{ section.id }} .last-chance__head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    #LastChance--{{ section.id }} .last-chance__link {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+  {%- endstyle -%}
+
+  <div
+    id="LastChance--{{ section.id }}"
+    class="last-chance section-padding {{ color_scheme }}"
+    data-section-id="{{ section.id }}"
+    data-section-type="last-chance"
+    style="--COLUMNS: {{ columns_desktop }}; --COLUMNS-MEDIUM: {{ columns_desktop | at_most: 3 }}; --COLUMNS-SMALL: 2; --COLUMNS-MOBILE: {{ columns_mobile }};"
+  >
+    <div class="{{ width }}">
+      {%- if section.settings.heading != blank or section.settings.eyebrow != blank or section.settings.subheading != blank -%}
+        <div class="last-chance__head {{ section.settings.heading_alignment }}">
+          <div class="last-chance__head-text">
+            {%- if section.settings.eyebrow != blank -%}
+              <span class="last-chance__eyebrow">{{ section.settings.eyebrow }}</span>
+            {%- endif -%}
+
+            {%- if section.settings.heading != blank -%}
+              <{{ heading_tag }} class="last-chance__heading {{ section.settings.heading_font_size }}">
+                {{- section.settings.heading -}}
+              </{{ heading_tag }}>
+            {%- endif -%}
+
+            {%- if section.settings.subheading != blank -%}
+              <p class="last-chance__subheading">{{ section.settings.subheading }}</p>
+            {%- endif -%}
+          </div>
+
+          {%- if section.settings.show_view_all and collection != blank and collection.url != blank -%}
+            <a class="last-chance__link link-arrow" href="{{ collection.url }}">
+              {{- section.settings.view_all_text | default: 'View all' -}}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="grid-outer">
+        {%- if slider_enabled -%}
+          <grid-slider align-arrows>
+            <div class="{{ grid_classes }}" data-grid-slider id="LastChanceGrid--{{ section.id }}">
+              {{ products_html }}
+            </div>
+          </grid-slider>
+        {%- else -%}
+          <div class="{{ grid_classes }}" id="LastChanceGrid--{{ section.id }}">
+            {{ products_html }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Last chance",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Point this at your clearance / final-sale collection."
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Last chance"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Before they're gone"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Final sizes from past seasons. Once they sell out, they're gone for good."
+    },
+    {
+      "type": "select",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "default": "heading-small",
+      "options": [
+        {"value": "heading-mini", "label": "Mini"},
+        {"value": "heading-x-small", "label": "Extra small"},
+        {"value": "heading-small", "label": "Small"},
+        {"value": "heading-medium", "label": "Medium"},
+        {"value": "heading-large", "label": "Large"},
+        {"value": "heading-x-large", "label": "Extra large"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Text alignment",
+      "default": "text-left",
+      "options": [
+        {"value": "text-left", "label": "Left"},
+        {"value": "text-center", "label": "Centered"}
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show \"view all\" link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "\"View all\" text",
+      "default": "Shop all"
+    },
+    {
+      "type": "header",
+      "content": "What to show"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Maximum products",
+      "info": "Applies to the slider. The grid uses rows × columns instead.",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_sold_out",
+      "label": "Hide sold-out items",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "only_low_stock",
+      "label": "Only show low-stock items",
+      "info": "Surfaces real urgency: hides anything still well-stocked. Requires inventory tracking.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "low_stock_threshold",
+      "min": 1,
+      "max": 25,
+      "step": 1,
+      "label": "Low-stock threshold",
+      "info": "An item counts as \"last chance\" at or below this many units left.",
+      "default": 6,
+      "visible_if": "{{ section.settings.only_low_stock }}"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "default": "wrapper--full-padded",
+      "options": [
+        {"value": "wrapper--full", "label": "Full width"},
+        {"value": "wrapper--full-padded", "label": "Full width padded"},
+        {"value": "wrapper", "label": "Normal"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout_desktop",
+      "label": "Desktop layout",
+      "default": "slider",
+      "options": [
+        {"value": "grid", "label": "Grid"},
+        {"value": "slider", "label": "Slider"}
+      ]
+    },
+    {
+      "type": "range",
+      "id": "grid",
+      "label": "Products per row",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "label": "Rows",
+      "info": "Applies only to the grid layout.",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Mobile layout",
+      "default": "slider",
+      "options": [
+        {"value": "1", "label": "1 per row"},
+        {"value": "2", "label": "2 per row"},
+        {"value": "slider", "label": "Slider"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme_1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading SEO tag",
+      "default": "automatic",
+      "options": [
+        {"value": "automatic", "label": "Automatic"},
+        {"value": "h2", "label": "H2"},
+        {"value": "h3", "label": "H3"},
+        {"value": "h4", "label": "H4"},
+        {"value": "h5", "label": "H5"},
+        {"value": "h6", "label": "H6"}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Last chance",
+      "category": "Products"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "aside", "footer"]
+  }
+}
+{% endschema %}

@@ -491,6 +491,32 @@
         "padding_bottom": 30
       }
     },
+    "last_chance": {
+      "type": "section-last-chance",
+      "settings": {
+        "collection": "",
+        "eyebrow": "Last chance",
+        "heading": "Before they're gone",
+        "subheading": "Final sizes from past seasons. Once they sell out, they're gone for good.",
+        "heading_font_size": "heading-small",
+        "heading_alignment": "text-left",
+        "show_view_all": true,
+        "view_all_text": "Shop all",
+        "limit": 8,
+        "hide_sold_out": true,
+        "only_low_stock": false,
+        "low_stock_threshold": 6,
+        "width": "wrapper--full-padded",
+        "layout_desktop": "slider",
+        "grid": 4,
+        "rows": 2,
+        "layout_mobile": "slider",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "heading_tag": "automatic"
+      }
+    },
     "related": {
       "type": "related",
       "blocks": {
@@ -535,6 +561,7 @@
     "section_text_row_rineBE",
     "section_double_R7t4Hk",
     "section_divider_RJH9eP",
+    "last_chance",
     "related"
   ]
 }
