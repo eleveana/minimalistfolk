@@ -154,6 +154,94 @@ Content → Metaobjects → Size chart → **Add entry**. For each below: set **
 {"headers": ["Size", "Width", "Length", "Sleeves"], "rows": [["3Y", "15", "13.5", "12"], ["4-5Y", "17", "14.5", "14"], ["6-7Y", "17.5", "15.5", "16"], ["8-9Y", "18.5", "17", "17.5"], ["10-11Y", "19", "18", "18"], ["12-13Y", "19.5", "18.5", "20"]]}
 ```
 
+### Maya Set (Bottom)
+- **Name:** `Maya Set (Bottom)`
+- **Unit:** `inches`
+- **Data:**
+```json
+{"headers": ["Size", "Length", "Inseam", "Waist"], "rows": [["3Y", "23.5", "16", "9"], ["4-5Y", "25.5", "17.5", "9.5"], ["6-7Y", "27.5", "19", "10.5"], ["8-9Y", "32", "23", "11"], ["10-11Y", "34", "24.5", "12"], ["12-13Y", "36", "25.5", "12.7"]]}
+```
+
+### Kids Tees
+- **Name:** `Kids Tees`
+- **Unit:** `inches`
+- **Data:**
+```json
+{"headers": ["Size", "Pit to Pit", "Length"], "rows": [["6-12M", "11.5", "13.5"], ["9-18M", "11.5", "14"], ["2-3Y", "12", "15"], ["4-5Y", "14.5", "17"], ["6-7Y", "16", "18"], ["8-9Y", "17", "19.5"], ["10-11Y", "17.5", "21"], ["12-13Y", "18", "22.5"]]}
+```
+
+### Adult Tees
+- **Name:** `Adult Tees`
+- **Unit:** `inches`
+- **Data:**
+```json
+{"headers": ["Size", "Pit to Pit", "Length"], "rows": [["S", "19.5", "23.5"], ["M", "20", "24"], ["L", "22", "24.5"], ["XL", "23", "25"]]}
+```
+
+### Kids Pullovers
+- **Name:** `Kids Pullovers`
+- **Unit:** `inches`
+- **Data:**
+```json
+{"headers": ["Size", "Pit to Pit", "Length", "Sleeve"], "rows": [["6-12M Bubble Romper", "13.5", "13", "12.5"], ["1-2Y", "14", "14.5", "15"], ["2-4Y", "15", "16", "18"], ["4-6Y", "16", "18", "20"], ["6-8Y", "17", "19.5", "22"], ["8-10Y", "18.5", "20.5", "24"], ["10-12Y", "19", "21", "26"], ["12-14Y", "21", "24", "21"]]}
+```
+
+### Women's Fit Pullover
+- **Name:** `Women's Fit Pullover`
+- **Unit:** `inches`
+- **Data:**
+```json
+{"headers": ["Size", "Sleeve", "Length", "Pit to Pit"], "rows": [["S", "24.5", "24", "21"], ["M", "25", "25", "22"], ["L", "25.5", "25.5", "23"], ["XL", "26", "27", "24"]]}
+```
+
+### Adult Unisex Oversized Pullover
+- **Name:** `Adult Unisex Oversized Pullover`
+- **Unit:** `inches`
+- **Data:**
+```json
+{"headers": ["Size", "Sleeve", "Length", "Pit to Pit"], "rows": [["S", "25", "27.5", "24"], ["M", "25.2", "28", "25"], ["L", "26", "29", "25.5"], ["XL", "26.2", "30", "26.5"]]}
+```
+
+### Ma-Me-Mi Two Piece Swim Top
+- **Name:** `Ma-Me-Mi Two Piece Swim Top`
+- **Unit:** `inches`
+- **Data:**
+```json
+{"headers": ["Size", "Length", "Chest"], "rows": [["3-4", "5.7", "10.2"], ["5-6", "6.2", "10.6"], ["7-8", "6.8", "11.4"], ["9-10", "7.4", "11.9"], ["11-12", "8", "12.2"]]}
+```
+
+### Ma-Me-Mi Two Piece Swim Bottom
+- **Name:** `Ma-Me-Mi Two Piece Swim Bottom`
+- **Unit:** `inches`
+- **Data:**
+```json
+{"headers": ["Size", "Length", "Waist"], "rows": [["3-4", "9", "9.7"], ["5-6", "9.4", "10.2"], ["7-8", "9.8", "10.6"], ["9-10", "10.2", "11.3"], ["11-12", "10.6", "11.8"]]}
+```
+
+### Ma-Me-Mi One Piece Swim
+- **Name:** `Ma-Me-Mi One Piece Swim`
+- **Unit:** `inches`
+- **Data:**
+```json
+{"headers": ["Size", "Length (from shoulder)", "Chest"], "rows": [["3-4", "19", "11.4"], ["5-6", "20", "11.8"], ["7-8", "21.2", "12.5"], ["9-10", "22.4", "13"], ["11-12", "23.6", "13.7"]]}
+```
+
+### Ma-Me-Mi Boardshorts
+- **Name:** `Ma-Me-Mi Boardshorts`
+- **Unit:** `inches`
+- **Data:**
+```json
+{"headers": ["Size", "Length", "Waist"], "rows": [["3-4", "7.8", "8.6"], ["5-6", "9", "9.4"], ["7-8", "10.2", "9.8"], ["9-10", "11.4", "10.6"], ["11-12", "12.5", "11"]]}
+```
+
+### Kids Sweatshirt Dress
+- **Name:** `Kids Sweatshirt Dress`
+- **Unit:** `inches`
+- **Data:**
+```json
+{"headers": ["Size", "Length", "Pit to Pit", "Sleeves"], "rows": [["1-2Y", "16", "14.5", "14"], ["2-4Y", "21", "17", "18"], ["4-6Y", "22.5", "19.5", "20"], ["6-8Y", "25", "20", "21"], ["8-10Y", "27", "21", "23"], ["10-12Y", "29", "21.5", "24"], ["12-14Y", "30", "22.5", "25"]]}
+```
+
 ---
 
 ## 4. Assign charts to products
@@ -176,7 +264,16 @@ Suggested mapping (by product title containing):
 | “adult joggers” | Adult Joggers |
 | “mini skirt” | Mini Skirt |
 | “clementine” | Clementine Dress |
-| “maya set” | Maya Set (Top) |
+| “maya set” | Maya Set (Top) + Maya Set (Bottom) |
+| “kids tee” | Kids Tees |
+| “adult tee” | Adult Tees |
+| “kids pullover” | Kids Pullovers |
+| “women's fit pullover” | Women's Fit Pullover |
+| “unisex oversized pullover” | Adult Unisex Oversized Pullover |
+| “two piece swim” | Ma-Me-Mi Two Piece Swim Top + Ma-Me-Mi Two Piece Swim Bottom |
+| “one piece swim” | Ma-Me-Mi One Piece Swim |
+| “boardshort” | Ma-Me-Mi Boardshorts |
+| “sweatshirt dress” | Kids Sweatshirt Dress |
 
 Products that share measurements (e.g. every color of the Mia Dress) all point at the same single entry — create the chart once, assign to many.
 
