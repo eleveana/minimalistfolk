@@ -11,6 +11,14 @@
     assign sibs_collection = product.metafields.theme.sibling_products.value | default: collections[product.metafields.theme.siblings.value].products
   endif
 
+  comment
+    A curated 'theme.sibling_products' list overrides the full siblings
+    collection, so large families (e.g. kids tees) can show a subset
+  endcomment
+  if metafields == false and product.metafields.theme.sibling_products.value != blank
+    assign sibs_collection = product.metafields.theme.sibling_products.value
+  endif
+
   if metafields and sibs_collection != blank
     assign show_siblings = true
   elsif metafields == false and sibs_collection.size > 0

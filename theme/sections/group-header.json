@@ -43,7 +43,11 @@
         "text_j64yTR",
         "text_WyF3k7"
       ],
-      "disabled": true,
+      "custom_css": [
+        ".announcement__bar-outer {background-color: #f6e8ad;}",
+        ".announcement__bar-holder--arrows .announcement__slider:not(.single-slide) .flickity-viewport:before {background: none;}",
+        ".announcement__slider:not(.single-slide) .flickity-viewport:after {background: none;}"
+      ],
       "settings": {
         "show_border": false,
         "layout": "slider",
@@ -53,7 +57,7 @@
         "marquee_speed": 100,
         "message_spacing": 10,
         "text_font_size": "body-small",
-        "color_scheme": "scheme-8",
+        "color_scheme": "scheme-1",
         "border_color": "",
         "padding_top": 10,
         "padding_bottom": 5

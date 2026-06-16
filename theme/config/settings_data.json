@@ -9,13 +9,13 @@
  */
 {
   "current": {
-    "color_scheme": "",
-    "menu_bg_color": "#fbf1cc",
-    "header_link": "#17404f",
-    "submenu_bg_color": "#fbf1cc",
-    "submenu_link_color": "#17404f",
+    "color_scheme": "scheme-1",
+    "menu_bg_color": "#FFF9E1",
+    "header_link": "#000000",
+    "submenu_bg_color": "#FFF9E1",
+    "submenu_link_color": "#000000",
     "menu_transparent_color": "#fbf1cc",
-    "sale_color": "#c64113",
+    "sale_color": "#D86344",
     "type_nav_font": "poppins_n4",
     "nav_font_size": 18,
     "nav_letter_spacing": 25,
@@ -119,13 +119,13 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "section_text": "#17404f",
-          "section_bg": "#ffffff",
+          "section_text": "#000000",
+          "section_bg": "#FFF9E1",
           "section_bg_light": "#f6e8ae",
           "section_bg_gradient": "",
-          "btn_primary_bg": "#17404f",
-          "btn_primary_text": "#fbf1cc",
-          "btn_primary_border": "#17404f",
+          "btn_primary_bg": "#ac97c8",
+          "btn_primary_text": "#000000",
+          "btn_primary_border": "#ac97c8",
           "btn_secondary_bg": "#f15c2e",
           "btn_secondary_text": "#ffffff",
           "btn_secondary_border": "#f15c2e",
@@ -246,7 +246,7 @@
       "scheme-8": {
         "settings": {
           "section_text": "#000000",
-          "section_bg": "#ffffff",
+          "section_bg": "#fff9e1",
           "section_bg_light": "#dc954d",
           "section_bg_gradient": "",
           "btn_primary_bg": "#be979f",

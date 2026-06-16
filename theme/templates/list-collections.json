@@ -11,7 +11,18 @@
   "sections": {
     "main": {
       "type": "list-collections",
-      "settings": {}
+      "settings": {
+        "display_type": "selected",
+        "title": "Collections",
+        "heading_font_size": "heading-medium",
+        "grid": 4,
+        "rows": 1,
+        "layout_mobile": "slider",
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "heading_tag": "automatic"
+      }
     }
   },
   "order": [
