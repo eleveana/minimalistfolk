@@ -881,7 +881,19 @@
                       {%- endif -%}
 
                       <div class="guide__line" style="{{ style }}">
-                        {%- assign segment_selected = block.settings.segment_selected | plus: 0 -%}
+                        {%- liquid
+                          # Per-product fit: the `custom.fit` metafield (1-5)
+                          # overrides the block default so each product can show
+                          # its own position on the Small -> Large scale.
+                          assign segment_selected = block.settings.segment_selected | plus: 0
+                          assign fit_metafield = product.metafields.custom.fit
+                          if fit_metafield != blank and fit_metafield.value != blank
+                            assign fit_value = fit_metafield.value | plus: 0
+                            if fit_value >= 1 and fit_value <= 5
+                              assign segment_selected = fit_value
+                            endif
+                          endif
+                        -%}
                         {%- for idx in (1..5) -%}
                           <span
                             {% if forloop.index == segment_selected %}
