@@ -21,6 +21,14 @@
   assign uniq_id = 'product-' | append: product.id | append: '-' | append: product.handle
   assign size_style = block.settings.size_chart_style
 
+  comment
+    Per-product size charts: a list of `size_chart` metaobjects assigned via the
+    product metafield custom.size_charts. When present these take priority over
+    the legacy all-in-one info_page / `_size_` tag charts below.
+  endcomment
+  assign size_charts = product.metafields.custom.size_charts.value
+  assign selected_size = ''
+
   if block.settings.info_page != blank
     assign size_translation = 'general.size_chart.size' | t
     assign info_page = pages[block.settings.info_page]
@@ -58,6 +66,7 @@
   {%- if translation_string_size contains option_name -%}
     {%- assign has_size_option = true -%}
     {%- assign show_size_link_separated = false -%}
+    {%- assign selected_size = option.selected_value -%}
   {%- endif -%}
 {%- endfor -%}
 
@@ -88,7 +97,64 @@
 
 {%- capture size_chart_content -%}
   {%- if enable_size_chart -%}
-    {%- if block.settings.info_page != blank or specific_pages != '' -%}
+    {%- if size_charts != blank and size_charts.size > 0 -%}
+      {%- assign show_size_chart = true -%}
+      {%- render 'stylesheet', name: 'tabs.css' -%}
+
+      <popup-component>
+        <a href="#" data-popup-open class="radio__legend__link body-x-small{% if product.has_only_default_variant %} size-popup-link{% endif %}{% if size_style == 'text' or show_size_link_separated %} text-link{% endif %}">
+          {{ size_button }}
+        </a>
+
+        <dialog class="product-modal" aria-hidden="true" inert data-scroll-lock-required>
+          <form method="dialog">
+            <button class="visually-hidden" aria-label="{{ 'general.accessibility.close' | t }}"></button>
+          </form>
+
+          <div class="product-modal__outer">
+            <div class="product-modal__content small" data-scroll-lock-scrollable>
+              <button type="button" class="product-modal__close" data-popup-close aria-label="{{ 'general.accessibility.close' | t }}">
+                {%- render 'icon-cancel' -%}
+              </button>
+
+              {%- if size_charts.size > 1 -%}
+                <tabs-component class="rte product-tabs">
+                  <native-scrollbar class="tabs__head product-tabs__head">
+                    <ul class="tabs product-tabs-title" data-scrollbar data-scrollbar-slider data-scroll-lock-scrollable>
+                      {%- for chart in size_charts -%}
+                        <li class="tab-link tab-link-{{ forloop.index0 }}{% if forloop.first %} current{% endif %}" data-tab="{{ forloop.index0 }}" tabindex="0">
+                          <span>{{ chart.name.value }}</span>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+
+                    <button type="button" class="tabs__arrow tabs__arrow--prev is-hidden" data-scrollbar-arrow-prev>
+                      {%- render 'icon-nav-arrow-left' -%}
+                      <span class="visually-hidden">{{ 'products.general.see_all' | t }}</span>
+                    </button>
+
+                    <button type="button" class="tabs__arrow tabs__arrow--next is-hidden" data-scrollbar-arrow-next>
+                      {%- render 'icon-nav-arrow-right' -%}
+                      <span class="visually-hidden">{{ 'products.general.see_all' | t }}</span>
+                    </button>
+                  </native-scrollbar>
+
+                  {%- for chart in size_charts -%}
+                    <div class="tab-content tab-content-{{ forloop.index0 }}{% if forloop.first %} current{% endif %}">
+                      {%- render 'size-chart-table', chart: chart, selected_size: selected_size -%}
+                    </div>
+                  {%- endfor -%}
+                </tabs-component>
+              {%- else -%}
+                <div class="rte">
+                  {%- render 'size-chart-table', chart: size_charts.first, selected_size: selected_size -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </dialog>
+      </popup-component>
+    {%- elsif block.settings.info_page != blank or specific_pages != '' -%}
       {%- liquid
         assign show_size_chart = true
         assign specific_pages_arr = specific_pages | split: ','

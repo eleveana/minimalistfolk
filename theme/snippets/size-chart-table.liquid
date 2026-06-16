@@ -1,0 +1,141 @@
+{% comment %}
+  Renders a single `size_chart` metaobject as a branded table.
+
+  Accepts:
+  - chart: {Object} a size_chart metaobject (required). Expects:
+      chart.name  -> single line text (display title)
+      chart.unit  -> single line text (e.g. "inches"), optional
+      chart.note  -> single line text (fit note), optional
+      chart.data  -> json: { "headers": [...], "rows": [[...], ...] }
+  - selected_size: {String} the shopper's currently selected size option value,
+      used to highlight the matching row (optional).
+
+  Usage:
+  {% render 'size-chart-table', chart: chart, selected_size: selected_size %}
+{% endcomment %}
+
+{%- liquid
+  assign data = chart.data.value
+  assign headers = data.headers
+  assign rows = data.rows
+  assign chart_name = chart.name.value
+  assign chart_note = chart.note.value
+  assign unit = chart.unit.value | default: 'inches'
+  assign selected_norm = selected_size | default: '' | downcase | remove: ' '
+-%}
+
+{%- if rows.size > 0 -%}
+  {%- style -%}
+    .size-chart { margin: 0 0 1em; }
+    .size-chart__title { margin: 0 0 0.6em; }
+    .size-chart__table { width: 100%; margin: 0; }
+    .size-chart__table th[scope='col'] { text-align: center; font-weight: var(--FONT-WEIGHT-BODY-BOLD); }
+    .size-chart__table th[scope='row'] { text-align: left; font-weight: var(--FONT-WEIGHT-BODY-BOLD); }
+    .size-chart__table td { text-align: center; }
+    .size-chart__table tbody tr.is-selected { background: var(--COLOR-BG-ACCENT); }
+    .size-chart__table tbody tr.is-selected th,
+    .size-chart__table tbody tr.is-selected td { font-weight: var(--FONT-WEIGHT-BODY-BOLD); }
+    .size-chart__caption { margin: 0.7em 0 0; opacity: 0.7; }
+  {%- endstyle -%}
+
+  <div class="size-chart" data-size-chart>
+    {%- if chart_name != blank -%}
+      <p class="size-chart__title heading-x-small">{{ chart_name }}</p>
+    {%- endif -%}
+
+    <div class="rte-table">
+      <table class="size-chart__table">
+        <thead>
+          <tr>
+            {%- for header in headers -%}
+              <th scope="col">{{ header }}</th>
+            {%- endfor -%}
+          </tr>
+        </thead>
+        <tbody>
+          {%- for row in rows -%}
+            {%- assign row_size = row[0] | strip -%}
+            {%- assign row_norm = row_size | downcase | remove: ' ' -%}
+            <tr
+              data-size-row="{{ row_norm }}"
+              {%- if selected_norm != '' and selected_norm == row_norm %} class="is-selected" aria-current="true"{% endif %}
+            >
+              {%- for cell in row -%}
+                {%- if forloop.first -%}
+                  <th scope="row">{{ cell }}</th>
+                {%- else -%}
+                  <td>{{ cell }}</td>
+                {%- endif -%}
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="size-chart__caption body-x-small">
+      {%- if chart_note != blank -%}{{ chart_note }} &middot; {% endif -%}
+      All measurements in {{ unit }}.
+    </p>
+  </div>
+{%- endif -%}
+
+{%- comment -%}
+  Live row highlight. Decoupled from the theme's variant JS: it listens for
+  native `change` on the size option inputs and matches their value to a row.
+  Registered once per page even when several charts render (e.g. set top+bottom).
+{%- endcomment -%}
+{%- unless request.design_mode -%}
+  <script>
+    (function () {
+      if (window.__sizeChartHighlight) return;
+      window.__sizeChartHighlight = true;
+
+      var norm = function (v) {
+        return (v || '').toString().trim().toLowerCase().replace(/\s+/g, '');
+      };
+
+      var apply = function (value) {
+        var key = norm(value);
+        if (!key) return;
+        document.querySelectorAll('[data-size-chart]').forEach(function (chart) {
+          var matched = false;
+          chart.querySelectorAll('[data-size-row]').forEach(function (row) {
+            var isMatch = row.getAttribute('data-size-row') === key;
+            row.classList.toggle('is-selected', isMatch);
+            if (isMatch) {
+              row.setAttribute('aria-current', 'true');
+              matched = true;
+            } else {
+              row.removeAttribute('aria-current');
+            }
+          });
+          return matched;
+        });
+      };
+
+      // Build the set of sizes any chart knows about, so we only react to
+      // inputs whose value actually corresponds to a size row.
+      var knownSizes = function () {
+        var set = {};
+        document.querySelectorAll('[data-size-row]').forEach(function (row) {
+          set[row.getAttribute('data-size-row')] = true;
+        });
+        return set;
+      };
+
+      var sizes = knownSizes();
+
+      document.addEventListener('change', function (e) {
+        var el = e.target;
+        if (!el) return;
+        var value =
+          el.type === 'radio'
+            ? (el.checked ? el.value : null)
+            : el.value;
+        if (value == null) return;
+        if (sizes[norm(value)]) apply(value);
+      }, true);
+    })();
+  </script>
+{%- endunless -%}
