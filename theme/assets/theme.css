@@ -11209,6 +11209,25 @@ shopify-paypal-button {
   display: block;
 }
 
+/* Coming soon launch notify — always visible (not gated on sold-out state) */
+.product__submit--coming-soon {
+  width: 100%;
+}
+.product-comingsoon-notification {
+  display: block;
+  width: 100%;
+}
+.product__submit--coming-soon .btn {
+  width: 100%;
+}
+.product-comingsoon-notification.has-success button[data-popup-open] {
+  display: none;
+}
+.product__notification__intro {
+  margin-bottom: 1rem;
+  opacity: 0.85;
+}
+
 @media only screen and (max-width: 749px) {
   .product-modal__notification {
     height: auto;

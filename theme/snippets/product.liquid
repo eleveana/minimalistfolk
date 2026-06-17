@@ -109,6 +109,24 @@
     assign preorder = true
   endif
 
+  assign coming_soon = false
+  if product.metafields.custom.coming_soon.type == 'boolean' and product.metafields.custom.coming_soon.value == true
+    assign coming_soon = true
+  endif
+  if current_variant.metafields.custom.coming_soon.type == 'boolean' and current_variant.metafields.custom.coming_soon.value == true
+    assign coming_soon = true
+  endif
+  if product_tags contains '_coming_soon'
+    assign coming_soon = true
+  endif
+
+  comment
+    A coming-soon launch supersedes pre-order and hides the price until launch.
+  endcomment
+  if coming_soon
+    assign preorder = false
+  endif
+
   assign on_sale = false
   if product.compare_at_price > product.price
     assign on_sale = true
@@ -422,7 +440,8 @@
                       product: product,
                       block: block,
                       block_style: block_style,
-                      onboarding_product: onboarding_product
+                      onboarding_product: onboarding_product,
+                      coming_soon: coming_soon
                     -%}
 
                   {%- when 'variants' -%}
@@ -481,8 +500,17 @@
                         assign title_class = 'product-bundle__holder__title'
                       endif
 
-                      assign target_product = product_metafield | default: fallback_product
-                      assign target_product_list = product_list_metafield | default: fallback_product_list
+                      # Per-product only: drive the widget from the product's own metafield
+                      # (e.g. the "Pair with" / upsell list). No fallback to the block's
+                      # default product list, so products without the metafield hide the widget.
+                      # In the theme editor we still fall back so merchants can preview/configure.
+                      if request.design_mode
+                        assign target_product = product_metafield | default: fallback_product
+                        assign target_product_list = product_list_metafield | default: fallback_product_list
+                      else
+                        assign target_product = product_metafield
+                        assign target_product_list = product_list_metafield
+                      endif
                       assign slider_enabled = false
                       assign block_tag = 'div'
 
@@ -770,6 +798,12 @@
                     >
                       {%- if badge != '' and block.settings.product_badges -%}
                         <span class="badge-box">{{ badge }}</span>
+                      {%- endif -%}
+
+                      {%- if coming_soon and block.settings.product_badges -%}
+                        <span class="badge-box comingsoon-box" data-comingsoon-badge>
+                          {{- 'products.product.coming_soon' | t -}}
+                        </span>
                       {%- endif -%}
 
                       {%- if preorder and product.available and block.settings.product_badges -%}

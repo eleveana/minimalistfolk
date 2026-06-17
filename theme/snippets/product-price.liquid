@@ -1,5 +1,28 @@
 {%- assign section_id = unique | default: section.id -%}
 
+{%- comment -%}
+  Hide price on coming-soon products until launch. Recompute defensively in case the
+  snippet is rendered without the flag passed in.
+{%- endcomment -%}
+{%- liquid
+  assign coming_soon = coming_soon | default: false
+  if product.metafields.custom.coming_soon.type == 'boolean' and product.metafields.custom.coming_soon.value == true
+    assign coming_soon = true
+  endif
+  assign product_tags = product.tags | join: ','
+  if product_tags contains '_coming_soon'
+    assign coming_soon = true
+  endif
+-%}
+
+{%- if coming_soon -%}
+  {%- comment -%} Keep an empty #Price node so variant-swap JS stays a no-op. {%- endcomment -%}
+  <div class="product__block block-padding product__block--price-hidden" {{ block_style }}>
+    <div class="product__price__wrap">
+      <div id="Price-{{ section_id }}" role="status" {{ block.shopify_attributes }}></div>
+    </div>
+  </div>
+{%- else -%}
 <div
   class="product__block block-padding"
   {{ block_style }}
@@ -181,3 +204,4 @@
     {% endif %}
   </div>
 </div>
+{%- endif -%}

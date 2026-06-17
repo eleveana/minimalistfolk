@@ -101,7 +101,7 @@
             "style": "collapsible",
             "show_description": true,
             "show_read_more": true,
-            "default_open": false,
+            "default_open": true,
             "heading": "Description",
             "heading_font_size": "body-medium",
             "text": "",
@@ -131,6 +131,8 @@
         "fit_guide_z4K6g8": {
           "type": "fit-guide",
           "settings": {
+            "show_size_chart_link": true,
+            "size_chart_heading": "Size Chart",
             "heading": "Fit",
             "segment_selected": 3,
             "left_label": "Small",

@@ -48,10 +48,13 @@
       "thank_you_with_code_html": "Thanks for signing up! Use the code <span>Discount10</span> for 10% off.",
       "error_message": "This customer is already subscribed!",
       "product_notification_for": "Product notification for",
+      "coming_soon_notification_for": "Coming soon launch sign-up",
       "newsletter_product_availability": "Notify Me When It's Available",
+      "coming_soon_availability": "Coming Soon — Notify Me",
       "notify": "Notify Me",
       "email": "Your email",
       "email_label": "Please enter your email and we will let you know when your selected item becomes available.",
+      "email_label_coming_soon": "Be the first to know — drop your email and we'll tell you the moment it launches.",
       "notification_success": "Your email has been received."
     },
     "search": {
@@ -456,6 +459,7 @@
       "sale_type": "Sale type",
       "new": "New",
       "pre_order": "Pre-order",
+      "coming_soon": "Coming Soon",
       "on_sale": "Sale",
       "save_badge_html": "Save {{ discount }}",
       "save_badge_up_to_html": "Save up to {{ discount }}",

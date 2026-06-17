@@ -1947,7 +1947,10 @@
       "#Announcement--template--18512788226142__section_announcement_rLEpbJ > announcement-bar > div > div > ticker-bar > div.announcement__message > div > div:nth-child(2) > div:nth-child(2) > div {color: #8a9140;}",
       "#Announcement--template--18512788226142__section_announcement_rLEpbJ > announcement-bar > div > div > ticker-bar > div.announcement__message > div > div:nth-child(1) > div:nth-child(2) > div {color: #8a9140;}",
       "#Announcement--template--18512788226142__section_announcement_rLEpbJ > announcement-bar > div > div > ticker-bar > div.announcement__message > div > div:nth-child(2) > div:nth-child(6) > div {color: #f15c2e;}",
-      ".site-footer {background-color: #F6E8AE;}"
+      "#Announcement--template--18512788226142__section_announcement_rLEpbJ > announcement-bar > div > div > ticker-bar > div.announcement__message > div > div:nth-child(2) > div:nth-child(4) > div .site-footer {background-color: #f6e8ae;}",
+      "#Announcement--template--18512788226142__section_announcement_rLEpbJ > announcement-bar > div > div > ticker-bar > div.announcement__message > div > div:nth-child(2) > div:nth-child(4) > div {color: #17404f;}",
+      "#Announcement--template--18512788226142__section_announcement_rLEpbJ > announcement-bar > div > div > ticker-bar > div.announcement__message > div > div:nth-child(3) > div:nth-child(2) > div {color: #17404f;}",
+      "#Announcement--template--18512788226142__section_announcement_rLEpbJ > announcement-bar > div > div > ticker-bar > div.announcement__message > div > div:nth-child(3) > div:nth-child(2) > div {color: #8a9140;}"
     ]
   }
 }
