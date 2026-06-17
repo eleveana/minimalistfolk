@@ -500,17 +500,8 @@
                         assign title_class = 'product-bundle__holder__title'
                       endif
 
-                      # Per-product only: drive the widget from the product's own metafield
-                      # (e.g. the "Pair with" / upsell list). No fallback to the block's
-                      # default product list, so products without the metafield hide the widget.
-                      # In the theme editor we still fall back so merchants can preview/configure.
-                      if request.design_mode
-                        assign target_product = product_metafield | default: fallback_product
-                        assign target_product_list = product_list_metafield | default: fallback_product_list
-                      else
-                        assign target_product = product_metafield
-                        assign target_product_list = product_list_metafield
-                      endif
+                      assign target_product = product_metafield | default: fallback_product
+                      assign target_product_list = product_list_metafield | default: fallback_product_list
                       assign slider_enabled = false
                       assign block_tag = 'div'
 

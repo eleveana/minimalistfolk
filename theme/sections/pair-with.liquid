@@ -1,0 +1,225 @@
+{%- comment -%}
+  Pair with — per-product "Complete the look" / "Pairs well with".
+
+  Reads a product-list metafield (default: custom.pair_with) and renders the
+  chosen products as cards. When the current product has no value for that
+  metafield, the whole section — heading included — renders nothing, so it
+  never shows on products that haven't opted in.
+
+  The metafield namespace/key are editable in the theme editor so they can be
+  pointed at the real definition without code changes.
+{%- endcomment -%}
+
+{%- liquid
+  assign ns = section.settings.metafield_namespace | default: 'custom'
+  assign key = section.settings.metafield_key | default: 'pair_with'
+  assign pair_products = product.metafields[ns][key].value
+
+  assign color_scheme = 'color-' | append: section.settings.color_scheme
+  assign wrapper_width = section.settings.width
+
+  assign columns_desktop = section.settings.columns_desktop | default: 4
+  assign columns_mobile = section.settings.layout_mobile | plus: 0
+-%}
+
+{%- if pair_products != blank -%}
+  {%- render 'stylesheet', name: 'custom-content.css' -%}
+
+  {%- capture style -%}
+    --PT: {{ section.settings.padding_top }}px;
+    --PB: {{ section.settings.padding_bottom }}px;
+    --COLUMNS: {{ columns_desktop }};
+    --COLUMNS-MEDIUM: 3;
+    --COLUMNS-SMALL: 2;
+    --COLUMNS-MOBILE: {{ columns_mobile }};
+  {%- endcapture -%}
+
+  {%- if settings.quickview_enable -%}
+    <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  <style>
+    #PairWith--{{ section.id }} .pair-with__title { margin: 0 0 30px; }
+  </style>
+
+  <section
+    id="PairWith--{{ section.id }}"
+    data-section-id="{{ section.id }}"
+    data-section-type="pair-with"
+    class="section-padding {{ color_scheme }}"
+    style="{{ style }}"
+  >
+    <div class="pair-with {{ wrapper_width }}">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pair-with__title {{ section.settings.heading_font_size }} {{ section.settings.align_text }}">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+
+      <div class="grid-outer">
+        <div
+          class="grid grid--slider{% if section.settings.layout_mobile == 'slider' %} grid--mobile-slider{% else %} grid--mobile-vertical{% endif %}"
+          data-grid-slider
+        >
+          {%- for product in pair_products limit: section.settings.products_limit -%}
+            {%- render 'product-grid-item', product: product, columns_mobile: columns_mobile -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  {%- comment -%} In the editor, show a hint so the section is selectable. {%- endcomment -%}
+  <section
+    id="PairWith--{{ section.id }}"
+    data-section-id="{{ section.id }}"
+    class="section-padding {{ color_scheme }}"
+  >
+    <div class="{{ wrapper_width }}" style="text-align:center; padding: 40px 0; opacity:.6;">
+      This product has no “Pair with” products set, so this section is hidden on the live store.
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Pair with",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Source"
+    },
+    {
+      "type": "paragraph",
+      "content": "Reads a per-product list-of-products metafield. The section is hidden on any product that has no value set."
+    },
+    {
+      "type": "text",
+      "id": "metafield_namespace",
+      "label": "Metafield namespace",
+      "default": "custom"
+    },
+    {
+      "type": "text",
+      "id": "metafield_key",
+      "label": "Metafield key",
+      "default": "pair_with"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Complete the look"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "default": "heading-small",
+      "options": [
+        { "value": "heading-x-small", "label": "Extra small" },
+        { "value": "heading-small", "label": "Small" },
+        { "value": "heading-medium", "label": "Medium" },
+        { "value": "heading-large", "label": "Large" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "align_text",
+      "label": "Heading alignment",
+      "default": "text-left",
+      "options": [
+        { "value": "text-left", "label": "Left" },
+        { "value": "text-center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Maximum products",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Mobile layout",
+      "default": "1",
+      "options": [
+        { "value": "1", "label": "Slider" },
+        { "value": "2", "label": "2 columns" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "default": "wrapper--full-padded",
+      "options": [
+        { "value": "wrapper", "label": "Normal" },
+        { "value": "wrapper--full-padded", "label": "Full width padded" },
+        { "value": "wrapper--full", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1",
+      "options": [
+        { "value": "scheme-1", "label": "Scheme 1" },
+        { "value": "scheme-2", "label": "Scheme 2" },
+        { "value": "scheme-3", "label": "Scheme 3" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pair with"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}
