@@ -17,8 +17,8 @@
         "footer-1": {
           "type": "linklist",
           "settings": {
-            "linklist": "",
-            "title": "Company",
+            "linklist": "policies",
+            "title": "Policies",
             "heading_font_size": "heading-x-small",
             "column_width": 22,
             "enable_accordion": true
@@ -37,10 +37,11 @@
         "footer-2": {
           "type": "text",
           "settings": {
+            "image": "shopify://shop_images/IMG_7859.jpg",
             "image_width": 150,
-            "title": "Contact",
+            "title": "Contact us",
             "heading_font_size": "heading-x-small",
-            "text": "<p>1234 Main St.</p><p>1-888-123-4567</p><p>email@company.com</p>",
+            "text": "<p>1489 POINSETTIA AVE </p><p>STE 133</p><p>VISTA, CA 92081</p><p></p>",
             "column_width": 22,
             "enable_accordion": true
           }
@@ -50,10 +51,10 @@
           "settings": {
             "title": "Thank you",
             "heading_font_size": "heading-x-small",
-            "text": "",
+            "text": "<p>Let's connect:</p>",
             "column_width": 34,
-            "enable_follow_on_shop": false,
-            "enable_accordion": false
+            "enable_follow_on_shop": true,
+            "enable_accordion": true
           }
         }
       },
@@ -63,7 +64,9 @@
         "footer-2",
         "social_qXTTRA"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".site-footer-wrapper {background-color: #F6E8AD;}"
+      ],
       "settings": {
         "logo": "shopify://shop_images/Asset_6.svg",
         "logo_image_width": 95,

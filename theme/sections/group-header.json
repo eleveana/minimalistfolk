@@ -93,15 +93,15 @@
           "type": "image",
           "settings": {
             "position": "2",
-            "image": "shopify://shop_images/IMG_52292.jpg",
+            "image": "shopify://shop_images/6A9A2468-3.jpg",
             "aspect_ratio": 0.8,
             "wide_image": false,
             "overlay_type": "text",
-            "title": "4th of July",
+            "title": "Back to School",
             "heading_font_size": "heading-small",
             "link_text": "",
             "text_font_size": "body-medium",
-            "link": "shopify://collections/4th-of-july",
+            "link": "shopify://collections/back-to-school-collection",
             "text_color": "#ffffff"
           }
         },

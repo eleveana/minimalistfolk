@@ -138,6 +138,20 @@
     assign badge = badge[1] | split: ',' | first | replace: '_', ' '
   endif
 
+  comment
+    Collection Sale (display only): if this product is in the configured sale
+    collection, expose the discount % to product-info.js so the Add to Cart
+    button price matches the faked sale price shown by price.liquid.
+  endcomment
+  assign collection_sale_discount = 0
+  if settings.summer_sale_enabled and settings.summer_sale_discount > 0 and settings.summer_sale_collection != blank
+    for sale_collection in product.collections
+      if sale_collection.id == settings.summer_sale_collection.id
+        assign collection_sale_discount = settings.summer_sale_discount
+      endif
+    endfor
+  endif
+
   assign color_scheme = 'color-' | append: section.settings.color_scheme
 -%}
 
@@ -155,6 +169,7 @@
   data-overlay-header
   data-sticky-enabled="{{ product_sticky_enable }}"
   data-variant-image-scroll="{{ section.settings.variant_image_scroll }}"
+  data-collection-sale-discount="{{ collection_sale_discount }}"
 >
   {%- style -%}
     {%- if show_cart_bar -%}
@@ -359,14 +374,11 @@
                 {% endif %}
               </div>
 
-              {%- if sibling_color != blank -%}
-                <input
-                  type="hidden"
-                  form="{{ product_form_id }}"
-                  name="properties[{{ 'general.siblings.label' | t }}]"
-                  value="{{ sibling_color }}"
-                >
-              {%- endif -%}
+              {%- comment -%}
+                Sibling color is shown only as the swatch tooltip (see product-grid-item).
+                We intentionally do NOT add it as a cart/order line-item property — the
+                product title already states the color, so it would be redundant.
+              {%- endcomment -%}
 
               {%- for block in section.blocks -%}
                 {%- liquid

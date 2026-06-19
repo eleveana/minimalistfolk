@@ -17,13 +17,17 @@
           "settings": {
             "subheading_option": "none",
             "heading_font_size": "heading-small",
-            "padding_bottom": 8
+            "padding_bottom": 4
           }
+        },
+        "judge_me_reviews_preview_badge_7D6FJt": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
         },
         "price": {
           "type": "price",
           "settings": {
-            "text_font_size": "body-medium",
+            "text_font_size": "body-x-large",
             "show_shipping_policy": true,
             "padding_bottom": 16
           }
@@ -203,6 +207,7 @@
         },
         "text_KParb6": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "title": "Reviews",
             "heading_font_size": "body-x-large",
@@ -220,6 +225,7 @@
       },
       "block_order": [
         "title",
+        "judge_me_reviews_preview_badge_7D6FJt",
         "price",
         "inventory_countdown_cTExEk",
         "variants",
@@ -249,6 +255,12 @@
         "color_scheme": "",
         "padding_top": 30,
         "padding_bottom": 30
+      }
+    },
+    "1781755129ac99b99c": {
+      "type": "apps",
+      "settings": {
+        "include_margins": false
       }
     },
     "pair_with": {
@@ -388,7 +400,7 @@
         "text_cjbArR": {
           "type": "text",
           "settings": {
-            "text": "<p>All of our styles are intentionally designed to wear everyday and be passed down from one kiddo to the next.</p>",
+            "text": "<p>Thoughtfully made for childhood — the messy, magical, everyday kind.</p><p>At Minimalist Folk, we design easy-to-wear pieces with soft fabrics, playful details, and a timeless feel, made to be loved now and passed down later.</p>",
             "text_font_size": "body-medium",
             "padding_bottom": 16
           }
@@ -396,8 +408,8 @@
         "buttons_hbkyVU": {
           "type": "buttons",
           "settings": {
-            "button_text": "Learn more",
-            "button_url": "",
+            "button_text": "OUR STORY",
+            "button_url": "shopify://pages/about-us",
             "button_type": "btn--secondary",
             "button_size": "",
             "button_style": "btn--solid",
@@ -415,7 +427,8 @@
         ".brick__section {margin-top: 60px;}"
       ],
       "settings": {
-        "image_width": "three-quarters",
+        "image_1": "shopify://shop_images/FullSizeRender-3.jpg",
+        "image_width": "one-half",
         "text_alignment": "text-left",
         "layout": "is-reversed",
         "width": "wrapper--full",
@@ -440,6 +453,7 @@
     },
     "last_chance": {
       "type": "section-last-chance",
+      "disabled": true,
       "settings": {
         "collection": "",
         "eyebrow": "Last chance",
@@ -501,6 +515,7 @@
   },
   "order": [
     "main",
+    "1781755129ac99b99c",
     "pair_with",
     "17812321478dfc5052",
     "section_rich_text_RiAKAx",

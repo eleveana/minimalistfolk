@@ -58,7 +58,7 @@
           "type": "featured_image",
           "settings": {
             "featured_image": "shopify://shop_images/IMG_4357.jpg",
-            "position": 1,
+            "position": 10,
             "featured_heading": "Summer Days",
             "heading_font_size": "heading-small",
             "featured_text": "<p>25% off all summer collection</p>",
@@ -76,8 +76,8 @@
         "featured_image_CdLUmq": {
           "type": "featured_image",
           "settings": {
-            "featured_image": "shopify://shop_images/277A9584-2.jpg",
-            "position": 13,
+            "featured_image": "shopify://shop_images/Tezza-2416.jpg",
+            "position": 24,
             "featured_heading": "From court to playground",
             "heading_font_size": "heading-x-small",
             "featured_text": "<p>and everything in between</p>",
@@ -95,8 +95,8 @@
         "featured_image_GDUWgj": {
           "type": "featured_image",
           "settings": {
-            "featured_image": "shopify://shop_images/6A9A2525.jpg",
-            "position": 6,
+            "featured_image": "shopify://shop_images/6A9A3070.jpg",
+            "position": 13,
             "featured_heading": "class of 2027",
             "heading_font_size": "heading-small",
             "featured_text": "<p>now enrolling </p>",

@@ -10,16 +10,43 @@
 {% endcomment %}
 
 {%- liquid
+  comment
+    Collection Sale (display only): mirror the product-page logic so cards/search show the
+    sale price too. Keep the % matched to the Shopify automatic discount. See price.liquid.
+  endcomment
+  assign grid_compare = product.compare_at_price
+  assign grid_price = product.price_min
+
+  assign summer_sale_active = false
+  if settings.summer_sale_enabled and settings.summer_sale_discount > 0 and settings.summer_sale_collection != blank
+    for sale_collection in product.collections
+      if sale_collection.id == settings.summer_sale_collection.id
+        assign summer_sale_active = true
+      endif
+    endfor
+  endif
+
+  if summer_sale_active and grid_price > 0
+    assign summer_multiplier = 100 | minus: settings.summer_sale_discount
+    assign grid_compare = grid_price
+    assign grid_price = grid_price | times: summer_multiplier | divided_by: 100
+  endif
+
+  assign grid_on_sale = false
+  if grid_compare > grid_price
+    assign grid_on_sale = true
+  endif
+
   if settings.currency_code_enable
-    assign product_price_min = product.price_min | money_with_currency
-    assign product_compare_at_price = product.compare_at_price | money_with_currency
+    assign product_price_min = grid_price | money_with_currency
+    assign product_compare_at_price = grid_compare | money_with_currency
   else
-    assign product_price_min = product.price_min | money
-    assign product_compare_at_price = product.compare_at_price | money
+    assign product_price_min = grid_price | money
+    assign product_compare_at_price = grid_compare | money
   endif
 -%}
 
-<span class="price{% if product.compare_at_price > product.price %} sale{% endif %}">
+<span class="price{% if grid_on_sale %} sale{% endif %}">
   {% if product.available %}
     <span class="new-price">
       {% if product.price_varies %}
@@ -31,7 +58,7 @@
         {{ product_price_min }}
       {%- endif -%}
     </span>
-    {% if product.compare_at_price > product.price %}
+    {% if grid_on_sale %}
       <span class="old-price">{{ product_compare_at_price }}</span>
     {% endif %}
   {% else %}

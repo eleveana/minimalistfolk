@@ -9,12 +9,37 @@
     assign button_add = true
   endif
 
+  comment
+    Collection Sale (display only): mirror the faked discount from price.liquid
+    so the sticky cart bar price matches the product page and Add to Cart button.
+  endcomment
+  assign cb_discount = 0
+  if settings.summer_sale_enabled and settings.summer_sale_discount > 0 and settings.summer_sale_collection != blank
+    for sale_collection in product.collections
+      if sale_collection.id == settings.summer_sale_collection.id
+        assign cb_discount = settings.summer_sale_discount
+      endif
+    endfor
+  endif
+
+  assign cb_raw_price = current_variant.price
+  assign cb_raw_compare = current_variant.compare_at_price
+  assign cb_on_sale = false
+  if cb_discount > 0 and current_variant.price > 0
+    assign cb_multiplier = 100 | minus: cb_discount
+    assign cb_raw_compare = current_variant.price
+    assign cb_raw_price = current_variant.price | times: cb_multiplier | divided_by: 100
+    assign cb_on_sale = true
+  elsif current_variant.compare_at_price > current_variant.price
+    assign cb_on_sale = true
+  endif
+
   if settings.currency_code_enable
-    assign current_variant_price = current_variant.price | money_with_currency
-    assign current_variant_compare_at_price = current_variant.compare_at_price | money_with_currency
+    assign current_variant_price = cb_raw_price | money_with_currency
+    assign current_variant_compare_at_price = cb_raw_compare | money_with_currency
   else
-    assign current_variant_price = current_variant.price | money
-    assign current_variant_compare_at_price = current_variant.compare_at_price | money
+    assign current_variant_price = cb_raw_price | money
+    assign current_variant_compare_at_price = cb_raw_compare | money
   endif
 
   assign any_variant_available = false
@@ -49,23 +74,21 @@
       <div class="body-small cart-bar__product__price product__price">
         <span
           data-product-price
-          {% if current_variant.compare_at_price > current_variant.price %}
+          {% if cb_on_sale %}
             class="product__price--sale"
           {% endif %}
         >
-          {%- if current_variant.price == 0 -%}
+          {%- if cb_raw_price == 0 -%}
             {{ 'general.money.free' | t }}
           {%- else -%}
             {{ current_variant_price }}
           {%- endif -%}
         </span>
 
-        {% if product.compare_at_price_max > product.price %}
+        {% if cb_on_sale %}
           <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
           <s class="product__price--strike">
-            {% if current_variant.compare_at_price > current_variant.price %}
-              {{ current_variant_compare_at_price }}
-            {% endif %}
+            {{ current_variant_compare_at_price }}
           </s>
         {% endif %}
       </div>

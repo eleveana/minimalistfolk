@@ -352,21 +352,42 @@
                 <span class="btn__text" data-add-to-cart-text>
                   {{- button_text -}}
                   {%- if settings.atc_show_product_price -%}
+                    {%- liquid
+                      # Collection Sale (display only): mirror the faked compare-at price
+                      # used in price.liquid so the ATC button total matches the page price.
+                      assign atc_price = current_variant.price
+                      assign atc_compare = current_variant.compare_at_price
+
+                      assign atc_sale_active = false
+                      if settings.summer_sale_enabled and settings.summer_sale_discount > 0 and settings.summer_sale_collection != blank
+                        for sale_collection in product.collections
+                          if sale_collection.id == settings.summer_sale_collection.id
+                            assign atc_sale_active = true
+                          endif
+                        endfor
+                      endif
+
+                      if atc_sale_active and current_variant.price > 0
+                        assign atc_multiplier = 100 | minus: settings.summer_sale_discount
+                        assign atc_compare = current_variant.price
+                        assign atc_price = current_variant.price | times: atc_multiplier | divided_by: 100
+                      endif
+                    -%}
                     <span
                       class="btn__price"
                       data-product-price
-                      {% if current_variant.compare_at_price > current_variant.price %}
+                      {% if atc_compare > atc_price %}
                         class="product__price--sale"
                       {% endif %}
                     >
-                      {%- if current_variant.price == 0 -%}
+                      {%- if atc_price == 0 -%}
                         {{ 'general.money.free' | t }}
                       {%- else -%}
-                        {%- if current_variant.compare_at_price > current_variant.price -%}
-                          {{ current_variant.price | money }}
-                          <s>{{ current_variant.compare_at_price | money }}</s>
+                        {%- if atc_compare > atc_price -%}
+                          {{ atc_price | money }}
+                          <s>{{ atc_compare | money }}</s>
                         {%- else -%}
-                          {{ current_variant.price | money }}
+                          {{ atc_price | money }}
                         {%- endif -%}
                       {%- endif -%}
                     </span>

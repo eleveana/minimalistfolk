@@ -496,6 +496,23 @@
         assign on_sale = true
       endif
 
+      comment
+        Collection Sale: also show the sale badge for products in the configured sale
+        collection, which have no real compare-at price. See price.liquid for the price logic.
+      endcomment
+      assign summer_sale_active = false
+      if settings.summer_sale_enabled and settings.summer_sale_discount > 0 and settings.summer_sale_collection != blank
+        for sale_collection in product.collections
+          if sale_collection.id == settings.summer_sale_collection.id
+            assign summer_sale_active = true
+          endif
+        endfor
+      endif
+
+      if summer_sale_active and settings.sale_tags_enable
+        assign on_sale = true
+      endif
+
       if on_sale
         assign sale_badge_class = badge_class | append: ' sale-box'
         assign sale_badge_text = 'products.product.on_sale' | t
@@ -537,6 +554,25 @@
 
         if product.variants.size > 1 and price_difference > 0
           assign sale_badge_text = 'products.product.save_badge_up_to_html' | t: discount: discount
+        endif
+      endif
+
+      if summer_sale_active and on_sale and show_saving
+        if settings.saving_badge_type == 'percentage'
+          assign summer_discount_label = settings.summer_sale_discount | append: '%'
+        else
+          assign summer_saved = product.price | times: settings.summer_sale_discount | divided_by: 100
+          if settings.currency_code_enable
+            assign summer_discount_label = summer_saved | money_without_trailing_zeros | append: ' ' | append: cart.currency.iso_code
+          else
+            assign summer_discount_label = summer_saved | money_without_trailing_zeros
+          endif
+        endif
+
+        if product.variants.size == 1
+          assign sale_badge_text = 'products.product.save_badge_html' | t: discount: summer_discount_label
+        else
+          assign sale_badge_text = 'products.product.save_badge_up_to_html' | t: discount: summer_discount_label
         endif
       endif
     endif

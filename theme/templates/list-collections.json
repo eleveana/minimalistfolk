@@ -11,6 +11,72 @@
   "sections": {
     "main": {
       "type": "list-collections",
+      "blocks": {
+        "collection_bLGMDx": {
+          "type": "collection",
+          "settings": {
+            "collection": "socks",
+            "collection_name": "SOCKS",
+            "image": "shopify://shop_images/6A9A2409-2.jpg"
+          }
+        },
+        "collection_Rmy3BJ": {
+          "type": "collection",
+          "settings": {
+            "collection": "ma-me-mi",
+            "collection_name": "",
+            "image": "shopify://shop_images/78994BA9-0647-44FC-8C6B-7A00A34DB9DA.jpg"
+          }
+        },
+        "collection_femMRC": {
+          "type": "collection",
+          "settings": {
+            "collection": "kids-pullovers",
+            "collection_name": "KIDS PULLOVERS",
+            "image": "shopify://shop_images/233F649D-09B8-4E8F-BE39-892C3C7107F9.jpg"
+          }
+        },
+        "collection_9CGz8T": {
+          "type": "collection",
+          "settings": {
+            "collection": "kids-tees",
+            "collection_name": "KIDS' TEES",
+            "image": "shopify://shop_images/6A9A9985.jpg"
+          }
+        },
+        "collection_qGqPYX": {
+          "type": "collection",
+          "settings": {
+            "collection": "ss26",
+            "collection_name": "",
+            "image": "shopify://shop_images/IMG_4445-2.jpg"
+          }
+        },
+        "collection_8jtyB6": {
+          "type": "collection",
+          "settings": {
+            "collection": "best-sellers",
+            "collection_name": "",
+            "image": "shopify://shop_images/2B8AEFA6-CBD2-4233-BCAC-7AB035C8B474.jpg"
+          }
+        },
+        "collection_TxrGwb": {
+          "type": "collection",
+          "settings": {
+            "collection": "back-to-school-collection",
+            "collection_name": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_bLGMDx",
+        "collection_Rmy3BJ",
+        "collection_femMRC",
+        "collection_9CGz8T",
+        "collection_qGqPYX",
+        "collection_8jtyB6",
+        "collection_TxrGwb"
+      ],
       "settings": {
         "display_type": "selected",
         "title": "Collections",

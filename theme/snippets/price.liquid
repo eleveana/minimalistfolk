@@ -28,14 +28,35 @@
   assign price_max = product.price_max
   assign available = target.available | default: false
 
+  comment
+    Collection Sale (display only): if this product is in the configured sale collection,
+    fake a compare-at price so the strikethrough + sale price render here. The real money
+    discount comes from the matching Shopify automatic discount — the % in theme settings
+    must match it so this page price equals the cart price.
+  endcomment
+  assign summer_sale_active = false
+  if settings.summer_sale_enabled and settings.summer_sale_discount > 0 and settings.summer_sale_collection != blank
+    for sale_collection in product.collections
+      if sale_collection.id == settings.summer_sale_collection.id
+        assign summer_sale_active = true
+      endif
+    endfor
+  endif
+
+  if summer_sale_active and target.price > 0
+    assign summer_multiplier = 100 | minus: settings.summer_sale_discount
+    assign compare_at_price = target.price
+    assign price = target.price | times: summer_multiplier | divided_by: 100
+  endif
+
   if compare_at_price > price
     assign is_on_sale = true
   endif
 
-  if target.price == 0
+  if price == 0
     assign money_price = 'general.money.free' | t
   else
-    assign money_price = target.price | money
+    assign money_price = price | money
   endif
 
   assign money_price_min = price_min | money
@@ -48,10 +69,10 @@
   endif
 
   if settings.currency_code_enable
-    if target.price == 0
+    if price == 0
       assign money_price = 'general.money.free' | t
     else
-      assign money_price = target.price | money_with_currency
+      assign money_price = price | money_with_currency
     endif
 
     if has_units

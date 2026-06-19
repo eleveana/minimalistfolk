@@ -13,7 +13,7 @@
       "color": "Color, Colour"
     },
     "siblings": {
-      "label": "Color"
+      "label": "Also available in"
     },
     "products_with_count": {
       "one": "{{ count }} product",

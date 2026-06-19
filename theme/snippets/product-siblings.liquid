@@ -61,13 +61,12 @@
                 {{- 'general.siblings.label' | t -}}
               </span>
 
-              {%- if settings.show_labels -%}
-                {%- capture label -%}
-                  {%- if sibling_color != blank -%}
-                    <small class="radio__legend__value {{ value_font_size }}">{{ sibling_color }}</small>
-                  {%- endif -%}
-                {%- endcapture -%}
-              {%- endif -%}
+              {%- comment -%}
+                The current sibling color is intentionally NOT shown under the
+                "Also available in" heading — it's redundant (it's the product you're
+                already viewing) and reads awkwardly. The name still appears as the
+                swatch tooltip on hover. Leave `label` empty.
+              {%- endcomment -%}
 
               {%- if current_variant.metafields.theme.color_description != blank -%}
                 {%- assign form_style = settings.form_style -%}
