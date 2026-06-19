@@ -1346,6 +1346,14 @@
         "default": false
       },
       {
+        "type": "text",
+        "id": "preorder_badge_text",
+        "visible_if": "{{ settings.show_preorder_badge }}",
+        "label": "Badge text",
+        "info": "Leave blank to use the default 'Pre-order' label.",
+        "default": "Pre-order"
+      },
+      {
         "type": "color",
         "id": "preorder_bg_color",
         "visible_if": "{{ settings.show_preorder_badge }}",

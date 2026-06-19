@@ -454,6 +454,9 @@
 
       if product_tags contains '_preorder' or is_preorder_meta
         assign preorder_badge_text = 'products.product.pre_order' | t
+        if settings.preorder_badge_text != blank
+          assign preorder_badge_text = settings.preorder_badge_text
+        endif
         assign preorder_badge_class = badge_class | append: ' preorder-box'
         assign preorder = true
       endif
@@ -539,11 +542,19 @@
     endif
   -%}
 
+  {%- comment -%}
+    Pre-order badge gets its own container pinned top-left so it can sit apart from
+    (and larger than) the other badges, which keep the global badge alignment.
+  {%- endcomment -%}
+  {%- if preorder and preorder_badge_text != blank -%}
+    <div class="preorder-badge-container">
+      {%- render 'product-badge', badge_class: preorder_badge_class, badge_text: preorder_badge_text, aos_delay: aos_delay, aos_duration: aos_duration, aos_anchor: aos_anchor -%}
+    </div>
+  {%- endif -%}
+
   <div class="{{ badge_container_class }}">
     {%- liquid
-      if preorder and preorder_badge_text != blank
-        render 'product-badge', badge_class: preorder_badge_class, badge_text: preorder_badge_text, aos_delay: aos_delay, aos_duration: aos_duration, aos_anchor: aos_anchor
-      elsif product.available == false and sold_badge_text != blank
+      if preorder == false and product.available == false and sold_badge_text != blank
         render 'product-badge', badge_class: sold_badge_class, badge_text: sold_badge_text, aos_delay: aos_delay, aos_duration: aos_duration, aos_anchor: aos_anchor
       endif
 

@@ -799,7 +799,11 @@
 
                       {%- if preorder and product.available and block.settings.product_badges -%}
                         <span class="badge-box preorder-box" data-preorder-badge>
-                          {{- 'products.product.pre_order' | t -}}
+                          {%- if settings.preorder_badge_text != blank -%}
+                            {{- settings.preorder_badge_text -}}
+                          {%- else -%}
+                            {{- 'products.product.pre_order' | t -}}
+                          {%- endif -%}
                         </span>
                       {%- endif -%}
 

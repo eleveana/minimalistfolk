@@ -9877,6 +9877,28 @@ product-siblings {
   --bg: var(--COLOR-PREORDER-BG);
 }
 
+.product-item .preorder-badge-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  padding: 5px;
+  display: flex;
+}
+.product-item .preorder-badge-container .preorder-box {
+  --padding-vertical: 0.6rem;
+  font-size: calc(var(--FONT-SIZE-BADGE) * 1.35);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media only screen and (max-width: 749px) {
+  .product-item .preorder-badge-container .preorder-box {
+    font-size: calc(var(--FONT-SIZE-BADGE) * 1.2);
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
 @media only screen and (min-width: 750px) {
   .product-item--featured {
     min-height: 100%;
