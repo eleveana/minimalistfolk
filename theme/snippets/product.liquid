@@ -152,6 +152,11 @@
     endfor
   endif
 
+  assign sitewide_sale_discount = 0
+  if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0
+    assign sitewide_sale_discount = settings.sitewide_sale_discount
+  endif
+
   assign color_scheme = 'color-' | append: section.settings.color_scheme
 -%}
 
@@ -170,6 +175,7 @@
   data-sticky-enabled="{{ product_sticky_enable }}"
   data-variant-image-scroll="{{ section.settings.variant_image_scroll }}"
   data-collection-sale-discount="{{ collection_sale_discount }}"
+  data-sitewide-sale-discount="{{ sitewide_sale_discount }}"
 >
   {%- style -%}
     {%- if show_cart_bar -%}

@@ -358,19 +358,34 @@
                       assign atc_price = current_variant.price
                       assign atc_compare = current_variant.compare_at_price
 
-                      assign atc_sale_active = false
+                      assign atc_summer_active = false
                       if settings.summer_sale_enabled and settings.summer_sale_discount > 0 and settings.summer_sale_collection != blank
                         for sale_collection in product.collections
                           if sale_collection.id == settings.summer_sale_collection.id
-                            assign atc_sale_active = true
+                            assign atc_summer_active = true
                           endif
                         endfor
                       endif
 
-                      if atc_sale_active and current_variant.price > 0
-                        assign atc_multiplier = 100 | minus: settings.summer_sale_discount
-                        assign atc_compare = current_variant.price
-                        assign atc_price = current_variant.price | times: atc_multiplier | divided_by: 100
+                      assign atc_sitewide_active = false
+                      if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0
+                        assign atc_sitewide_active = true
+                      endif
+
+                      if atc_summer_active or atc_sitewide_active
+                        if current_variant.price > 0
+                          assign atc_sale_price = current_variant.price
+                          if atc_summer_active
+                            assign atc_multiplier = 100 | minus: settings.summer_sale_discount
+                            assign atc_sale_price = atc_sale_price | times: atc_multiplier | divided_by: 100
+                          endif
+                          if atc_sitewide_active
+                            assign atc_multiplier = 100 | minus: settings.sitewide_sale_discount
+                            assign atc_sale_price = atc_sale_price | times: atc_multiplier | divided_by: 100
+                          endif
+                          assign atc_compare = current_variant.price
+                          assign atc_price = atc_sale_price
+                        endif
                       endif
                     -%}
                     <span

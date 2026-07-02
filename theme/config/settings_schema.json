@@ -1522,5 +1522,31 @@
         "label": "Sale collection"
       }
     ]
+  },
+  {
+    "name": "Sitewide Sale",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shows a strikethrough sale price on EVERY product. This is DISPLAY ONLY — set the discount % to match the Shopify automatic discount you created for the whole store, so the page price matches the cart. Products also in the Collection Sale show both discounts compounded (Collection Sale first, then Sitewide), matching how Shopify stacks combined product discounts."
+      },
+      {
+        "type": "checkbox",
+        "id": "sitewide_sale_enabled",
+        "label": "Enable sitewide sale display",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "sitewide_sale_discount",
+        "label": "Discount percentage",
+        "min": 5,
+        "max": 90,
+        "step": 5,
+        "unit": "%",
+        "default": 15,
+        "info": "Must match your store-wide Shopify automatic discount."
+      }
+    ]
   }
 ]

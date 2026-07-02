@@ -36,10 +36,25 @@
     endfor
   endif
 
-  if summer_sale_active and upsell_variant.price > 0
-    assign summer_multiplier = 100 | minus: settings.summer_sale_discount
-    assign upsell_display_compare = upsell_variant.price
-    assign upsell_display_price = upsell_variant.price | times: summer_multiplier | divided_by: 100
+  assign sitewide_sale_active = false
+  if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0
+    assign sitewide_sale_active = true
+  endif
+
+  if summer_sale_active or sitewide_sale_active
+    if upsell_variant.price > 0
+      assign upsell_sale_price = upsell_variant.price
+      if summer_sale_active
+        assign summer_multiplier = 100 | minus: settings.summer_sale_discount
+        assign upsell_sale_price = upsell_sale_price | times: summer_multiplier | divided_by: 100
+      endif
+      if sitewide_sale_active
+        assign sitewide_multiplier = 100 | minus: settings.sitewide_sale_discount
+        assign upsell_sale_price = upsell_sale_price | times: sitewide_multiplier | divided_by: 100
+      endif
+      assign upsell_display_compare = upsell_variant.price
+      assign upsell_display_price = upsell_sale_price
+    endif
   endif
 
   if settings.currency_code_enable

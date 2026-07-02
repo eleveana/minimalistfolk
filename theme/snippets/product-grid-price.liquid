@@ -26,10 +26,25 @@
     endfor
   endif
 
-  if summer_sale_active and grid_price > 0
-    assign summer_multiplier = 100 | minus: settings.summer_sale_discount
-    assign grid_compare = grid_price
-    assign grid_price = grid_price | times: summer_multiplier | divided_by: 100
+  assign sitewide_sale_active = false
+  if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0
+    assign sitewide_sale_active = true
+  endif
+
+  if summer_sale_active or sitewide_sale_active
+    if grid_price > 0
+      assign grid_sale_price = grid_price
+      if summer_sale_active
+        assign summer_multiplier = 100 | minus: settings.summer_sale_discount
+        assign grid_sale_price = grid_sale_price | times: summer_multiplier | divided_by: 100
+      endif
+      if sitewide_sale_active
+        assign sitewide_multiplier = 100 | minus: settings.sitewide_sale_discount
+        assign grid_sale_price = grid_sale_price | times: sitewide_multiplier | divided_by: 100
+      endif
+      assign grid_compare = grid_price
+      assign grid_price = grid_sale_price
+    endif
   endif
 
   assign grid_on_sale = false

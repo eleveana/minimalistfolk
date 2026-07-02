@@ -13,23 +13,38 @@
     Collection Sale (display only): mirror the faked discount from price.liquid
     so the sticky cart bar price matches the product page and Add to Cart button.
   endcomment
-  assign cb_discount = 0
+  assign cb_summer_active = false
   if settings.summer_sale_enabled and settings.summer_sale_discount > 0 and settings.summer_sale_collection != blank
     for sale_collection in product.collections
       if sale_collection.id == settings.summer_sale_collection.id
-        assign cb_discount = settings.summer_sale_discount
+        assign cb_summer_active = true
       endif
     endfor
+  endif
+
+  assign cb_sitewide_active = false
+  if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0
+    assign cb_sitewide_active = true
   endif
 
   assign cb_raw_price = current_variant.price
   assign cb_raw_compare = current_variant.compare_at_price
   assign cb_on_sale = false
-  if cb_discount > 0 and current_variant.price > 0
-    assign cb_multiplier = 100 | minus: cb_discount
-    assign cb_raw_compare = current_variant.price
-    assign cb_raw_price = current_variant.price | times: cb_multiplier | divided_by: 100
-    assign cb_on_sale = true
+  if cb_summer_active or cb_sitewide_active
+    if current_variant.price > 0
+      assign cb_sale_price = current_variant.price
+      if cb_summer_active
+        assign cb_multiplier = 100 | minus: settings.summer_sale_discount
+        assign cb_sale_price = cb_sale_price | times: cb_multiplier | divided_by: 100
+      endif
+      if cb_sitewide_active
+        assign cb_multiplier = 100 | minus: settings.sitewide_sale_discount
+        assign cb_sale_price = cb_sale_price | times: cb_multiplier | divided_by: 100
+      endif
+      assign cb_raw_compare = current_variant.price
+      assign cb_raw_price = cb_sale_price
+      assign cb_on_sale = true
+    endif
   elsif current_variant.compare_at_price > current_variant.price
     assign cb_on_sale = true
   endif

@@ -29,10 +29,14 @@
   assign available = target.available | default: false
 
   comment
-    Collection Sale (display only): if this product is in the configured sale collection,
-    fake a compare-at price so the strikethrough + sale price render here. The real money
-    discount comes from the matching Shopify automatic discount — the % in theme settings
-    must match it so this page price equals the cart price.
+    Sale display (display only): fake a compare-at price so the strikethrough +
+    sale price render here. The real money comes from matching Shopify automatic
+    discounts — each % in theme settings must match its discount so this page price
+    equals the cart price. Two tiers:
+      - Collection Sale: products in the configured sale collection.
+      - Sitewide Sale: every product.
+    A product in both compounds the discounts (collection first, then sitewide),
+    matching how Shopify applies combined product discounts sequentially.
   endcomment
   assign summer_sale_active = false
   if settings.summer_sale_enabled and settings.summer_sale_discount > 0 and settings.summer_sale_collection != blank
@@ -43,10 +47,25 @@
     endfor
   endif
 
-  if summer_sale_active and target.price > 0
-    assign summer_multiplier = 100 | minus: settings.summer_sale_discount
-    assign compare_at_price = target.price
-    assign price = target.price | times: summer_multiplier | divided_by: 100
+  assign sitewide_sale_active = false
+  if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0
+    assign sitewide_sale_active = true
+  endif
+
+  if summer_sale_active or sitewide_sale_active
+    if target.price > 0
+      assign sale_price = target.price
+      if summer_sale_active
+        assign summer_multiplier = 100 | minus: settings.summer_sale_discount
+        assign sale_price = sale_price | times: summer_multiplier | divided_by: 100
+      endif
+      if sitewide_sale_active
+        assign sitewide_multiplier = 100 | minus: settings.sitewide_sale_discount
+        assign sale_price = sale_price | times: sitewide_multiplier | divided_by: 100
+      endif
+      assign compare_at_price = target.price
+      assign price = sale_price
+    endif
   endif
 
   if compare_at_price > price

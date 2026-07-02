@@ -509,8 +509,15 @@
         endfor
       endif
 
-      if summer_sale_active and settings.sale_tags_enable
-        assign on_sale = true
+      assign sitewide_sale_active = false
+      if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0
+        assign sitewide_sale_active = true
+      endif
+
+      if summer_sale_active or sitewide_sale_active
+        if settings.sale_tags_enable
+          assign on_sale = true
+        endif
       endif
 
       if on_sale
@@ -557,22 +564,40 @@
         endif
       endif
 
-      if summer_sale_active and on_sale and show_saving
-        if settings.saving_badge_type == 'percentage'
-          assign summer_discount_label = settings.summer_sale_discount | append: '%'
-        else
-          assign summer_saved = product.price | times: settings.summer_sale_discount | divided_by: 100
-          if settings.currency_code_enable
-            assign summer_discount_label = summer_saved | money_without_trailing_zeros | append: ' ' | append: cart.currency.iso_code
-          else
-            assign summer_discount_label = summer_saved | money_without_trailing_zeros
+      if summer_sale_active or sitewide_sale_active
+        if on_sale and show_saving
+          comment
+            Effective saving = compounded discount (collection first, then sitewide),
+            derived from the same integer math as price.liquid so the badge % matches
+            the displayed sale price.
+          endcomment
+          assign theme_sale_price = product.price
+          if summer_sale_active
+            assign theme_multiplier = 100 | minus: settings.summer_sale_discount
+            assign theme_sale_price = theme_sale_price | times: theme_multiplier | divided_by: 100
           endif
-        endif
+          if sitewide_sale_active
+            assign theme_multiplier = 100 | minus: settings.sitewide_sale_discount
+            assign theme_sale_price = theme_sale_price | times: theme_multiplier | divided_by: 100
+          endif
+          assign theme_saved = product.price | minus: theme_sale_price
 
-        if product.variants.size == 1
-          assign sale_badge_text = 'products.product.save_badge_html' | t: discount: summer_discount_label
-        else
-          assign sale_badge_text = 'products.product.save_badge_up_to_html' | t: discount: summer_discount_label
+          if settings.saving_badge_type == 'percentage' and product.price > 0
+            assign theme_percent_off = theme_saved | times: 100.0 | divided_by: product.price | round
+            assign theme_discount_label = theme_percent_off | append: '%'
+          else
+            if settings.currency_code_enable
+              assign theme_discount_label = theme_saved | money_without_trailing_zeros | append: ' ' | append: cart.currency.iso_code
+            else
+              assign theme_discount_label = theme_saved | money_without_trailing_zeros
+            endif
+          endif
+
+          if product.variants.size == 1
+            assign sale_badge_text = 'products.product.save_badge_html' | t: discount: theme_discount_label
+          else
+            assign sale_badge_text = 'products.product.save_badge_up_to_html' | t: discount: theme_discount_label
+          endif
         endif
       endif
     endif
