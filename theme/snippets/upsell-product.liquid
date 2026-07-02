@@ -18,12 +18,36 @@
   assign upsell_variant = upsell_product.selected_or_first_available_variant
   assign upsell_variant_image = upsell_variant.featured_media | default: upsell_product.featured_media.preview_image
 
+  comment
+    Collection Sale (display only): mirror price.liquid / product-grid-price.liquid so the
+    cart "You may also like" cards show the sale price too, even though the variant's
+    compare-at price is unset. The real money discount comes from the matching Shopify
+    automatic discount — keep the % in theme settings matched to it. See price.liquid.
+  endcomment
+  assign upsell_display_price = upsell_variant.price
+  assign upsell_display_compare = upsell_variant.compare_at_price
+
+  assign summer_sale_active = false
+  if settings.summer_sale_enabled and settings.summer_sale_discount > 0 and settings.summer_sale_collection != blank
+    for sale_collection in upsell_product.collections
+      if sale_collection.id == settings.summer_sale_collection.id
+        assign summer_sale_active = true
+      endif
+    endfor
+  endif
+
+  if summer_sale_active and upsell_variant.price > 0
+    assign summer_multiplier = 100 | minus: settings.summer_sale_discount
+    assign upsell_display_compare = upsell_variant.price
+    assign upsell_display_price = upsell_variant.price | times: summer_multiplier | divided_by: 100
+  endif
+
   if settings.currency_code_enable
-    assign upsell_variant_price = upsell_variant.price | money_with_currency
-    assign upsell_variant_compare_at_price = upsell_variant.compare_at_price | money_with_currency
+    assign upsell_variant_price = upsell_display_price | money_with_currency
+    assign upsell_variant_compare_at_price = upsell_display_compare | money_with_currency
   else
-    assign upsell_variant_price = upsell_variant.price | money
-    assign upsell_variant_compare_at_price = upsell_variant.compare_at_price | money
+    assign upsell_variant_price = upsell_display_price | money
+    assign upsell_variant_compare_at_price = upsell_display_compare | money
   endif
 
   assign unique = section.id | append: '-' | append: upsell_product.id
@@ -138,16 +162,16 @@
                 </p>
               {%- endif -%}
 
-              <p class="product-upsell__price{% if upsell_variant.compare_at_price > upsell_variant.price %} sale{% endif %}">
+              <p class="product-upsell__price{% if upsell_display_compare > upsell_display_price %} sale{% endif %}">
                 <span class="new-price">
-                  {%- if upsell_variant.price == 0 -%}
+                  {%- if upsell_display_price == 0 -%}
                     {{ 'general.money.free' | t }}
                   {%- else -%}
                     {{ upsell_variant_price }}
                   {%- endif -%}
                 </span>
 
-                {%- if upsell_variant.compare_at_price > upsell_variant.price -%}
+                {%- if upsell_display_compare > upsell_display_price -%}
                   <span class="old-price">{{ upsell_variant_compare_at_price }}</span>
                 {%- endif -%}
 

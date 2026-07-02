@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR:-/Users/anaborba/Documents/minimalist}/.claude/hooks/shopify-push-guard.sh\"",
+            "if": "Bash(*shopify theme push*)",
+            "timeout": 120,
+            "statusMessage": "Guarding owner JSON before Shopify push…"
+          }
+        ]
+      }
+    ]
+  }
+}

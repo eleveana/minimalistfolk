@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Metafields Guide — minimalist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF6EC;
+    --sand:#EFE5D3;
+    --sand-deep:#E4D5BD;
+    --sage:#A9B79E;
+    --sage-deep:#7E9072;
+    --charcoal:#3A352E;
+    --muted:#6E665B;
+    --sale:#C64113;
+    --card:#FFFDF8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Nunito Sans',-apple-system,sans-serif;
+    background:#ffffff;
+    color:var(--charcoal);
+    line-height:1.55;
+    padding:56px 40px 64px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:1080px;margin:0 auto;}
+
+  /* Header */
+  .logo{display:block;width:300px;max-width:70%;height:auto;margin-bottom:26px;}
+  .brand{
+    font-family:'Fraunces',serif;
+    font-size:13px;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--sage-deep);font-weight:600;margin-bottom:14px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-size:46px;font-weight:500;line-height:1.05;letter-spacing:-.01em;
+    margin-bottom:14px;
+  }
+  .intro{font-size:16.5px;color:var(--muted);max-width:760px;}
+  .intro strong{color:var(--charcoal);font-weight:700;}
+  .rule{height:1px;background:var(--sand-deep);border:0;margin:34px 0 38px;}
+
+  /* Filled example screenshot */
+  .example-shot{
+    margin:28px auto 0;max-width:560px;
+    border:1px solid var(--sand-deep);border-radius:18px;
+    overflow:hidden;background:#fff;box-shadow:0 10px 26px rgba(58,53,46,.08);
+  }
+  .example-shot img{display:block;width:100%;height:auto;}
+  .example-shot figcaption{
+    font-size:13.5px;color:var(--muted);padding:12px 18px;text-align:center;
+    background:var(--cream);border-top:1px solid var(--sand-deep);
+  }
+  .example-shot figcaption strong{color:var(--charcoal);}
+
+  /* Section label */
+  .section-label{
+    font-family:'Fraunces',serif;font-size:22px;font-weight:600;
+    margin:0 0 4px;display:flex;align-items:center;gap:12px;
+  }
+  .section-sub{color:var(--muted);font-size:15px;margin-bottom:22px;}
+
+  /* Grid of cards */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+
+  .card{
+    background:var(--cream);
+    border:1px solid var(--sand-deep);
+    border-radius:16px;
+    padding:22px 24px 24px;
+    position:relative;
+  }
+  .card .num{
+    position:absolute;top:20px;right:22px;
+    font-family:'Fraunces',serif;font-size:30px;font-weight:500;
+    color:var(--sand-deep);line-height:1;
+  }
+  .card h3{
+    font-family:'Fraunces',serif;font-size:21px;font-weight:600;
+    margin-bottom:3px;padding-right:40px;
+  }
+  .card .en{font-size:13px;color:var(--sage-deep);font-weight:700;
+    text-transform:uppercase;letter-spacing:.08em;margin-bottom:13px;}
+  .card p{font-size:15px;color:var(--charcoal);margin-bottom:11px;}
+  .card p:last-child{margin-bottom:0;}
+  .meta-row{
+    display:flex;gap:8px;font-size:13.5px;margin-bottom:7px;align-items:baseline;
+  }
+  .meta-row .k{color:var(--muted);font-weight:700;min-width:74px;flex-shrink:0;}
+  .meta-row .v{color:var(--charcoal);}
+  .pill{
+    display:inline-block;background:var(--sand);color:var(--charcoal);
+    font-size:12px;font-weight:700;padding:2px 10px;border-radius:20px;
+    vertical-align:middle;
+  }
+  .shot{
+    margin-top:14px;border:1px solid var(--sand-deep);border-radius:12px;
+    overflow:hidden;background:#fff;box-shadow:0 6px 18px rgba(58,53,46,.07);
+  }
+  .shot img{display:block;width:100%;height:auto;}
+  .shot .cap{
+    font-size:12px;color:var(--muted);padding:7px 12px;
+    background:var(--cream);border-top:1px solid var(--sand-deep);
+  }
+  .fit-scale{margin-top:13px;display:flex;flex-direction:column;gap:6px;}
+  .fit-scale .label{font-size:12.5px;font-weight:700;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;}
+  .fit-scale .row{display:flex;align-items:center;gap:10px;font-size:13.5px;}
+  .fit-scale .n{width:22px;height:22px;border-radius:50%;flex-shrink:0;
+    background:var(--sand);color:var(--charcoal);font-weight:700;font-size:12px;
+    display:flex;align-items:center;justify-content:center;}
+  .fit-scale .row.mid .n{background:var(--sage-deep);color:#fff;}
+  .fit-scale .row b{font-weight:700;color:var(--charcoal);}
+  .fit-scale .row span{color:var(--muted);}
+
+  /* Siblings group */
+  .siblings-wrap{
+    background:#ffffff;
+    border:1px solid var(--sand-deep);
+    border-radius:20px;padding:26px 26px 28px;margin-top:10px;
+  }
+  .siblings-wrap .grid{grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  .siblings-wrap .card{background:var(--cream);}
+  .tip{
+    background:#EAF0E4;border:1px solid #CBD8BE;border-radius:14px;
+    padding:16px 20px;margin-top:18px;font-size:14.5px;color:var(--charcoal);
+  }
+  .tip b{color:var(--sage-deep);}
+  .why{
+    display:flex;gap:14px;align-items:flex-start;
+    background:#fff;border:1px solid var(--sand-deep);border-left:4px solid var(--sage-deep);
+    border-radius:14px;padding:16px 20px;margin-bottom:22px;
+    font-size:14.5px;color:var(--charcoal);
+  }
+  .why .tag{font-family:'Fraunces',serif;font-weight:600;font-size:15px;
+    color:var(--sage-deep);white-space:nowrap;padding-top:1px;}
+  .why strong{font-weight:700;}
+
+  /* Result showcase */
+  .result{
+    margin-top:38px;background:var(--card);border:1px solid var(--sand-deep);
+    border-radius:20px;padding:26px 28px 28px;
+  }
+  .result h2{font-family:'Fraunces',serif;font-weight:600;font-size:22px;margin-bottom:4px;}
+  .result .section-sub{margin-bottom:20px;}
+  .result-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:26px;align-items:center;}
+  .result-img{border:1px solid var(--sand-deep);border-radius:14px;overflow:hidden;
+    box-shadow:0 8px 22px rgba(58,53,46,.08);}
+  .result-img img{display:block;width:100%;height:auto;}
+  .legend{display:flex;flex-direction:column;gap:16px;}
+  .legend .item{display:flex;gap:13px;align-items:flex-start;}
+  .legend .dot{width:26px;height:26px;border-radius:50%;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:600;font-size:14px;color:#fff;margin-top:1px;}
+  .legend .item h4{font-size:15.5px;font-weight:700;margin-bottom:2px;}
+  .legend .item p{font-size:14px;color:var(--muted);}
+
+  /* How-to steps */
+  .howto{
+    background:var(--charcoal);color:#F4EEE2;border-radius:20px;
+    padding:30px 34px;margin-top:38px;
+    display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:start;
+  }
+  .howto h2{font-family:'Fraunces',serif;font-weight:500;font-size:24px;margin-bottom:18px;color:#fff;}
+  ol{list-style:none;counter-reset:step;}
+  ol li{counter-increment:step;position:relative;padding-left:42px;margin-bottom:15px;font-size:15px;}
+  ol li::before{
+    content:counter(step);position:absolute;left:0;top:-2px;
+    width:28px;height:28px;border-radius:50%;
+    background:var(--sage);color:var(--charcoal);
+    font-family:'Fraunces',serif;font-weight:600;font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .howto code{background:rgba(255,255,255,.12);padding:1px 7px;border-radius:6px;font-size:13.5px;}
+  .howto .aside{
+    background:rgba(169,183,158,.16);border-radius:14px;padding:18px 20px;
+    font-size:14px;border:1px solid rgba(169,183,158,.3);
+  }
+  .howto .aside b{color:var(--sage);}
+
+  .foot{text-align:center;margin-top:40px;color:var(--muted);font-size:13px;
+    font-family:'Fraunces',serif;letter-spacing:.04em;}
+
+  @media(max-width:880px){
+    .grid,.siblings-wrap .grid,.howto{grid-template-columns:1fr;}
+    h1{font-size:36px;}
+  }
+
+  @media print{
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    body{padding:34px;}
+    .page{max-width:none;}
+    .card,.siblings-wrap,.result,.howto,.example-shot,.why,.shot,.fit-scale,.result-img{
+      break-inside:avoid;page-break-inside:avoid;
+    }
+    .section-label,h1,h3{break-after:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <img class="logo" src="img/logo.svg" alt="minimalist">
+  <div class="brand">Internal guide</div>
+  <h1>Product Metafields</h1>
+  <p class="intro">These fields show up on <strong>every product</strong> (Admin → Product → <em>Metafields</em> section). They control special theme behaviors on a <strong>per-product basis</strong>, with no code changes.</p>
+
+  <figure class="example-shot">
+    <img src="img/metafields-filled.png" alt="Metafields section of the Track Shorts product with every field filled in">
+    <figcaption>Real example — the <strong>Track Shorts</strong> product with every field filled in</figcaption>
+  </figure>
+
+  <hr class="rule">
+
+  <div class="section-label">Individual fields</div>
+  <p class="section-sub">Each one acts on its own, on the product where it's filled in.</p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="num">01</span>
+      <h3>Coming Soon</h3>
+      <div class="en">Pre-launch</div>
+      <p>Flags the product as <strong>pre-launch</strong>. When on, the theme <strong>hides the price</strong> and shows the “Notify Me” flow instead of the buy button.</p>
+      <div class="meta-row"><span class="k">Type</span><span class="v"><span class="pill">True / False</span></span></div>
+      <div class="meta-row"><span class="k">How to set</span><span class="v">Choose <strong>True</strong> while it's not for sale. Set <strong>False</strong> (or Clear) at launch.</span></div>
+      <div class="shot">
+        <img src="img/coming-soon-example.png" alt="Coming Soon field with True and False options">
+        <div class="cap">How it looks in the product admin</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">02</span>
+      <h3>Fit</h3>
+      <div class="en">Sizing scale</div>
+      <p>Shows a <strong>fit guide</strong> on the product page — where the item sits on the Small → Large scale.</p>
+      <div class="meta-row"><span class="k">Type</span><span class="v"><span class="pill">Number (1–5)</span></span></div>
+      <div class="meta-row"><span class="k">How to set</span><span class="v">Enter a number from <strong>1 to 5</strong>. It highlights that point on the scale. <strong>If empty, it defaults to True to size (3).</strong></span></div>
+      <div class="fit-scale">
+        <div class="label">What each number means</div>
+        <div class="row"><span class="n">1</span><b>Runs small</b><span>— size up</span></div>
+        <div class="row"><span class="n">2</span><b>Slightly small</b></div>
+        <div class="row mid"><span class="n">3</span><b>True to size</b><span>— most common</span></div>
+        <div class="row"><span class="n">4</span><b>Slightly large</b></div>
+        <div class="row"><span class="n">5</span><b>Runs large</b><span>— size down</span></div>
+      </div>
+      <div class="shot">
+        <img src="img/fit-example.png" alt="Fit guide on the product page: Small / True to size / Large">
+        <div class="cap">How it looks on the product page (here: 3 = True to size)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">03</span>
+      <h3>Size charts</h3>
+      <div class="en">Measurements popup</div>
+      <p>Links the product to the <strong>size chart</strong> that opens in the sizing popup.</p>
+      <div class="meta-row"><span class="k">Type</span><span class="v"><span class="pill">Reference (chart)</span></span></div>
+      <div class="meta-row"><span class="k">How to set</span><span class="v">Pick a ready-made entry — <strong>Content → Metaobjects → Size Chart</strong> (e.g. “Kids Tees”, “Track Shorts”). Empty = popup won't appear.</span></div>
+      <div class="meta-row"><span class="k">New chart?</span><span class="v">If the right one isn't listed, create it first: Size Chart → <strong>Add entry</strong>, then select it here.</span></div>
+      <div class="shot">
+        <img src="img/size-chart-entries.png" alt="Size Chart metaobject entries list in Shopify admin">
+        <div class="cap">Content → Metaobjects → Size Chart — the entries you can choose from</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">04</span>
+      <h3>Pair with</h3>
+      <div class="en">Complete the look</div>
+      <p>Any product you add here shows up on the product page under the <strong>“Complete the look”</strong> section. If none is set, that section is <strong>hidden</strong> for that product.</p>
+      <div class="meta-row"><span class="k">Type</span><span class="v"><span class="pill">List of products</span></span></div>
+      <div class="meta-row"><span class="k">How to set</span><span class="v">Search and select the pieces that go together.</span></div>
+      <div class="shot">
+        <img src="img/complete-the-look.png" alt="Complete the look section on the product page with two paired products">
+        <div class="cap">How it looks on the product page</div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="rule">
+
+  <div class="section-label">The “Siblings” group — they work together</div>
+  <p class="section-sub">Link the <strong>same style across different colors/prints</strong>, showing the swatch dots on the card and the product page.</p>
+
+  <div class="why">
+    <span class="tag">Why it matters</span>
+    <span>Each color/print is a <strong>separate product</strong> in Shopify. Without this link, those pages are unrelated dead-ends and customers never discover the other versions. With it, they can <strong>hop between every version</strong> from any one product page — and when you launch a new color, just add it to the collection and it shows up on all the siblings automatically.</span>
+  </div>
+
+  <div class="siblings-wrap">
+    <div class="grid">
+
+      <div class="card">
+        <span class="num">05</span>
+        <h3>Siblings</h3>
+        <div class="en">By collection</div>
+        <p>Links the variations <strong>by collection</strong>: you enter the <em>handle</em> of a collection that gathers all versions of that style.</p>
+        <div class="meta-row"><span class="k">Type</span><span class="v"><span class="pill">Text (handle)</span></span></div>
+        <div class="meta-row"><span class="k">Example</span><span class="v"><code>track-shorts</code></span></div>
+      </div>
+
+      <div class="card">
+        <span class="num">06</span>
+        <h3>Sibling Color</h3>
+        <div class="en">Swatch tooltip · optional</div>
+        <p>The <strong>name of this product's version</strong>. It appears as the <strong>tooltip</strong> when you hover a swatch in “Also available in”. Each sibling has its own.</p>
+        <div class="meta-row"><span class="k">Type</span><span class="v"><span class="pill">Text</span></span></div>
+        <div class="meta-row"><span class="k">Example</span><span class="v">Green + Yellow</span></div>
+        <div class="meta-row"><span class="k">Optional</span><span class="v">Swatches still appear and link without it — you only lose the hover label.</span></div>
+        <div class="shot">
+          <img src="img/sibling-color-tooltip.png" alt="Also available in swatches with a Green + Yellow tooltip on hover">
+          <div class="cap">The “Green + Yellow” label is the swatch tooltip</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="num">07</span>
+        <h3>Sibling products</h3>
+        <div class="en">By manual list</div>
+        <p>Alternative to a collection: you <strong>manually list</strong> the other versions of the same style.</p>
+        <div class="meta-row"><span class="k">Type</span><span class="v"><span class="pill">List of products</span></span></div>
+        <div class="meta-row"><span class="k">How to set</span><span class="v">Select the other color/print versions.</span></div>
+      </div>
+
+    </div>
+
+    <div class="tip">
+      Use <b>Siblings</b> (collection) <em>OR</em> <b>Sibling products</b> (list) to make the link — you only need one. Either way, fill in <b>Sibling Color</b> on <u>each</u> product so the swatch shows the right label.
+    </div>
+  </div>
+
+  <div class="result">
+    <h2>How it looks in the store</h2>
+    <p class="section-sub">The same fields, filled in and live on the product page.</p>
+    <div class="result-grid">
+      <div class="result-img">
+        <img src="img/storefront-result.png" alt="Track Shorts product page showing color swatches and Coming Soon button">
+      </div>
+      <div class="legend">
+        <div class="item">
+          <span class="dot" style="background:var(--sage-deep);">A</span>
+          <div>
+            <h4>Color/print swatches (Siblings)</h4>
+            <p>The 4 versions of the same style, linked by the <strong>Sibling products</strong> + <strong>Sibling Color</strong> fields.</p>
+          </div>
+        </div>
+        <div class="item">
+          <span class="dot" style="background:#8E7CC3;">B</span>
+          <div>
+            <h4>“Coming Soon — Notify Me” button</h4>
+            <p>Appears automatically when the <strong>Coming Soon</strong> field is set to <strong>True</strong> — it replaces the buy button.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="howto">
+    <div>
+      <h2>How to set it up</h2>
+      <ol>
+        <li>Admin → <strong>Products</strong> → open the product.</li>
+        <li>Scroll to <strong>Metafields</strong> (the section in the screenshot).</li>
+        <li>Click the field and <strong>type or select</strong> the value.</li>
+        <li><strong>Save</strong> (top-right corner).</li>
+      </ol>
+    </div>
+    <div class="aside">
+      <b>In bulk</b><br>
+      To fill in many products at once (e.g. the color for a whole collection): Products → select several → <b>Edit products</b> → add the metafield columns in the bulk editor.
+    </div>
+  </div>
+
+
+  <div class="foot">Developed by Ana Borba · 2026</div>
+
+</div>
+</body>
+</html>

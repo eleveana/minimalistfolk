@@ -41,7 +41,7 @@
             "image_width": 150,
             "title": "Contact us",
             "heading_font_size": "heading-x-small",
-            "text": "<p>1489 POINSETTIA AVE </p><p>STE 133</p><p>VISTA, CA 92081</p><p></p>",
+            "text": "<p>1489 POINSETTIA AVE </p><p>STE 133</p><p>VISTA, CA 92081</p><p>support@minimalistfolk.co</p><p></p>",
             "column_width": 22,
             "enable_accordion": true
           }
@@ -65,7 +65,7 @@
         "social_qXTTRA"
       ],
       "custom_css": [
-        ".site-footer-wrapper {background-color: #F6E8AD;}"
+        ".site-footer-wrapper {background-color: #f6e8ad;}"
       ],
       "settings": {
         "logo": "shopify://shop_images/Asset_6.svg",

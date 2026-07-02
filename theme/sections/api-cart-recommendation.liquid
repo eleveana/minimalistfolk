@@ -1,0 +1,18 @@
+{%- comment -%}
+  API section for the cart "You may also like" widget.
+
+  Rendered through Shopify's Product Recommendations endpoint, e.g.:
+    /recommendations/products?section_id=api-cart-recommendation&product_id=<id>&limit=<n>&intent=<related|complementary>
+  Shopify populates the `recommendations` object for that request. Cards reuse
+  the cart-native `upsell-product` snippet so they match the theme's existing
+  "Pair products" widget. Consumed by assets/cart-recommendations.js.
+{%- endcomment -%}
+<template data-api-cart-recommendation-template>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    {%- for product in recommendations.products -%}
+      {%- unless product.tags contains 'hide' -%}
+        {%- render 'upsell-product', upsell_product: product, is_cart: true, is_product_list: true -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+</template>

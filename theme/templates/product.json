@@ -423,6 +423,7 @@
         "text_cjbArR",
         "buttons_hbkyVU"
       ],
+      "disabled": true,
       "custom_css": [
         ".brick__section {margin-top: 60px;}"
       ],

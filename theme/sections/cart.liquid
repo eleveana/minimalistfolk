@@ -248,6 +248,9 @@
                   {%- when 'upsell-products', 'bundle-products', 'product-list' -%}
                     {%- render 'cart-block-upsell', block: block -%}
 
+                  {%- when 'recommendations' -%}
+                    {%- render 'cart-block-recommendations', block: block -%}
+
                   {%- when 'free-shipping' -%}
                     {%- unless is_free_shipping_first -%}
                       {{- free_shipping -}}
@@ -504,6 +507,48 @@
           "type": "checkbox",
           "id": "upsell_auto_open",
           "label": "Show bundle products automatically on cart page",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "recommendations",
+      "name": "You may also like",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Automatic product recommendations, picked by Shopify based on the items in the cart. Shows nothing when the cart is empty. Preview on the live storefront — recommendations don't render in the theme editor."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "You may also like"
+        },
+        {
+          "type": "select",
+          "id": "intent",
+          "label": "Recommendation type",
+          "default": "related",
+          "options": [
+            {"value": "related", "label": "Related products"},
+            {"value": "complementary", "label": "Complementary products"}
+          ]
+        },
+        {
+          "type": "range",
+          "id": "limit",
+          "label": "Products to show",
+          "min": 2,
+          "max": 10,
+          "step": 1,
+          "default": 4
+        },
+        {
+          "type": "checkbox",
+          "id": "auto_open",
+          "label": "Expand automatically on cart page",
           "default": true
         }
       ]

@@ -9289,17 +9289,21 @@ product-siblings {
   transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1), background 0.5s cubic-bezier(0.215, 0.61, 0.355, 1), border 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 .radio__fieldset .radio__button label:hover, .radio__fieldset .radio__button label:active, .radio__fieldset .radio__button label:focus {
-  background: var(--text);
-  color: var(--bg);
+  /* brand: size buttons use sage green with black text instead of black */
+  background: #8A9140;
+  color: #000;
+  border-color: #8A9140;
 }
 @media (hover: none) and (pointer: coarse) {
   .radio__fieldset .radio__button label:hover {
     background: transparent;
     color: inherit;
+    border-color: var(--text);
   }
   .radio__fieldset .radio__button label:active {
-    background: var(--text);
-    color: var(--bg);
+    background: #8A9140;
+    color: #000;
+    border-color: #8A9140;
   }
 }
 .radio__fieldset .radio__button input:disabled + label,
@@ -9309,10 +9313,32 @@ product-siblings {
   background-color: var(--text-a5);
   color: var(--text-a35);
   border-color: var(--text-a35);
+  /* brand: sold-out sizes are not selectable and show a strike-through */
+  pointer-events: none;
+  cursor: not-allowed;
+  overflow: hidden;
+}
+.radio__fieldset .radio__button input:disabled + label::after,
+.radio__fieldset .radio__button input.disabled + label::after,
+.radio__fieldset .radio__button input.sold-out + label::after,
+.radio__fieldset .radio__button input.unavailable + label::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top right,
+    transparent calc(50% - 0.75px),
+    var(--text-a35) calc(50% - 0.75px),
+    var(--text-a35) calc(50% + 0.75px),
+    transparent calc(50% + 0.75px)
+  );
+  pointer-events: none;
 }
 .radio__fieldset .radio__button input:checked ~ label {
-  background: var(--text);
-  color: var(--bg);
+  /* brand: selected size button = sage green with black text */
+  background: #8A9140;
+  color: #000;
+  border-color: #8A9140;
 }
 
 .radio__fieldset .radio__buttons {

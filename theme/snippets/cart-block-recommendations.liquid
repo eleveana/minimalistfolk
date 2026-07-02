@@ -1,0 +1,63 @@
+{% comment %}
+  Renders the automatic "You may also like" recommendations widget on the
+  Cart page and Cart drawer. Products are fetched client-side from Shopify's
+  Product Recommendations API (see assets/cart-recommendations.js +
+  sections/api-cart-recommendation.liquid) and rendered with the cart-native
+  `upsell-product` card, matching the "Pair products" widget.
+
+  Accepts:
+  - block: {Object} Block object (required)
+
+  Usage:
+  {% render 'cart-block-recommendations', block: block %}
+{% endcomment %}
+
+{%- liquid
+  assign auto_open = block.settings.auto_open
+  assign limit = block.settings.limit | default: 4
+  assign intent = block.settings.intent | default: 'related'
+-%}
+
+<script src="{{ 'cart-recommendations.js' | asset_url }}" defer="defer"></script>
+
+<details
+  class="cart__widget cart__widget--products accordion"
+  data-cart-recommendations-widget
+  data-collapsible
+  {% if auto_open %}
+    open="true"
+  {% endif %}
+  {% unless request.design_mode %}
+    hidden
+  {% endunless %}
+>
+  <summary class="cart__widget__title" data-collapsible-trigger>
+    {{ block.settings.title | default: 'You may also like' }}
+    {%- render 'icon-nav-arrow-down' -%}
+  </summary>
+
+  <div
+    class="cart__widget__content"
+    {% if auto_open %}
+      style="height: auto;"
+    {% endif %}
+    data-collapsible-body
+  >
+    <div class="cart__widget__content__inner" data-collapsible-content>
+      <div class="cart__widget__products">
+        <cart-recommendations
+          data-limit="{{ limit }}"
+          data-intent="{{ intent }}"
+        >
+          <div data-cart-recommendations-holder>
+            {%- if request.design_mode -%}
+              <p class="cart__widget__placeholder">
+                {{- 'Recommendations appear here once the cart has items (live storefront only).' -}}
+              </p>
+            {%- endif -%}
+          </div>
+        </cart-recommendations>
+      </div>
+    </div>
+  </div>
+</details>

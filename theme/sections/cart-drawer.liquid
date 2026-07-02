@@ -31,7 +31,112 @@
         assign has_checkout_buttons = true
     endcase
   endfor
+
+  comment
+    "You may also like" recommendations. When enabled, the same engine renders
+    as a side flyout on wide screens and stacked inside the drawer on narrow
+    ones (see assets/cart-recommendations.js viewport gating).
+  endcomment
+  assign rec_enable = section.settings.rec_enable
+  assign rec_heading = section.settings.rec_heading | default: 'You may also like'
+  assign rec_intent = section.settings.rec_intent | default: 'related'
+  assign rec_limit = section.settings.rec_limit | default: 4
+  assign rec_breakpoint = 1000
 -%}
+
+{%- if rec_enable -%}
+  <script src="{{ 'cart-recommendations.js' | asset_url }}" defer="defer"></script>
+  {%- capture rec_flyout_min %}{{ rec_breakpoint }}{% endcapture -%}
+  {%- assign rec_stacked_max = rec_breakpoint | minus: 1 -%}
+
+  {%- comment -%} Side flyout — rendered as a sibling of .drawer__inner (below). {%- endcomment -%}
+  {%- capture rec_flyout -%}
+    <aside
+      class="drawer__recs"
+      data-cart-recommendations-widget
+      {% unless request.design_mode %}hidden{% endunless %}
+    >
+      <div class="drawer__recs__inner">
+        {%- if rec_heading != blank -%}
+          <p class="drawer__recs__title cart__widget__title">{{ rec_heading }}</p>
+        {%- endif -%}
+        <cart-recommendations
+          data-limit="{{ rec_limit }}"
+          data-intent="{{ rec_intent }}"
+          data-min-width="{{ rec_flyout_min }}"
+        >
+          <div class="drawer__recs__list" data-cart-recommendations-holder></div>
+        </cart-recommendations>
+      </div>
+    </aside>
+  {%- endcapture -%}
+
+  {%- comment -%} Stacked fallback — rendered inside the drawer body (below). {%- endcomment -%}
+  {%- capture rec_stacked -%}
+    <div
+      class="cart__widget cart__widget--products drawer__recs-stacked"
+      data-cart-recommendations-widget
+      {% unless request.design_mode %}hidden{% endunless %}
+    >
+      {%- if rec_heading != blank -%}
+        <p class="cart__widget__title">{{ rec_heading }}</p>
+      {%- endif -%}
+      <cart-recommendations
+        data-limit="{{ rec_limit }}"
+        data-intent="{{ rec_intent }}"
+        data-max-width="{{ rec_stacked_max }}"
+      >
+        <div class="cart__widget__products" data-cart-recommendations-holder></div>
+      </cart-recommendations>
+    </div>
+  {%- endcapture -%}
+
+  {%- capture rec_styles -%}
+    .drawer__recs {
+      position: fixed;
+      top: 0;
+      right: var(--DRAWER-WIDTH, 380px);
+      width: min(340px, 32vw);
+      height: 100%;
+      z-index: 6001;
+      background: var(--bg);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 40px 28px;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(16px);
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+      pointer-events: none;
+    }
+    #cart-drawer.is-open .drawer__recs {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+    .drawer__recs[hidden] { display: none; }
+    .drawer__recs__title {
+      margin: 0 0 1.6rem;
+      text-align: left;
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+    .drawer__recs__list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .drawer__recs__list > quick-add-product { display: block; }
+    .drawer__recs-stacked { display: none; }
+    @media only screen and (max-width: {{ rec_stacked_max }}px) {
+      .drawer__recs { display: none; }
+      .drawer__recs-stacked:not([hidden]) { display: block; }
+    }
+  {%- endcapture -%}
+  <style>{{ rec_styles | strip_newlines }}</style>
+{%- endif -%}
 
 {%- capture cart_title -%}
   <h3 class="drawer__heading">
@@ -212,6 +317,9 @@
                   {%- when 'upsell-products', 'bundle-products', 'product-list' -%}
                     {%- render 'cart-block-upsell', block: block -%}
 
+                  {%- when 'recommendations' -%}
+                    {%- render 'cart-block-recommendations', block: block -%}
+
                   {%- when 'free-shipping' -%}
                     {%- render 'free-shipping', message: block.settings.message, color_scheme: block.settings.color_scheme, show_wheel: false, show_progress_bar: true, is_cart_drawer: true -%}
 
@@ -270,6 +378,10 @@
 
           {%- if static_blocks != blank -%}
             {{ static_blocks }}
+          {%- endif -%}
+
+          {%- if rec_enable -%}
+            {{ rec_stacked }}
           {%- endif -%}
 
           {%- if product_block.size == 0 -%}
@@ -387,6 +499,10 @@
         </div>
       </collapsible-elements>
 
+      {%- if rec_enable -%}
+        {{ rec_flyout }}
+      {%- endif -%}
+
       <span class="underlay drawer__underlay" data-drawer-underlay></span>
     </cart-drawer>
   </div>
@@ -401,6 +517,45 @@
       "id": "color_scheme",
       "default": "scheme_1",
       "label": "Color scheme"
+    },
+    {
+      "type": "header",
+      "content": "You may also like"
+    },
+    {
+      "type": "paragraph",
+      "content": "Shows automatic recommendations (picked by Shopify from the cart's items) as a side flyout on desktop and stacked inside the drawer below 1000px. If you also added the separate \"You may also like\" block to this drawer, remove it to avoid duplicates. Preview on the live storefront — recommendations don't render in the theme editor."
+    },
+    {
+      "type": "checkbox",
+      "id": "rec_enable",
+      "label": "Show recommendations flyout",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "rec_heading",
+      "label": "Heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "select",
+      "id": "rec_intent",
+      "label": "Recommendation type",
+      "default": "related",
+      "options": [
+        {"value": "related", "label": "Related products"},
+        {"value": "complementary", "label": "Complementary products"}
+      ]
+    },
+    {
+      "type": "range",
+      "id": "rec_limit",
+      "label": "Products to show",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4
     }
   ],
   "blocks": [
@@ -585,6 +740,54 @@
           "type": "checkbox",
           "id": "upsell_auto_open",
           "label": "Show bundle products automatically when cart drawer is open",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "pin_to_bottom",
+          "label": "Pin to bottom",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "recommendations",
+      "name": "You may also like",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Automatic product recommendations, picked by Shopify based on the items in the cart. Shows nothing when the cart is empty. Preview on the live storefront — recommendations don't render in the theme editor."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "You may also like"
+        },
+        {
+          "type": "select",
+          "id": "intent",
+          "label": "Recommendation type",
+          "default": "related",
+          "options": [
+            {"value": "related", "label": "Related products"},
+            {"value": "complementary", "label": "Complementary products"}
+          ]
+        },
+        {
+          "type": "range",
+          "id": "limit",
+          "label": "Products to show",
+          "min": 2,
+          "max": 10,
+          "step": 1,
+          "default": 4
+        },
+        {
+          "type": "checkbox",
+          "id": "auto_open",
+          "label": "Expand automatically when cart drawer is open",
           "default": true
         },
         {

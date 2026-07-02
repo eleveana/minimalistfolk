@@ -24,6 +24,15 @@
   assign images_space = 0
   for block in section.blocks
     if block.settings.position == index
+      comment
+        Header mega-menu blocks are image cards. One with no image set has
+        nothing to show, so skip it — otherwise it forces an otherwise-plain
+        nav item (e.g. HOME) to open an empty dropdown on hover.
+      endcomment
+      if block.settings.image == blank
+        continue
+      endif
+
       assign grandparent = true
       assign image_count = image_count | plus: 1
       assign image_space = 1

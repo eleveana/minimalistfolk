@@ -116,6 +116,8 @@
       <div class="image-overlay"></div>
     {%- endif -%}
 
-    {%- render 'image', image: image, aspect_ratio: aspect_ratio, sizes: sizes, loading: 'lazy' -%}
+    {%- if image != blank -%}
+      {%- render 'image', image: image, aspect_ratio: aspect_ratio, sizes: sizes, loading: 'lazy' -%}
+    {%- endif -%}
   </div>
 </div>

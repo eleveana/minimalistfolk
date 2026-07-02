@@ -1,0 +1,179 @@
+<!-- /sections/cart-recommendations.liquid -->
+{%- comment -%}
+  Full-width "You may also like" section for the bottom of the Cart page.
+  Reuses the same engine as the cart-drawer/cart block:
+    - assets/cart-recommendations.js  (the <cart-recommendations> element)
+    - sections/api-cart-recommendation.liquid  (renders the cards)
+  Recommendations are seeded off the most recently added cart item and the
+  whole section hides itself when the cart is empty or no matches are found.
+{%- endcomment -%}
+
+{%- liquid
+  assign color_scheme = 'color-' | append: section.settings.color_scheme
+  assign heading = section.settings.heading
+  assign limit = section.settings.limit | default: 4
+  assign intent = section.settings.intent | default: 'related'
+  assign columns = section.settings.columns | default: 3
+-%}
+
+{%- capture scoped_styles -%}
+  #CartRecommendations--{{ section.id }} {
+    --PT: {{ section.settings.padding_top }}px;
+    --PB: {{ section.settings.padding_bottom }}px;
+    --columns: {{ columns }};
+    padding-top: var(--PT);
+    padding-bottom: var(--PB);
+  }
+  #CartRecommendations--{{ section.id }} .cart-recommendations__title {
+    margin: 0 0 1.5rem;
+  }
+  #CartRecommendations--{{ section.id }} .cart-recommendations__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+    gap: 2rem 2.4rem;
+  }
+  #CartRecommendations--{{ section.id }} .cart-recommendations__grid > quick-add-product {
+    display: block;
+  }
+  @media (max-width: 990px) {
+    #CartRecommendations--{{ section.id }} .cart-recommendations__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 749px) {
+    #CartRecommendations--{{ section.id }} .cart-recommendations__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+{%- endcapture -%}
+<style>{{ scoped_styles | strip_newlines }}</style>
+
+<script src="{{ 'cart-recommendations.js' | asset_url }}" defer="defer"></script>
+
+<section
+  id="CartRecommendations--{{ section.id }}"
+  class="cart-recommendations {{ color_scheme }}"
+  data-cart-recommendations-widget
+  {% unless request.design_mode %}
+    hidden
+  {% endunless %}
+  {{ section.shopify_attributes }}
+>
+  <div class="wrapper">
+    {%- if heading != blank -%}
+      <h2 class="cart-recommendations__title {{ section.settings.heading_font_size }}">
+        {{ heading }}
+      </h2>
+    {%- endif -%}
+
+    <cart-recommendations
+      data-limit="{{ limit }}"
+      data-intent="{{ intent }}"
+    >
+      <div class="cart-recommendations__grid" data-cart-recommendations-holder>
+        {%- if request.design_mode -%}
+          <p class="cart-recommendations__placeholder">
+            {{- 'Recommendations appear here once the cart has items (live storefront only).' -}}
+          </p>
+        {%- endif -%}
+      </div>
+    </cart-recommendations>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart recommendations",
+  "tag": "section",
+  "class": "cart-recommendations-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Automatic \"You may also like\" recommendations for the cart page, picked by Shopify based on the items in the cart. Hidden when the cart is empty. Preview on the live storefront — recommendations don't render in the theme editor."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "default": "h3",
+      "options": [
+        {"value": "h4", "label": "Small"},
+        {"value": "h3", "label": "Medium"},
+        {"value": "h2", "label": "Large"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "intent",
+      "label": "Recommendation type",
+      "default": "related",
+      "options": [
+        {"value": "related", "label": "Related products"},
+        {"value": "complementary", "label": "Complementary products"}
+      ]
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Products to show",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cart recommendations"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["cart"]
+  }
+}
+{% endschema %}

@@ -23,9 +23,10 @@ The `theme/` directory mirrors what Shopify expects:
 ## Shopify CLI Workflow
 
 - **Store handle:** `the-mini-malist-apparel.myshopify.com`
-- **Working theme:** `Relay` (id `139581489246`) — unpublished, this is what we customize
-- **Current live theme:** `VALENTINES SALE` (id `137168650334`) — do not touch from CLI
-- CLI version: 4.1.0 (`/opt/homebrew/bin/shopify`). Upgrade with `brew upgrade shopify-cli`.
+- **Working theme:** `Relay` (id `139581489246`) — ⚠️ **now LIVE/published** (as of 2026-06-19). Ana published it via admin. Every push to this theme hits the live storefront.
+- **Old live theme:** `VALENTINES SALE` (id `137168650334`) — now unpublished.
+- **Pushing to Relay = pushing to production.** The CLI requires `--allow-live`. Always scope pushes to code only (`--only snippets/… --only assets/…`); never push owner JSON to live. Prefer `shopify theme dev` to preview, or push to an unpublished copy for risky changes, before touching live.
+- CLI version: 4.2.0 (`/opt/homebrew/bin/shopify`). Upgrade with `brew upgrade shopify-cli`.
 
 ```bash
 # Pull latest Relay theme state from the store
@@ -36,16 +37,29 @@ cd theme && shopify theme pull \
 # Local dev with hot reload (proxies the store)
 shopify theme dev --store the-mini-malist-apparel.myshopify.com
 
-# Push edits back to the Relay theme (it stays unpublished)
+# Push edits to the Relay theme — ⚠️ THIS IS LIVE. Scope to code, requires --allow-live.
 shopify theme push \
   --store the-mini-malist-apparel.myshopify.com \
-  --theme 139581489246
+  --theme 139581489246 \
+  --allow-live \
+  --only snippets/header-block.liquid
 
 # List remote themes
 shopify theme list --store the-mini-malist-apparel.myshopify.com
 ```
 
-**Launch workflow:** We push edits to the unpublished Relay theme. Ana publishes via the Shopify admin when ready — **never** push `--live` from CLI.
+**Launch workflow:** Relay is now the live, published theme — there is no unpublished Relay sandbox anymore. Pushes go straight to production. Keep pushes scoped to individual code files, verify with `theme dev` first when in doubt, and treat every `--allow-live` push as a production deploy.
+
+**Pull owner JSON before every push.** The store owner edits content/config through the Shopify admin, so the remote Relay theme drifts ahead of the local checkout on these files: `config/settings_data.json` and `templates/*.json`. A blind push overwrites that work. Before pushing, refresh them from the remote:
+
+```bash
+cd theme && shopify theme pull \
+  --store the-mini-malist-apparel.myshopify.com \
+  --theme 139581489246 \
+  --only config/settings_data.json --only "templates/*.json"
+```
+
+Then push. Prefer scoped pushes (`--only snippets/… --only assets/…`) for code changes — a push that names only non-JSON files can't clobber owner content. A `PreToolUse` hook (`.claude/hooks/shopify-push-guard.sh`) enforces this automatically: it auto-pulls owner JSON before any push that could touch it, and stops to ask if those files have uncommitted local edits. Edit `templates/*.json` and `settings_data.json` in the admin, not locally.
 
 ## Brand Direction
 
