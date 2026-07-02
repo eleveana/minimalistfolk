@@ -104,6 +104,7 @@
     "show_recently_viewed_products": true,
     "currency_code_enable": false,
     "summer_sale_enabled": true,
+    "summer_sale_discount": 40,
     "summer_sale_collection": "ss26",
     "checkout_logo_position": "left",
     "checkout_logo_size": "large",
@@ -121,6 +122,21 @@
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,
         "settings": {}
+      },
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {}
+      },
+      "15599951759576395258": {
+        "type": "shopify://apps/mida-replay-heatmaps/blocks/mida_recorder/e4c350c5-eabf-426d-8014-47ef50412bd0",
+        "disabled": false,
+        "settings": {}
+      },
+      "17676059084223943535": {
+        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
@@ -133,7 +149,7 @@
           "btn_primary_bg": "#ac97c8",
           "btn_primary_text": "#000000",
           "btn_primary_border": "#ac97c8",
-          "btn_secondary_bg": "#8A9140",
+          "btn_secondary_bg": "#8a9140",
           "btn_secondary_text": "#000000",
           "btn_secondary_border": "#f15c2e",
           "accent": "#f4a21a",

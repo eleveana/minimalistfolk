@@ -87,7 +87,11 @@
         "checkout-buttons"
       ],
       "settings": {
-        "color_scheme": ""
+        "color_scheme": "",
+        "rec_enable": true,
+        "rec_heading": "You may also like",
+        "rec_intent": "related",
+        "rec_limit": 4
       }
     }
   },

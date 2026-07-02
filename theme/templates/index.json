@@ -1051,6 +1051,10 @@
         "padding_top": 0,
         "padding_bottom": 0
       }
+    },
+    "178249293045de7ade": {
+      "type": "_blocks",
+      "settings": {}
     }
   },
   "order": [
@@ -1072,6 +1076,7 @@
     "section_multicolumn_4Tr4im",
     "section_announcement_iUFAbn",
     "section_text_row_P6MwFe",
-    "section_divider_WPdtJR"
+    "section_divider_WPdtJR",
+    "178249293045de7ade"
   ]
 }
