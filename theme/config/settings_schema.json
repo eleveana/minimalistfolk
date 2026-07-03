@@ -1546,6 +1546,13 @@
         "unit": "%",
         "default": 15,
         "info": "Must match your store-wide Shopify automatic discount."
+      },
+      {
+        "type": "text",
+        "id": "sitewide_sale_label",
+        "label": "Cart savings label",
+        "default": "Sitewide 15%",
+        "info": "Shown per line in the cart as \"You're saving $X with {label}\". The sitewide discount is a Shopify order discount, so it isn't attached to lines automatically — this restores the per-line savings message."
       }
     ]
   }

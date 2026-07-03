@@ -14,7 +14,23 @@
 
 {%- for line_item in cart.items -%}
   {%- liquid
-    assign line_item_final_price = line_item.final_price | money
+    comment
+      Sitewide Sale (display only): the real 15% is a Shopify "Amount off order"
+      discount, applied at the cart total — it never touches line_item.final_price.
+      To keep the drawer line consistent with the product page, fake the same
+      compounded markdown here: take final_price (which already reflects any real
+      product discount, e.g. the 40% collection sale) and knock off the sitewide %.
+      Totals stay real; this only styles the per-line strikethrough + sale price.
+    endcomment
+    assign li_display_final = line_item.final_price
+    assign li_sitewide_active = false
+    if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0 and line_item.final_price > 0
+      assign li_sitewide_active = true
+      assign li_sitewide_multiplier = 100 | minus: settings.sitewide_sale_discount
+      assign li_display_final = line_item.final_price | times: li_sitewide_multiplier | divided_by: 100
+    endif
+
+    assign line_item_final_price = li_display_final | money
     assign line_item_variant_compare_at_price = line_item.variant.compare_at_price | money
     assign line_item_original_price = line_item.original_price | money
     assign line_item_unit_price = line_item.unit_price | money
@@ -127,6 +143,14 @@
 
               if line_item.variant.compare_at_price > line_item.final_price
                 assign sale = true
+              endif
+
+              comment
+                Sitewide markdown pushes the display price below the original even
+                when there's no real line discount — show the strikethrough for it.
+              endcomment
+              if li_sitewide_active and li_display_final < line_item.original_price
+                assign discounted = true
               endif
             -%}
 
@@ -256,12 +280,15 @@
             {%- if line_item.final_price == 0 -%}
               {{ 'general.money.free' | t }}
             {%- else -%}
-              {{- line_item.final_price | times: quantity | money -}}
+              {{- li_display_final | times: quantity | money -}}
             {%- endif -%}
           </div>
         </div>
       </div>
 
+      {%- comment -%}
+        Real line-level discounts (e.g. the 40% collection product discount).
+      {%- endcomment -%}
       {%- if line_item.original_price > line_item.final_price -%}
         {%- for discount in line_item.line_level_discount_allocations -%}
           <p class="cart__discount">
@@ -272,6 +299,23 @@
             <span>{{ 'cart.general.discount_label' | t: amount: discount_price, title: discount.discount_application.title }}</span>
           </p>
         {%- endfor -%}
+      {%- endif -%}
+
+      {%- comment -%}
+        Sitewide sale is a Shopify order discount — it shows in the cart totals,
+        not on the line. Re-add a display-only per-line savings message. The amount
+        matches how Shopify computes the order discount (% of the current line price).
+      {%- endcomment -%}
+      {%- if li_sitewide_active and settings.sitewide_sale_label != blank -%}
+        {%- liquid
+          assign li_sitewide_saving = line_item.final_price | times: settings.sitewide_sale_discount | divided_by: 100 | times: quantity
+          assign li_sitewide_saving_money = li_sitewide_saving | money | strip_html
+        -%}
+        <p class="cart__discount">
+          {%- render 'icon-tags' -%}
+
+          <span>{{ 'cart.general.discount_label' | t: amount: li_sitewide_saving_money, title: settings.sitewide_sale_label }}</span>
+        </p>
       {%- endif -%}
     </div>
   {%- endcapture -%}
