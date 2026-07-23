@@ -21,7 +21,6 @@
     },
     "hero": {
       "type": "collection-image-with-title",
-      "disabled": true,
       "settings": {
         "show_title": true,
         "show_description": true,
