@@ -63,8 +63,7 @@
   if coming_soon
     assign preorder = false
     assign coming_soon_label = 'products.product.coming_soon' | t
-    assign notify_label = 'general.newsletter_form.notify' | t
-    assign coming_soon_button_text = coming_soon_label | append: ' — ' | append: notify_label
+    assign coming_soon_button_text = 'general.newsletter_form.coming_soon_availability' | t
   endif
 
   if current_variant == null
