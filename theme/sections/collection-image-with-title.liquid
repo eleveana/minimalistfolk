@@ -43,12 +43,29 @@
     --PT: {{ section.settings.padding_top }}px;
     --PB: {{ section.settings.padding_bottom }}px;
   }
+  .collection-image-with-title .hero__label {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    background: var(--text);
+    color: var(--bg);
+    margin-bottom: 14px;
+  }
 {%- endstyle -%}
 
 {%- capture collection_content -%}
   {%- if show_title or show_description -%}
     <div class="hero__content__wrapper{% if show_header_backdrop %} backdrop--linear{% endif %} {{ section.settings.flex_align }}{% if banner_layout == 'overlay' %} frame__item{% endif %}">
       <div class="hero__content{% if text_underlay %} backdrop--radial{% endif %}{% if hero_transparent %} hero__content--transparent{% endif %}">
+        {%- if section.settings.label_text != blank -%}
+          <span class="hero__label">{{ section.settings.label_text }}</span>
+        {%- endif -%}
+
         {%- if show_title -%}
           <h1 class="hero__title h3">
             {{ title }}
@@ -136,6 +153,12 @@
     {
       "type": "header",
       "content": "Title and Description"
+    },
+    {
+      "type": "text",
+      "id": "label_text",
+      "label": "Label",
+      "info": "Optional pill shown above the title, e.g. \"Launching tomorrow\". Leave empty to hide."
     },
     {
       "type": "checkbox",

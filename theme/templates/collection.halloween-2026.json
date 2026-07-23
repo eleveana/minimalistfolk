@@ -12,7 +12,14 @@
     },
     "hero": {
       "type": "collection-image-with-title",
+      "custom_css": [
+        ".hero__title {font-size: 42px; line-height: 1.1;}",
+        ".hero__content {text-align: left; align-items: flex-start;}",
+        ".hero__description {margin-top: 6px;}",
+        ".hero__description p {text-align: left !important;}"
+      ],
       "settings": {
+        "label_text": "Launching tomorrow",
         "show_title": true,
         "show_description": true,
         "flex_align": "align--middle-left",
