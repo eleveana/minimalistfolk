@@ -19,7 +19,10 @@
         ".hero__description p {text-align: left !important;}"
       ],
       "settings": {
-        "label_text": "Launching tomorrow",
+        "label_text": "Launching tomorrow at 10am PT",
+        "label_text_2": "Launch today at 10am PT",
+        "label_swap_epoch": "1784876400",
+        "label_hide_epoch": "1784912400",
         "show_title": true,
         "show_description": true,
         "flex_align": "align--middle-left",

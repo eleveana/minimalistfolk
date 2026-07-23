@@ -34,6 +34,27 @@
   if hero_transparent and text_underlay
     assign show_header_backdrop = true
   endif
+
+  comment
+    Time-based label: before switch time show "Label", after it show
+    "Label (after switch time)", and after the hide time show nothing.
+    Times are Unix epochs so the swap needs no manual edit on launch day.
+    Storefront page caching can delay each flip by a few minutes.
+  endcomment
+  assign hero_label = section.settings.label_text
+  assign now_epoch = 'now' | date: '%s' | plus: 0
+  if section.settings.label_swap_epoch != blank
+    assign swap_epoch = section.settings.label_swap_epoch | plus: 0
+    if now_epoch >= swap_epoch
+      assign hero_label = section.settings.label_text_2
+    endif
+  endif
+  if section.settings.label_hide_epoch != blank
+    assign hide_epoch = section.settings.label_hide_epoch | plus: 0
+    if now_epoch >= hide_epoch
+      assign hero_label = blank
+    endif
+  endif
 -%}
 
 {%- render 'stylesheet', name: 'collection-image-with-title.css' -%}
@@ -62,8 +83,8 @@
   {%- if show_title or show_description -%}
     <div class="hero__content__wrapper{% if show_header_backdrop %} backdrop--linear{% endif %} {{ section.settings.flex_align }}{% if banner_layout == 'overlay' %} frame__item{% endif %}">
       <div class="hero__content{% if text_underlay %} backdrop--radial{% endif %}{% if hero_transparent %} hero__content--transparent{% endif %}">
-        {%- if section.settings.label_text != blank -%}
-          <span class="hero__label">{{ section.settings.label_text }}</span>
+        {%- if hero_label != blank -%}
+          <span class="hero__label">{{ hero_label }}</span>
         {%- endif -%}
 
         {%- if show_title -%}
@@ -159,6 +180,24 @@
       "id": "label_text",
       "label": "Label",
       "info": "Optional pill shown above the title, e.g. \"Launching tomorrow\". Leave empty to hide."
+    },
+    {
+      "type": "text",
+      "id": "label_text_2",
+      "label": "Label (after switch time)",
+      "info": "Replaces the label once the switch time passes."
+    },
+    {
+      "type": "text",
+      "id": "label_swap_epoch",
+      "label": "Label switch time (Unix epoch, UTC seconds)",
+      "info": "e.g. 1784876400 = Jul 24 2026 12:00am PT. Leave empty to never switch."
+    },
+    {
+      "type": "text",
+      "id": "label_hide_epoch",
+      "label": "Label hide time (Unix epoch, UTC seconds)",
+      "info": "Label disappears entirely after this time. e.g. 1784912400 = Jul 24 2026 10:00am PT. Leave empty to never hide."
     },
     {
       "type": "checkbox",
