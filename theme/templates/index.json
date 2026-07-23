@@ -673,7 +673,7 @@
       ],
       "settings": {
         "show_product_count": false,
-        "title": "Designed by parents for kiddos",
+        "title": "Good lucky getting them to wear anything else.",
         "heading_font_size": "heading-small",
         "text": "",
         "text_font_size": "body-medium",
@@ -1055,6 +1055,68 @@
     "178249293045de7ade": {
       "type": "_blocks",
       "settings": {}
+    },
+    "section_countdown_timer_FgHwEh": {
+      "type": "section-countdown-timer",
+      "blocks": {
+        "timer_ViNWAB": {
+          "type": "timer",
+          "settings": {
+            "end_date": "2026/07/24",
+            "end_time": "10:00",
+            "period": "am",
+            "end_message": "<p>Offer has expired</p>",
+            "digits_font_size": "heading-x-large",
+            "text_font_size": "body-small"
+          }
+        },
+        "subheading_iDkQKH": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Countdown is on"
+          }
+        },
+        "heading_Gz3btb": {
+          "type": "heading",
+          "settings": {
+            "title": "Halloween Launch",
+            "heading_font_size": "heading-medium",
+            "heading_tag": "automatic"
+          }
+        },
+        "buttons_34HiGY": {
+          "type": "buttons",
+          "settings": {
+            "button_text": "Plan your shopping",
+            "button_url": "shopify://collections/halloween-2026",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "timer_ViNWAB",
+        "subheading_iDkQKH",
+        "heading_Gz3btb",
+        "buttons_34HiGY"
+      ],
+      "disabled": true,
+      "name": "Countdown timer",
+      "settings": {
+        "hide_on_complete": true,
+        "width": "wrapper",
+        "text_align": "text-center",
+        "height": "four-fifty-height-hero",
+        "mobile_height": "four-fifty-height-hero--mobile",
+        "text_align_mobile": "text-left--mobile",
+        "color_scheme": "",
+        "digits_gradient": "",
+        "overlay_type": "disabled",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
@@ -1077,6 +1139,7 @@
     "section_announcement_iUFAbn",
     "section_text_row_P6MwFe",
     "section_divider_WPdtJR",
-    "178249293045de7ade"
+    "178249293045de7ade",
+    "section_countdown_timer_FgHwEh"
   ]
 }
