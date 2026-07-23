@@ -21,6 +21,31 @@
     endif
   endif
 
+  comment
+    Coming-soon products aren't buyable yet, so low-stock urgency is
+    misleading pre-launch. Anything in stock reads as plain in-stock.
+    Mirrors the coming-soon detection in product-buttons.liquid.
+  endcomment
+  if status == 'low-stock'
+    assign coming_soon = false
+    if product.metafields.custom.coming_soon.type == 'boolean' and product.metafields.custom.coming_soon.value == true
+      assign coming_soon = true
+    endif
+    if current_variant.metafields.custom.coming_soon.type == 'boolean' and current_variant.metafields.custom.coming_soon.value == true
+      assign coming_soon = true
+    endif
+    if product.tags contains '_coming_soon'
+      assign coming_soon = true
+    endif
+    if coming_soon
+      if show_notice == 'always'
+        assign status = 'in-stock'
+      else
+        assign status = ''
+      endif
+    endif
+  endif
+
   assign status_color = ''
   if status == 'in-stock'
     assign status_color = in_stock_color
