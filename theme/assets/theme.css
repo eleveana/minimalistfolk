@@ -9313,9 +9313,10 @@ product-siblings {
   background-color: var(--text-a5);
   color: var(--text-a35);
   border-color: var(--text-a35);
-  /* brand: sold-out sizes are not selectable and show a strike-through */
-  pointer-events: none;
-  cursor: not-allowed;
+  /* brand: sold-out sizes stay clickable so shoppers can open the "Notify me"
+     flow for that size — they keep the muted look + strike-through as the
+     sold-out cue, but remain selectable (pointer-events left enabled). */
+  cursor: pointer;
   overflow: hidden;
 }
 .radio__fieldset .radio__button input:disabled + label::after,

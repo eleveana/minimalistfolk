@@ -106,6 +106,7 @@
     "summer_sale_enabled": true,
     "summer_sale_discount": 40,
     "summer_sale_collection": "ss26",
+    "sitewide_sale_enabled": false,
     "checkout_logo_position": "left",
     "checkout_logo_size": "large",
     "checkout_body_background_color": "#fff",
@@ -137,6 +138,116 @@
         "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
         "disabled": false,
         "settings": {}
+      },
+      "12608439564960700138": {
+        "type": "shopify://apps/sezzle-widget/blocks/widget-embed/f3a53793-e118-4764-a86b-a79bfedb0d5f",
+        "disabled": false,
+        "settings": {
+          "heading": "Sezzle Widget",
+          "font_size": 14,
+          "font_family": "inherit"
+        }
+      },
+      "11468047240823483236": {
+        "type": "shopify://apps/sezzle-widget/blocks/checkout-embed/f3a53793-e118-4764-a86b-a79bfedb0d5f",
+        "disabled": false,
+        "settings": {
+          "heading": "Sezzle Checkout Button",
+          "template": "Checkout with %%logo%%",
+          "mode": "light",
+          "padding": 9,
+          "marginTop": 0,
+          "marginRight": 0,
+          "marginBottom": 0,
+          "marginLeft": 0,
+          "width": "auto"
+        }
+      },
+      "14257673941758180001": {
+        "type": "shopify://apps/navidium-protection/blocks/claim-page/0127ebe0-a248-4215-97ad-f7db763bd6c8",
+        "disabled": false,
+        "settings": {
+          "page_url": "",
+          "custom_css": ""
+        }
+      },
+      "10862475845122376913": {
+        "type": "shopify://apps/navidium-protection/blocks/widget_app_embed/0127ebe0-a248-4215-97ad-f7db763bd6c8",
+        "disabled": false,
+        "settings": {
+          "enablejQuery": false,
+          "scriptType": "javascript",
+          "iosDeviceListener": "touchstart",
+          "auto_install": true,
+          "manual_install": false,
+          "nvdContainer1": "REQUIRED",
+          "nvdContainer2": "OPTIONAL",
+          "nvdContainer3": "OPTIONAL",
+          "waitForParent": 1000,
+          "widgetPosition": "afterbegin",
+          "currencyFormatType": "symbol",
+          "currencyPosition": "begin",
+          "nvdCurrency": "{{ shop.money_format | strip_html }}",
+          "product_handle": "navidium-shipping-protection",
+          "subtotal_element": "navidium",
+          "cart_bubble_count": "navidium",
+          "checkoutBtns": "[name='checkout'], [name='checkout'] *, #dyn-checkout",
+          "customCSS": ""
+        }
+      },
+      "2699851813924348007": {
+        "type": "shopify://apps/navidium-protection/blocks/navidium-protection-consent/0127ebe0-a248-4215-97ad-f7db763bd6c8",
+        "disabled": false,
+        "settings": {
+          "show_landing_popup": false,
+          "show_reminder_popup": false,
+          "enablejQuery": true,
+          "product_handle": "navidium-shipping-protection",
+          "checkout_section": "navidium",
+          "subtotal_element": "navidium",
+          "click_triggers": "#cart-icon-bubble",
+          "store_checkout_button": "#checkout-button",
+          "custom_css": ""
+        }
+      },
+      "10379133644710169917": {
+        "type": "shopify://apps/returngo-returns-exchanges/blocks/returngo-loader/c46ec5ca-ca5f-4afb-904e-7e20126a14d4",
+        "disabled": false,
+        "settings": {}
+      },
+      "7584948915495707528": {
+        "type": "shopify://apps/joy-loyalty-program/blocks/app-embed/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
+        "disabled": false,
+        "settings": {}
+      },
+      "18208872656243357035": {
+        "type": "shopify://apps/joy-loyalty-program/blocks/joy-points-calculator-embed/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
+        "disabled": false,
+        "settings": {
+          "points_calculator_alignment": "left"
+        }
+      },
+      "589228961406621311": {
+        "type": "shopify://apps/joy-loyalty-program/blocks/joy-redeem-inline-embed/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
+        "disabled": false,
+        "settings": {
+          "hide-for-guest": false,
+          "hide-not-enough-point": false,
+          "detail-view-layout": false,
+          "hide-redeem-all-points": false,
+          "background-color-redeem-button": "#ffffff",
+          "text-color-redeem-button": "#000000",
+          "border-color-redeem-button": "#d1d5db",
+          "border-color-redeem-button-hover": "#000000",
+          "background-color-button": "#ffffff",
+          "text-color-button": "#000000",
+          "border-color-button": "#000000",
+          "text-color": "#000000",
+          "text-redeem-all-point": "#0066cc",
+          "hasEnableCancel": true,
+          "enableRevokeDiscountApplyFailed": true,
+          "hasReloadPage": true
+        }
       }
     },
     "color_schemes": {
