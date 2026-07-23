@@ -55,6 +55,13 @@
       assign hero_label = blank
     endif
   endif
+  comment
+    On the shared collection template this section renders for every
+    collection, so a label can be scoped to a single collection handle.
+  endcomment
+  if section.settings.label_collection != blank and collection.handle != section.settings.label_collection
+    assign hero_label = blank
+  endif
 -%}
 
 {%- render 'stylesheet', name: 'collection-image-with-title.css' -%}
@@ -198,6 +205,12 @@
       "id": "label_hide_epoch",
       "label": "Label hide time (Unix epoch, UTC seconds)",
       "info": "Label disappears entirely after this time. e.g. 1784912400 = Jul 24 2026 10:00am PT. Leave empty to never hide."
+    },
+    {
+      "type": "text",
+      "id": "label_collection",
+      "label": "Show label only on this collection",
+      "info": "Collection handle, e.g. halloween-2026. Leave empty to show the label on every collection using this template."
     },
     {
       "type": "checkbox",
