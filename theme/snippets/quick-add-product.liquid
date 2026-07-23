@@ -67,7 +67,7 @@
     {%- if coming_soon -%}
       <a
         href="{{ product.url }}"
-        class="{% if use_icon %}look__dot__button{% else %}quick-add__button {{ btn_style }}{% endif %}"
+        class="{% if use_icon %}look__dot__button{% else %}quick-add__button quick-add__button--coming-soon {{ btn_style }}{% endif %}"
         aria-label="{{ 'general.newsletter_form.notify' | t }}"
       >
         {%- if use_icon -%}

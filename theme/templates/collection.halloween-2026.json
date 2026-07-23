@@ -12,12 +12,6 @@
     },
     "hero": {
       "type": "collection-image-with-title",
-      "custom_css": [
-        ".hero__title {font-size: 42px; line-height: 1.1;}",
-        ".hero__content {text-align: left; align-items: flex-start;}",
-        ".hero__description {margin-top: 6px;}",
-        ".hero__description p {text-align: left !important;}"
-      ],
       "settings": {
         "label_text": "Launching tomorrow at 10am PT",
         "label_text_2": "Launch today at 10am PT",
@@ -30,11 +24,11 @@
         "show_text_background": false,
         "overlay_type": "disabled",
         "show_image": true,
-        "banner_layout": "inline",
-        "height": "two-fifty-height-hero",
-        "mobile_height": "two-fifty-height-hero--mobile",
+        "banner_layout": "overlay",
+        "height": "screen-height-one-third",
+        "mobile_height": "screen-height-one-half--mobile",
         "padding_top": 0,
-        "padding_bottom": 15
+        "padding_bottom": 0
       }
     },
     "main": {
