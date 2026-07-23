@@ -13890,16 +13890,18 @@ dialog.is-loading .loader {
   --btn-border: var(--COLOR-QUICK-ADD-TEXT);
   --btn-border-hover: var(--COLOR-QUICK-ADD-TEXT);
 }
-/* brand: coming-soon cards swap Add to Cart for a black Notify Me link */
-.quick-add__button--coming-soon,
-.quick-add__button--coming-soon.btn--outline {
+/* brand: coming-soon cards swap Add to Cart for a black, borderless
+   Notify Me link. Doubled class beats .btn--solid.btn--white specificity. */
+.quick-add__button.quick-add__button--coming-soon,
+.quick-add__button.quick-add__button--coming-soon.btn--outline {
   --btn-bg: #000000;
   --btn-bg-hover: #2b2b2b;
   --btn-text: #ffffff;
   --btn-text-hover: #ffffff;
-  --btn-border: #000000;
-  --btn-border-hover: #2b2b2b;
+  --btn-border: transparent;
+  --btn-border-hover: transparent;
   --accent: #ffffff;
+  border-color: transparent;
 }
 @media only screen and (min-width: 750px) {
   .quick-add__button,
