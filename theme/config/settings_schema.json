@@ -1555,5 +1555,31 @@
         "info": "Shown per line in the cart as \"You're saving $X with {label}\". The sitewide discount is a Shopify order discount, so it isn't attached to lines automatically — this restores the per-line savings message."
       }
     ]
+  },
+  {
+    "name": "Tiered Promo Badge",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Shows a static promotional badge (e.g. \"Up to 60% off\") on product cards for every product in the chosen collection. This is MESSAGING ONLY — it never changes prices. Use it for a tiered / quantity-based cart discount, where the saving depends on how much is in the cart, so no single per-product price would be accurate. Leave the Collection Sale display OFF when using this."
+      },
+      {
+        "type": "checkbox",
+        "id": "promo_badge_enabled",
+        "label": "Enable promo badge",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "promo_badge_text",
+        "label": "Badge text",
+        "default": "Up to 60% off"
+      },
+      {
+        "type": "collection",
+        "id": "promo_badge_collection",
+        "label": "Promo collection"
+      }
+    ]
   }
 ]

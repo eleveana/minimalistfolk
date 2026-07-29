@@ -520,6 +520,26 @@
         endif
       endif
 
+      comment
+        Tiered Promo Badge: a static, messaging-only badge (e.g. "Up to 60% off") for
+        products in the promo collection. Unlike the Collection Sale it does not fake a
+        per-product price — it markets a quantity-based cart discount where no single
+        per-item % is accurate. See the Tiered Promo Badge group in settings_schema.json.
+      endcomment
+      assign promo_badge_active = false
+      if settings.promo_badge_enabled and settings.promo_badge_text != blank and settings.promo_badge_collection != blank
+        for promo_collection in product.collections
+          if promo_collection.id == settings.promo_badge_collection.id
+            assign promo_badge_active = true
+          endif
+        endfor
+      endif
+
+      if promo_badge_active
+        assign promo_badge_text = settings.promo_badge_text
+        assign promo_badge_class = badge_class | append: ' sale-box'
+      endif
+
       if on_sale
         assign sale_badge_class = badge_class | append: ' sale-box'
         assign sale_badge_text = 'products.product.on_sale' | t
@@ -630,6 +650,10 @@
 
         if sale_badge_text != blank
           render 'product-badge', badge_class: sale_badge_class, badge_text: sale_badge_text, aos_delay: aos_delay, aos_duration: aos_duration, aos_anchor: aos_anchor
+        endif
+
+        if promo_badge_text != blank
+          render 'product-badge', badge_class: promo_badge_class, badge_text: promo_badge_text, aos_delay: aos_delay, aos_duration: aos_duration, aos_anchor: aos_anchor
         endif
       endif
     -%}
