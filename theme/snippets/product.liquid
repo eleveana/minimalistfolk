@@ -152,10 +152,32 @@
     endfor
   endif
 
+  assign collection_sale_2_discount = 0
+  if settings.collection_sale_2_enabled and settings.collection_sale_2_discount > 0 and settings.collection_sale_2_collection != blank
+    for sale_collection in product.collections
+      if sale_collection.id == settings.collection_sale_2_collection.id
+        assign collection_sale_2_discount = settings.collection_sale_2_discount
+      endif
+    endfor
+  endif
+
   assign sitewide_sale_discount = 0
   if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0
     assign sitewide_sale_discount = settings.sitewide_sale_discount
   endif
+
+  comment
+    Sale opt-out: a product tagged NO-sale gets zero discount, so product-info.js
+    recomputes the Add to Cart button at full price on variant/quantity change.
+  endcomment
+  for sale_optout_tag in product.tags
+    assign normalized_sale_tag = sale_optout_tag | downcase | strip
+    if normalized_sale_tag == 'no-sale'
+      assign collection_sale_discount = 0
+      assign collection_sale_2_discount = 0
+      assign sitewide_sale_discount = 0
+    endif
+  endfor
 
   assign color_scheme = 'color-' | append: section.settings.color_scheme
 -%}
@@ -175,6 +197,7 @@
   data-sticky-enabled="{{ product_sticky_enable }}"
   data-variant-image-scroll="{{ section.settings.variant_image_scroll }}"
   data-collection-sale-discount="{{ collection_sale_discount }}"
+  data-collection-sale-two-discount="{{ collection_sale_2_discount }}"
   data-sitewide-sale-discount="{{ sitewide_sale_discount }}"
 >
   {%- style -%}

@@ -22,19 +22,45 @@
     endfor
   endif
 
+  assign cb_collection_2_active = false
+  if settings.collection_sale_2_enabled and settings.collection_sale_2_discount > 0 and settings.collection_sale_2_collection != blank
+    for sale_collection in product.collections
+      if sale_collection.id == settings.collection_sale_2_collection.id
+        assign cb_collection_2_active = true
+      endif
+    endfor
+  endif
+
   assign cb_sitewide_active = false
   if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0
     assign cb_sitewide_active = true
   endif
 
+  comment
+    Sale opt-out: mirror price.liquid — a product tagged NO-sale is held out of
+    every display-only sale and keeps its real price in the sticky bar.
+  endcomment
+  for sale_optout_tag in product.tags
+    assign normalized_sale_tag = sale_optout_tag | downcase | strip
+    if normalized_sale_tag == 'no-sale'
+      assign cb_summer_active = false
+      assign cb_collection_2_active = false
+      assign cb_sitewide_active = false
+    endif
+  endfor
+
   assign cb_raw_price = current_variant.price
   assign cb_raw_compare = current_variant.compare_at_price
   assign cb_on_sale = false
-  if cb_summer_active or cb_sitewide_active
+  if cb_summer_active or cb_collection_2_active or cb_sitewide_active
     if current_variant.price > 0
       assign cb_sale_price = current_variant.price
       if cb_summer_active
         assign cb_multiplier = 100 | minus: settings.summer_sale_discount
+        assign cb_sale_price = cb_sale_price | times: cb_multiplier | divided_by: 100
+      endif
+      if cb_collection_2_active
+        assign cb_multiplier = 100 | minus: settings.collection_sale_2_discount
         assign cb_sale_price = cb_sale_price | times: cb_multiplier | divided_by: 100
       endif
       if cb_sitewide_active
