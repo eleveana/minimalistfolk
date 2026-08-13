@@ -104,9 +104,14 @@
     "show_recently_viewed_products": true,
     "currency_code_enable": false,
     "summer_sale_enabled": true,
-    "summer_sale_discount": 40,
-    "summer_sale_collection": "ss26",
+    "summer_sale_discount": 25,
+    "summer_sale_collection": "back-to-school-collection",
+    "collection_sale_2_enabled": true,
+    "collection_sale_2_discount": 40,
+    "collection_sale_2_collection": "ss26",
     "sitewide_sale_enabled": false,
+    "promo_badge_enabled": true,
+    "promo_badge_collection": "ss26",
     "checkout_logo_position": "left",
     "checkout_logo_size": "large",
     "checkout_body_background_color": "#fff",
@@ -248,6 +253,11 @@
           "enableRevokeDiscountApplyFailed": true,
           "hasReloadPage": true
         }
+      },
+      "7280966411886983154": {
+        "type": "shopify://apps/monk/blocks/app-embed/e949adb6-87ca-4b97-8f31-0e51bf507f2d",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {

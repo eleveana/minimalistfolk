@@ -509,12 +509,33 @@
         endfor
       endif
 
+      assign collection_sale_2_active = false
+      if settings.collection_sale_2_enabled and settings.collection_sale_2_discount > 0 and settings.collection_sale_2_collection != blank
+        for sale_collection in product.collections
+          if sale_collection.id == settings.collection_sale_2_collection.id
+            assign collection_sale_2_active = true
+          endif
+        endfor
+      endif
+
       assign sitewide_sale_active = false
       if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0
         assign sitewide_sale_active = true
       endif
 
-      if summer_sale_active or sitewide_sale_active
+      comment
+        Sale opt-out: products tagged NO-sale get no sale badge and no sale price. See price.liquid.
+      endcomment
+      for sale_optout_tag in product.tags
+        assign normalized_sale_tag = sale_optout_tag | downcase | strip
+        if normalized_sale_tag == 'no-sale'
+          assign summer_sale_active = false
+          assign collection_sale_2_active = false
+          assign sitewide_sale_active = false
+        endif
+      endfor
+
+      if summer_sale_active or collection_sale_2_active or sitewide_sale_active
         if settings.sale_tags_enable
           assign on_sale = true
         endif
@@ -584,16 +605,20 @@
         endif
       endif
 
-      if summer_sale_active or sitewide_sale_active
+      if summer_sale_active or collection_sale_2_active or sitewide_sale_active
         if on_sale and show_saving
           comment
-            Effective saving = compounded discount (collection first, then sitewide),
+            Effective saving = compounded discount (collection tiers first, then sitewide),
             derived from the same integer math as price.liquid so the badge % matches
             the displayed sale price.
           endcomment
           assign theme_sale_price = product.price
           if summer_sale_active
             assign theme_multiplier = 100 | minus: settings.summer_sale_discount
+            assign theme_sale_price = theme_sale_price | times: theme_multiplier | divided_by: 100
+          endif
+          if collection_sale_2_active
+            assign theme_multiplier = 100 | minus: settings.collection_sale_2_discount
             assign theme_sale_price = theme_sale_price | times: theme_multiplier | divided_by: 100
           endif
           if sitewide_sale_active
@@ -613,12 +638,22 @@
             endif
           endif
 
-          if product.variants.size == 1
-            assign sale_badge_text = 'products.product.save_badge_html' | t: discount: theme_discount_label
-          else
-            assign sale_badge_text = 'products.product.save_badge_up_to_html' | t: discount: theme_discount_label
-          endif
+          comment
+            Collection/sitewide sales apply one flat % to every variant, so "Save up to"
+            is both wrong and softer than we want — say the discount straight: "25% OFF".
+          endcomment
+          assign sale_badge_text = 'products.product.save_badge_off_html' | t: discount: theme_discount_label
         endif
+      endif
+
+      comment
+        The tiered promo badge outranks the sale badge: where a quantity-based promo runs,
+        its headline ("Up to 60% off") is the offer we're advertising, so showing the flat
+        collection-sale % beside it would undercut the bigger number and read as two
+        competing claims. The discounted price still renders — only the badge is dropped.
+      endcomment
+      if promo_badge_active
+        assign sale_badge_text = ''
       endif
     endif
   -%}

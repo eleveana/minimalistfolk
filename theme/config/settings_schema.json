@@ -1520,6 +1520,41 @@
         "type": "collection",
         "id": "summer_sale_collection",
         "label": "Sale collection"
+      },
+      {
+        "type": "paragraph",
+        "content": "Tag any product NO-sale to hold it out of every sale below — it keeps its full price and gets no badge. Remember to exclude those products from the Shopify automatic discount too."
+      }
+    ]
+  },
+  {
+    "name": "Collection Sale 2",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "A second, independent collection sale so two can run at once (e.g. Summer and Back To School) at different percentages. Same rules as Collection Sale — DISPLAY ONLY, and the % must match its own Shopify automatic discount. A product in both collections shows the two discounts compounded."
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_sale_2_enabled",
+        "label": "Enable second collection sale display",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "collection_sale_2_discount",
+        "label": "Discount percentage",
+        "min": 5,
+        "max": 90,
+        "step": 5,
+        "unit": "%",
+        "default": 25,
+        "info": "Must match your Shopify automatic discount for this collection."
+      },
+      {
+        "type": "collection",
+        "id": "collection_sale_2_collection",
+        "label": "Sale collection"
       }
     ]
   },

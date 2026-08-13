@@ -26,17 +26,42 @@
     endfor
   endif
 
+  assign collection_sale_2_active = false
+  if settings.collection_sale_2_enabled and settings.collection_sale_2_discount > 0 and settings.collection_sale_2_collection != blank
+    for sale_collection in product.collections
+      if sale_collection.id == settings.collection_sale_2_collection.id
+        assign collection_sale_2_active = true
+      endif
+    endfor
+  endif
+
   assign sitewide_sale_active = false
   if settings.sitewide_sale_enabled and settings.sitewide_sale_discount > 0
     assign sitewide_sale_active = true
   endif
 
-  if summer_sale_active or sitewide_sale_active
+  comment
+    Sale opt-out: products tagged NO-sale never show the display-only sale price. See price.liquid.
+  endcomment
+  for sale_optout_tag in product.tags
+    assign normalized_sale_tag = sale_optout_tag | downcase | strip
+    if normalized_sale_tag == 'no-sale'
+      assign summer_sale_active = false
+      assign collection_sale_2_active = false
+      assign sitewide_sale_active = false
+    endif
+  endfor
+
+  if summer_sale_active or collection_sale_2_active or sitewide_sale_active
     if grid_price > 0
       assign grid_sale_price = grid_price
       if summer_sale_active
         assign summer_multiplier = 100 | minus: settings.summer_sale_discount
         assign grid_sale_price = grid_sale_price | times: summer_multiplier | divided_by: 100
+      endif
+      if collection_sale_2_active
+        assign collection_2_multiplier = 100 | minus: settings.collection_sale_2_discount
+        assign grid_sale_price = grid_sale_price | times: collection_2_multiplier | divided_by: 100
       endif
       if sitewide_sale_active
         assign sitewide_multiplier = 100 | minus: settings.sitewide_sale_discount

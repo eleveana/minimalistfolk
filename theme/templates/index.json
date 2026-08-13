@@ -15,18 +15,18 @@
         "image_yxFkVN": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/6A9A2988-2.jpg",
-            "image_link": "shopify://collections/back-to-school-collection",
-            "label": "NOW ENROLLING",
-            "title": "Class of 2027",
+            "image": "shopify://shop_images/6A9A3891_5ededc97-7961-4441-a3db-aeaec8667ebd.jpg",
+            "image_link": "shopify://collections/halloween-2026",
+            "label": "halloween collection",
+            "title": "HALLOWEEN\n\nPART 1",
             "heading_font_size": "heading-medium",
             "title_color": "#213f4d",
-            "description": "BACK TO SCHOOL IS HERE",
+            "description": "IS LIVE!",
             "text_font_size": "body-x-large",
-            "first_button_text": "Shop back to school",
-            "first_button_link": "shopify://collections/back-to-school-collection",
+            "first_button_text": "Shop HALLOWEEN",
+            "first_button_link": "shopify://collections/halloween-2026",
             "first_button_type": "btn--primary",
-            "first_button_size": "",
+            "first_button_size": "btn--small",
             "first_button_style": "btn--solid",
             "first_button_show_arrow": true,
             "second_button_text": "",
@@ -168,6 +168,96 @@
         "padding_bottom": 15
       }
     },
+    "section_countdown_timer_FgHwEh": {
+      "type": "section-countdown-timer",
+      "blocks": {
+        "timer_ViNWAB": {
+          "type": "timer",
+          "settings": {
+            "end_date": "2026/07/24",
+            "end_time": "10:00",
+            "period": "am",
+            "end_message": "<p>Offer has expired</p>",
+            "digits_font_size": "heading-x-large",
+            "text_font_size": "body-small"
+          }
+        },
+        "subheading_iDkQKH": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Countdown is on"
+          }
+        },
+        "heading_Gz3btb": {
+          "type": "heading",
+          "settings": {
+            "title": "Halloween Launch",
+            "heading_font_size": "heading-medium",
+            "heading_tag": "automatic"
+          }
+        },
+        "buttons_34HiGY": {
+          "type": "buttons",
+          "settings": {
+            "button_text": "Plan your shopping",
+            "button_url": "shopify://collections/halloween-2026",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "timer_ViNWAB",
+        "subheading_iDkQKH",
+        "heading_Gz3btb",
+        "buttons_34HiGY"
+      ],
+      "disabled": true,
+      "name": "Countdown timer",
+      "settings": {
+        "image": "shopify://shop_images/6A9A3891_5ededc97-7961-4441-a3db-aeaec8667ebd.jpg",
+        "hide_on_complete": true,
+        "width": "wrapper",
+        "text_align": "text-center",
+        "height": "four-fifty-height-hero",
+        "mobile_height": "four-fifty-height-hero--mobile",
+        "text_align_mobile": "text-left--mobile",
+        "color_scheme": "scheme-4",
+        "digits_gradient": "",
+        "overlay_type": "disabled",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_collection_DWfNDH": {
+      "type": "section-collection",
+      "name": "Featured collection",
+      "settings": {
+        "featured_collection": "halloween-2026",
+        "heading": "",
+        "heading_font_size": "heading-medium",
+        "description": "",
+        "text_font_size": "body-medium",
+        "layout": "center",
+        "link_text": "Shop halloween",
+        "link_url": "shopify://collections/halloween-2026",
+        "button_type": "btn--primary",
+        "button_size": "",
+        "button_style": "btn--solid",
+        "show_arrow": false,
+        "layout_desktop": "grid",
+        "grid": 4,
+        "rows": 3,
+        "width": "wrapper",
+        "layout_mobile": "slider",
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "heading_tag": "automatic"
+      }
+    },
     "section_highlights_CPXDAE": {
       "type": "section-highlights",
       "blocks": {
@@ -277,7 +367,7 @@
           "settings": {
             "collection": "back-to-school-collection",
             "collection_image": "shopify://shop_images/6A9A2525.jpg",
-            "title": "",
+            "title": "Back to School Sale!",
             "heading_font_size": "heading-medium",
             "text_alignment": "align--bottom-left",
             "show_text_background": false,
@@ -724,6 +814,9 @@
             "show_sample_reviews": false,
             "reviews_selection": "product_reviews",
             "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
             "star_rating": "5_star",
             "show_review_media": false,
             "display_order": "most_recent",
@@ -1055,73 +1148,13 @@
     "178249293045de7ade": {
       "type": "_blocks",
       "settings": {}
-    },
-    "section_countdown_timer_FgHwEh": {
-      "type": "section-countdown-timer",
-      "blocks": {
-        "timer_ViNWAB": {
-          "type": "timer",
-          "settings": {
-            "end_date": "2026/07/24",
-            "end_time": "10:00",
-            "period": "am",
-            "end_message": "<p>Offer has expired</p>",
-            "digits_font_size": "heading-x-large",
-            "text_font_size": "body-small"
-          }
-        },
-        "subheading_iDkQKH": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Countdown is on"
-          }
-        },
-        "heading_Gz3btb": {
-          "type": "heading",
-          "settings": {
-            "title": "Halloween Launch",
-            "heading_font_size": "heading-medium",
-            "heading_tag": "automatic"
-          }
-        },
-        "buttons_34HiGY": {
-          "type": "buttons",
-          "settings": {
-            "button_text": "Plan your shopping",
-            "button_url": "shopify://collections/halloween-2026",
-            "button_type": "btn--primary",
-            "button_size": "",
-            "button_style": "btn--solid",
-            "show_arrow": false
-          }
-        }
-      },
-      "block_order": [
-        "timer_ViNWAB",
-        "subheading_iDkQKH",
-        "heading_Gz3btb",
-        "buttons_34HiGY"
-      ],
-      "disabled": true,
-      "name": "Countdown timer",
-      "settings": {
-        "hide_on_complete": true,
-        "width": "wrapper",
-        "text_align": "text-center",
-        "height": "four-fifty-height-hero",
-        "mobile_height": "four-fifty-height-hero--mobile",
-        "text_align_mobile": "text-left--mobile",
-        "color_scheme": "",
-        "digits_gradient": "",
-        "overlay_type": "disabled",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
     }
   },
   "order": [
     "section_slideshow_8fbYKq",
     "section_announcement_rLEpbJ",
+    "section_countdown_timer_FgHwEh",
+    "section_collection_DWfNDH",
     "section_highlights_CPXDAE",
     "section_collections_list_ypRCMi",
     "section_custom_content_AtWtfq",
@@ -1139,7 +1172,6 @@
     "section_announcement_iUFAbn",
     "section_text_row_P6MwFe",
     "section_divider_WPdtJR",
-    "178249293045de7ade",
-    "section_countdown_timer_FgHwEh"
+    "178249293045de7ade"
   ]
 }

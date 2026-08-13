@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "section_divider_HPmQRD": {
@@ -14,9 +23,10 @@
       "type": "collection-image-with-title",
       "settings": {
         "label_text": "Launching tomorrow at 10am PT",
-        "label_text_2": "Launch today at 10am PT",
+        "label_text_2": "Launching today at 10am PT",
         "label_swap_epoch": "1784876400",
         "label_hide_epoch": "1784912400",
+        "label_collection": "",
         "show_title": true,
         "show_description": true,
         "flex_align": "align--middle-left",
