@@ -1,0 +1,101 @@
+{%- comment -%}
+  Birthday mystery gift — auto-applies the gift code to the cart.
+  Rendered once from layout/theme.liquid.
+
+  Why: for the anniversary day the owner wants every shopper to get the mystery gift,
+  not only those who know the code. As soon as the cart has a product, this adds the
+  code to the cart, so it's already applied when checkout opens. The checkout extension
+  ("Anniversary mystery gift" app) then adds the $0 gift line, and Shopify Flow tags the
+  order — both keyed on the code, so nothing else had to change.
+
+    - Only runs inside the promo window below (store time, Pacific).
+    - Keeps any code the shopper already applied; the gift code combines with others.
+    - Applies once per browser session, so a shopper who removes it at checkout
+      doesn't get it forced back on.
+
+  Express buttons on product pages ("Buy it now" / Shop Pay) skip the cart, so the code
+  isn't added there — shoppers can still type it at checkout.
+
+  To end early or reuse later, change the values below. Blank code turns it off.
+{%- endcomment -%}
+
+{%- liquid
+  assign gift_code = 'BDAYGIFT'
+  assign gift_starts_at = '2026-11-06T00:00:00-08:00'
+  assign gift_ends_at = '2026-11-06T23:59:59-08:00'
+-%}
+
+{%- if gift_code != blank -%}
+  <script>
+    (() => {
+      const CODE = {{ gift_code | upcase | json }};
+      const STARTS = Date.parse({{ gift_starts_at | json }});
+      const ENDS = Date.parse({{ gift_ends_at | json }});
+      const SESSION_KEY = `gift-code-applied:${CODE}`;
+      const routes = {
+        cart: {{ routes.cart_url | append: '.js' | json }},
+        update: {{ routes.cart_update_url | append: '.js' | json }},
+      };
+
+      const inWindow = () => {
+        const now = Date.now();
+        return now >= STARTS && now <= ENDS;
+      };
+
+      const alreadyApplied = () => {
+        try {
+          return sessionStorage.getItem(SESSION_KEY) === '1';
+        } catch (error) {
+          return false;
+        }
+      };
+
+      const markApplied = () => {
+        try {
+          sessionStorage.setItem(SESSION_KEY, '1');
+        } catch (error) {
+          // Private mode etc. — the code check on the cart still stops repeat applies.
+        }
+      };
+
+      let busy = false;
+
+      async function applyGiftCode() {
+        if (busy || !inWindow() || alreadyApplied()) return;
+        busy = true;
+
+        try {
+          const cart = await fetch(routes.cart, {headers: {Accept: 'application/json'}}).then((r) => r.json());
+          if (!cart.item_count) return;
+
+          const codes = (cart.discount_codes || []).map((d) => d.code);
+          if (codes.some((code) => code.toUpperCase() === CODE)) {
+            markApplied();
+            return;
+          }
+
+          // `discount` replaces the cart's code list, so send the existing codes too.
+          await fetch(routes.update, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+            body: JSON.stringify({discount: [...codes, CODE].join(',')}),
+          });
+          markApplied();
+          document.dispatchEvent(new CustomEvent('theme:cart:refresh', {bubbles: true}));
+        } catch (error) {
+          console.warn('[birthday-gift-code]', error);
+        } finally {
+          busy = false;
+        }
+      }
+
+      // The theme fires theme:cart:change after every cart re-render, including adds.
+      document.addEventListener('theme:cart:change', applyGiftCode);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyGiftCode);
+      } else {
+        applyGiftCode();
+      }
+    })();
+  </script>
+{%- endif -%}
