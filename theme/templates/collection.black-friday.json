@@ -6,13 +6,13 @@
         "subheading": {
           "type": "subheading",
           "settings": {
-            "subheading": "Nov 27 – Dec 1 · Our biggest sale of the year"
+            "subheading": "Black Friday starts in"
           }
         },
         "heading": {
           "type": "heading",
           "settings": {
-            "title": "Black Friday is here. Everything is on sale.",
+            "title": "Our biggest sale of the year. Everything, sitewide.",
             "heading_font_size": "heading-large",
             "heading_tag": "h1"
           }
@@ -20,10 +20,10 @@
         "timer": {
           "type": "timer",
           "settings": {
-            "end_date": "2026/12/01",
-            "end_time": "11:59",
-            "period": "pm",
-            "end_message": "<p>Black Friday has ended. Thank you for shopping with us.</p>",
+            "end_date": "2026/11/27",
+            "end_time": "12:00",
+            "period": "am",
+            "end_message": "<p>Black Friday is live — shop everything on sale through December 1.</p>",
             "digits_font_size": "heading-x-large",
             "text_font_size": "body-small"
           }
