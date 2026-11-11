@@ -1,0 +1,337 @@
+{
+  "sections": {
+    "countdown": {
+      "type": "section-countdown-timer",
+      "blocks": {
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Nov 27 – Dec 1 · Our biggest sale of the year"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Black Friday is here. Everything is on sale.",
+            "heading_font_size": "heading-large",
+            "heading_tag": "h1"
+          }
+        },
+        "timer": {
+          "type": "timer",
+          "settings": {
+            "end_date": "2026/12/01",
+            "end_time": "11:59",
+            "period": "pm",
+            "end_message": "<p>Black Friday has ended. Thank you for shopping with us.</p>",
+            "digits_font_size": "heading-x-large",
+            "text_font_size": "body-small"
+          }
+        }
+      },
+      "block_order": [
+        "subheading",
+        "heading",
+        "timer"
+      ],
+      "settings": {
+        "hide_on_complete": false,
+        "width": "wrapper--full-padded",
+        "text_align": "text-center",
+        "height": "four-fifty-height-hero",
+        "mobile_height": "four-fifty-height-hero--mobile",
+        "text_align_mobile": "text-center--mobile",
+        "color_scheme": "scheme-5",
+        "digits_gradient": "",
+        "overlay_type": "disabled",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "main": {
+      "type": "collection",
+      "custom_css": [
+        ".collection__products .grid {column-gap: 5px;}"
+      ],
+      "settings": {
+        "enable_sort": true,
+        "enable_filters": true,
+        "filter_layout": "inline-open",
+        "default_open": true,
+        "collection_linklist": "minimalist-menu-v2",
+        "grid": 4,
+        "grid_mobile": "2",
+        "products_per_page": 24,
+        "color_scheme": "",
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    },
+    "faq": {
+      "type": "section-accordion-group",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Black Friday questions"
+          }
+        },
+        "q_code": {
+          "type": "question",
+          "settings": {
+            "default_open": false,
+            "title": "Do I need a discount code?",
+            "content": "<p>No code needed. The Black Friday price is already shown on every piece and applied automatically in your cart.</p>",
+            "show_icon": false,
+            "icon_name": "icon-award",
+            "icon_size": 20,
+            "icon_color": ""
+          }
+        },
+        "q_dates": {
+          "type": "question",
+          "settings": {
+            "default_open": false,
+            "title": "How long does the sale last?",
+            "content": "<p>From Friday, November 27 through the end of Tuesday, December 1 — or while sizes last.</p>",
+            "show_icon": false,
+            "icon_name": "icon-award",
+            "icon_size": 20,
+            "icon_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "q_code",
+        "q_dates"
+      ],
+      "settings": {
+        "heading_font_size": "heading-medium",
+        "question_font_size": "heading-small",
+        "width": "wrapper--narrow",
+        "columns": "1",
+        "color_scheme": "",
+        "padding_top": 20,
+        "padding_bottom": 60
+      }
+    },
+    "newsletter": {
+      "type": "section-newsletter",
+      "blocks": {
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "subheading": "Join our mailing list",
+            "heading": "Be first to hear about the next drop",
+            "heading_font_size": "heading-small",
+            "text": "",
+            "text_font_size": "body-medium",
+            "text_columns": 1,
+            "align_text": "text-center",
+            "button_text": "Join",
+            "show_arrow": false,
+            "terms": false,
+            "show_name": false,
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_social_links": false,
+            "bg_color": "",
+            "color": "",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "newsletter"
+      ],
+      "settings": {
+        "width": "wrapper--full-padded",
+        "height": "three-fifty-height-hero",
+        "mobile_height": "screen-height-one-half--mobile",
+        "color_scheme": "scheme-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "marquee": {
+      "type": "section-announcement",
+      "blocks": {
+        "msg_0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Black Friday",
+            "heading_font_size": "heading-mini"
+          }
+        },
+        "msg_1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Everything on sale",
+            "heading_font_size": "heading-mini"
+          }
+        },
+        "msg_2": {
+          "type": "heading",
+          "settings": {
+            "heading": "No code needed",
+            "heading_font_size": "heading-mini"
+          }
+        },
+        "msg_3": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ends Dec 1",
+            "heading_font_size": "heading-mini"
+          }
+        },
+        "msg_4": {
+          "type": "heading",
+          "settings": {
+            "heading": "Black Friday",
+            "heading_font_size": "heading-mini"
+          }
+        },
+        "msg_5": {
+          "type": "heading",
+          "settings": {
+            "heading": "Everything on sale",
+            "heading_font_size": "heading-mini"
+          }
+        },
+        "msg_6": {
+          "type": "heading",
+          "settings": {
+            "heading": "No code needed",
+            "heading_font_size": "heading-mini"
+          }
+        },
+        "msg_7": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ends Dec 1",
+            "heading_font_size": "heading-mini"
+          }
+        }
+      },
+      "block_order": [
+        "msg_0",
+        "msg_1",
+        "msg_2",
+        "msg_3",
+        "msg_4",
+        "msg_5",
+        "msg_6",
+        "msg_7"
+      ],
+      "settings": {
+        "slider_speed": 7,
+        "text_alignment": "center",
+        "marquee_speed": 100,
+        "direction": "ticker-rtl",
+        "message_spacing": 10,
+        "show_border": false,
+        "layout": "marquee",
+        "color_scheme": "scheme-2",
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "categories": {
+      "type": "section-highlights",
+      "blocks": {
+        "cat_kids_tees": {
+          "type": "highlight",
+          "settings": {
+            "heading": "tees",
+            "url": "shopify://collections/kids-tees",
+            "color": "#000000",
+            "bg_color": "#ecb935",
+            "border_color": "#ecb935"
+          }
+        },
+        "cat_ma_me_mi": {
+          "type": "highlight",
+          "settings": {
+            "heading": "swim",
+            "url": "shopify://collections/ma-me-mi",
+            "color": "#000000",
+            "bg_color": "#de8d9b",
+            "border_color": "#de8d9b"
+          }
+        },
+        "cat_dresses": {
+          "type": "highlight",
+          "settings": {
+            "heading": "Dresses",
+            "url": "shopify://collections/dresses",
+            "color": "#000000",
+            "bg_color": "#d1def9",
+            "border_color": "#d1def9"
+          }
+        },
+        "cat_kids_pullovers": {
+          "type": "highlight",
+          "settings": {
+            "heading": "Sweatshirts",
+            "url": "shopify://collections/kids-pullovers",
+            "color": "#000000",
+            "bg_color": "#dc954d",
+            "border_color": "#dc954d"
+          }
+        },
+        "cat_ss26_part_2": {
+          "type": "highlight",
+          "settings": {
+            "heading": "sets",
+            "url": "shopify://collections/ss26-part-2",
+            "color": "#000000",
+            "bg_color": "#be979f",
+            "border_color": "#be979f"
+          }
+        },
+        "cat_two_piece_set": {
+          "type": "highlight",
+          "settings": {
+            "heading": "Accessories",
+            "url": "shopify://collections/two-piece-set",
+            "color": "#000000",
+            "bg_color": "#eed9c2",
+            "border_color": "#eed9c2"
+          }
+        }
+      },
+      "block_order": [
+        "cat_kids_tees",
+        "cat_ma_me_mi",
+        "cat_dresses",
+        "cat_kids_pullovers",
+        "cat_ss26_part_2",
+        "cat_two_piece_set"
+      ],
+      "settings": {
+        "style": "button",
+        "grid": 6,
+        "heading": "Shop the sale by category",
+        "heading_position": "text-center",
+        "heading_font_size": "heading-small",
+        "text_font_size": "body-x-small",
+        "width": "wrapper",
+        "layout_mobile": "1",
+        "color_scheme": "scheme-1",
+        "padding_top": 30,
+        "padding_bottom": 10,
+        "heading_tag": "automatic"
+      }
+    }
+  },
+  "order": [
+    "marquee",
+    "countdown",
+    "categories",
+    "main",
+    "faq",
+    "newsletter"
+  ]
+}
