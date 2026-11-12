@@ -1,0 +1,35 @@
+{%- comment -%} Black Friday: dark band of short selling points. {%- endcomment -%}
+{{ 'black-friday.css' | asset_url | stylesheet_tag }}
+
+<div class="bf">
+  <section class="bf-perks">
+    <div class="bf__wrap bf-perks__grid">
+      {%- for block in section.blocks -%}
+        <div class="bf-perk" style="--accent: {{ block.settings.color }}" {{ block.shopify_attributes }}>
+          <h3 class="bf__display bf-perk__title">{{ block.settings.title }}</h3>
+          {%- if block.settings.text != blank -%}<p class="bf-perk__text">{{ block.settings.text }}</p>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Black Friday perks",
+  "tag": "div",
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Perk",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Everything" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "color", "id": "color", "label": "Title color", "default": "#ecb935" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Black Friday perks" }]
+}
+{% endschema %}

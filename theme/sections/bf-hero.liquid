@@ -1,0 +1,145 @@
+{%- comment -%}
+  Black Friday hero: pills, giant title, countdown that targets the sale start
+  and then flips to the sale end, tilted photo cards and a marquee strip.
+  Sets html[data-bf-phase] ("pre" / "live") that the other bf-* sections read.
+{%- endcomment -%}
+{{ 'black-friday.css' | asset_url | stylesheet_tag }}
+<script>
+  (function () {
+    var s = Date.parse({{ section.settings.start | json }});
+    document.documentElement.setAttribute('data-bf-phase', Date.now() < s ? 'pre' : 'live');
+  })();
+</script>
+
+{%- liquid
+  assign accents = '#ecb935,#de8d9b,#d1def9,#dc954d' | split: ','
+  assign photo_blocks = section.blocks | where: 'type', 'photo'
+-%}
+
+<div class="bf" data-bf-hero data-start="{{ section.settings.start | escape }}" data-end="{{ section.settings.end | escape }}">
+  <section class="bf-hero">
+    <div class="bf__wrap">
+      <div class="bf-hero__pills">
+        {%- if section.settings.pill_1 != blank -%}<span class="bf-pill bf-pill--solid bf__eyebrow">{{ section.settings.pill_1 }}</span>{%- endif -%}
+        {%- if section.settings.pill_2 != blank -%}<span class="bf-pill bf__eyebrow">{{ section.settings.pill_2 }}</span>{%- endif -%}
+      </div>
+
+      <h1 class="bf__display bf-hero__title">{{ section.settings.title_1 }} <span>{{ section.settings.title_2 }}</span></h1>
+
+      <div class="bf-hero__row">
+        <div>
+          <p class="bf__display bf-hero__sub">
+            {{ section.settings.sub_1 }} <span class="c2">{{ section.settings.sub_2 }}</span> <span class="c3">{{ section.settings.sub_3 }}</span>
+          </p>
+          <div class="bf-hero__actions">
+            <a class="bf-btn" href="#bf-shop">
+              <span data-bf-pre>{{ section.settings.button_pre }}</span>
+              <span data-bf-live>{{ section.settings.button_live }}</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+            {%- if section.settings.link_text != blank -%}
+              <a class="bf-link" href="#bf-categories">{{ section.settings.link_text }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <div class="bf-countdown">
+          <span class="bf__eyebrow bf-countdown__label">
+            <span data-bf-pre>{{ section.settings.countdown_pre }}</span>
+            <span data-bf-live>{{ section.settings.countdown_live }}</span>
+          </span>
+          <div class="bf-countdown__tiles" data-bf-countdown>
+            <div class="bf-tile" style="background: {{ accents[0] }}"><span class="bf-tile__num" data-bf-days>00</span><span class="bf-tile__unit">Days</span></div>
+            <div class="bf-tile" style="background: {{ accents[1] }}"><span class="bf-tile__num" data-bf-hours>00</span><span class="bf-tile__unit">Hours</span></div>
+            <div class="bf-tile" style="background: {{ accents[2] }}"><span class="bf-tile__num" data-bf-minutes>00</span><span class="bf-tile__unit">Minutes</span></div>
+            <div class="bf-tile" style="background: {{ accents[3] }}"><span class="bf-tile__num" data-bf-seconds>00</span><span class="bf-tile__unit">Seconds</span></div>
+          </div>
+          <p class="bf-countdown__done" data-bf-done hidden>{{ section.settings.ended_message }}</p>
+        </div>
+      </div>
+
+      <div class="bf-hero__photos">
+        {%- if photo_blocks.size > 0 -%}
+          {%- for block in photo_blocks limit: 4 -%}
+            {%- assign accent = block.settings.accent | default: accents[forloop.index0] -%}
+            {%- liquid
+              assign tag = 'div'
+              if block.settings.link != blank
+                assign tag = 'a'
+              endif
+            -%}
+            <{{ tag }} class="bf-photo" style="--accent: {{ accent }}"{% if tag == 'a' %} href="{{ block.settings.link }}"{% endif %} {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 700 | image_tag: loading: 'eager', sizes: '(min-width: 750px) 25vw, 50vw', alt: block.settings.image.alt | escape }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag }}
+              {%- endif -%}
+            </{{ tag }}>
+          {%- endfor -%}
+        {%- elsif collection.products.size > 0 -%}
+          {%- for product in collection.products limit: 4 -%}
+            <a class="bf-photo" style="--accent: {{ accents[forloop.index0] }}" href="{{ product.url }}">
+              {%- if product.featured_media -%}
+                {{ product.featured_media | image_url: width: 700 | image_tag: loading: 'eager', sizes: '(min-width: 750px) 25vw, 50vw', alt: product.title | escape }}
+              {%- endif -%}
+            </a>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- assign marquee_items = section.settings.marquee | split: ',' -%}
+  {%- if marquee_items.size > 0 -%}
+    <div class="bf-marquee" aria-hidden="true">
+      <div class="bf-marquee__track">
+        {%- for i in (1..8) -%}
+          {%- for item in marquee_items -%}<span class="bf-marquee__item">{{ item | strip }}</span>{%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<script src="{{ 'black-friday.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Black Friday hero",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Sale dates" },
+    { "type": "text", "id": "start", "label": "Sale starts", "default": "2026-11-20T00:00:00-08:00", "info": "Format 2026-11-20T00:00:00-08:00 (-08:00 = Pacific). Before this the countdown says 'starts in'; after, it counts to the end date." },
+    { "type": "text", "id": "end", "label": "Sale ends", "default": "2026-12-01T23:59:59-08:00" },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "pill_1", "label": "Pill 1", "default": "Our biggest sale of the year" },
+    { "type": "text", "id": "pill_2", "label": "Pill 2", "default": "Nov 20 to Dec 1" },
+    { "type": "text", "id": "title_1", "label": "Title (cream)", "default": "Black" },
+    { "type": "text", "id": "title_2", "label": "Title (yellow)", "default": "Friday" },
+    { "type": "text", "id": "sub_1", "label": "Subheading part 1", "default": "Everything on sale." },
+    { "type": "text", "id": "sub_2", "label": "Subheading part 2 (pink)", "default": "Sitewide." },
+    { "type": "text", "id": "sub_3", "label": "Subheading part 3 (blue)", "default": "No code needed." },
+    { "type": "text", "id": "button_pre", "label": "Button before the sale", "default": "Preview the sale" },
+    { "type": "text", "id": "button_live", "label": "Button during the sale", "default": "Shop the sale" },
+    { "type": "text", "id": "link_text", "label": "Secondary link", "default": "Shop by category" },
+    { "type": "text", "id": "countdown_pre", "label": "Countdown label before the sale", "default": "Black Friday starts in" },
+    { "type": "text", "id": "countdown_live", "label": "Countdown label during the sale", "default": "Sale ends in" },
+    { "type": "text", "id": "ended_message", "label": "Message after the sale", "default": "Black Friday has ended" },
+    { "type": "header", "content": "Marquee" },
+    { "type": "text", "id": "marquee", "label": "Marquee messages", "info": "Separate with commas.", "default": "Black Friday, Everything on sale, No code needed, Ends Dec 1" }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo card",
+      "limit": 4,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "color", "id": "accent", "label": "Shadow color" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Black Friday hero" }]
+}
+{% endschema %}

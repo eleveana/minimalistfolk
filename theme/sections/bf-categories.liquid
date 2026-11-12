@@ -1,0 +1,52 @@
+{%- comment -%} Black Friday: big colored category tiles. {%- endcomment -%}
+{{ 'black-friday.css' | asset_url | stylesheet_tag }}
+
+<div class="bf" id="bf-categories">
+  <section class="bf-cats">
+    <div class="bf__wrap">
+      <div class="bf-cats__head">
+        <h2 class="bf__display bf-cats__title">{{ section.settings.title }}</h2>
+        {%- if section.settings.text != blank -%}<p class="bf-cats__text">{{ section.settings.text }}</p>{%- endif -%}
+      </div>
+      <div class="bf-cats__grid">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign url = block.settings.link
+            if url == blank and block.settings.collection != blank
+              assign url = block.settings.collection.url
+            endif
+            assign name = block.settings.title | default: block.settings.collection.title
+          -%}
+          <a class="bf-cat" href="{{ url | default: '#' }}" style="--tile: {{ block.settings.color }}" {{ block.shopify_attributes }}>
+            <span class="bf-cat__name">{{ name }}</span>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Black Friday categories",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Shop the sale by category" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Every category is included. Pick a lane and start filling your cart." }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category tile",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "info": "Leave empty to use the collection name." },
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "url", "id": "link", "label": "Custom link", "info": "Overrides the collection link." },
+        { "type": "color", "id": "color", "label": "Tile color", "default": "#ecb935" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Black Friday categories" }]
+}
+{% endschema %}

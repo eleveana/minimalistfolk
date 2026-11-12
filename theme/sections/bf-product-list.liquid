@@ -1,0 +1,63 @@
+{%- comment -%}
+  Black Friday: a short featured row ("On the list") with colored offset cards.
+  Prices go through product-grid-price so sale strikethroughs match the rest of the store.
+{%- endcomment -%}
+{{ 'black-friday.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign accents = '#ecb935,#de8d9b,#d1def9,#dc954d' | split: ','
+  assign source = section.settings.collection
+  if source == blank
+    assign source = collection
+  endif
+-%}
+
+<div class="bf">
+  <section class="bf-list">
+    <div class="bf__wrap">
+      <div class="bf-list__head">
+        <h2 class="bf__display bf-list__title">{{ section.settings.title }}</h2>
+        {%- if section.settings.button_text != blank -%}
+          <a class="bf-btn bf-btn--outline" href="#bf-shop">{{ section.settings.button_text }}</a>
+        {%- endif -%}
+      </div>
+      <div class="bf-list__grid">
+        {%- for product in source.products limit: section.settings.count -%}
+          {%- assign current_variant = product.selected_or_first_available_variant -%}
+          {%- assign accent_index = forloop.index0 | modulo: 4 -%}
+          <a class="bf-card" href="{{ product.url }}" style="--accent: {{ accents[accent_index] }}">
+            <div class="bf-card__media">
+              {%- if product.featured_media -%}
+                {{ product.featured_media | image_url: width: 700 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 25vw, 50vw', alt: product.title | escape }}
+              {%- endif -%}
+              <span class="bf-card__badge bf__eyebrow">
+                <span data-bf-pre>{{ section.settings.badge_pre }}</span>
+                <span data-bf-live>{{ section.settings.badge_live }}</span>
+              </span>
+            </div>
+            <h3 class="bf__display bf-card__title">{{ product.title | split: '|' | first | strip }}</h3>
+            {%- if product.type != blank -%}<p class="bf-card__type">{{ product.type | downcase | capitalize }}</p>{%- endif -%}
+            {%- render 'product-grid-price', product: product, current_variant: current_variant -%}
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+<div id="bf-shop"></div>
+
+{% schema %}
+{
+  "name": "Black Friday product row",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "On the list" },
+    { "type": "collection", "id": "collection", "label": "Collection", "info": "Leave empty to use this page's collection (best sellers first)." },
+    { "type": "range", "id": "count", "label": "Products", "min": 2, "max": 8, "step": 2, "default": 4 },
+    { "type": "text", "id": "button_text", "label": "Button", "default": "View all products" },
+    { "type": "text", "id": "badge_pre", "label": "Badge before the sale", "default": "On sale Nov 20" },
+    { "type": "text", "id": "badge_live", "label": "Badge during the sale", "default": "On sale" }
+  ],
+  "presets": [{ "name": "Black Friday product row" }]
+}
+{% endschema %}

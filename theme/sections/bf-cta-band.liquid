@@ -1,0 +1,35 @@
+{%- comment -%} Black Friday: big yellow closing band, with different copy before and during the sale. {%- endcomment -%}
+{{ 'black-friday.css' | asset_url | stylesheet_tag }}
+
+<div class="bf">
+  <section class="bf-band">
+    <div class="bf__wrap">
+      <div data-bf-pre>
+        <h2 class="bf__display bf-band__title">{{ section.settings.title_pre }}</h2>
+        {%- if section.settings.text_pre != blank -%}<p class="bf-band__text">{{ section.settings.text_pre }}</p>{%- endif -%}
+      </div>
+      <div data-bf-live>
+        <h2 class="bf__display bf-band__title">{{ section.settings.title_live }}</h2>
+        {%- if section.settings.text_live != blank -%}<p class="bf-band__text">{{ section.settings.text_live }}</p>{%- endif -%}
+      </div>
+      {%- if section.settings.button_text != blank -%}
+        <a class="bf-btn" href="#bf-shop">{{ section.settings.button_text }} <span aria-hidden="true">&rarr;</span></a>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Black Friday closing band",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "title_pre", "label": "Heading before the sale", "default": "Doors open Nov 20" },
+    { "type": "textarea", "id": "text_pre", "label": "Text before the sale", "default": "Browse now, fill your cart, and check out the moment Black Friday begins." },
+    { "type": "text", "id": "title_live", "label": "Heading during the sale", "default": "The doors are open" },
+    { "type": "textarea", "id": "text_live", "label": "Text during the sale", "default": "Everything is on sale through December 1. No code needed." },
+    { "type": "text", "id": "button_text", "label": "Button", "default": "Shop everything" }
+  ],
+  "presets": [{ "name": "Black Friday closing band" }]
+}
+{% endschema %}
