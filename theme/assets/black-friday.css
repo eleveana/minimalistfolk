@@ -105,8 +105,8 @@ html:not([data-bf-phase="live"]) .bf [data-bf-live] { display: none !important; 
 
 /* ---------- Categories ---------- */
 .bf-cats { padding: clamp(48px, 7vw, 96px) 0; }
-.bf-cats__head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 32px; }
-.bf-cats__title { font-size: clamp(44px, 6vw, 80px); max-width: 9ch; }
+.bf-cats__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 24px; margin-bottom: 32px; }
+.bf-cats__title { font-size: clamp(26px, 6.6vw, 80px); white-space: nowrap; }
 .bf-cats__text { max-width: 260px; font-size: 13px; line-height: 1.5; margin: 0; }
 .bf-cats__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .bf-cat {
