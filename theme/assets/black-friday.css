@@ -50,7 +50,7 @@ html:not([data-bf-phase="live"]) .bf [data-bf-live] { display: none !important; 
 }
 
 /* ---------- Hero ---------- */
-.bf-hero { background: var(--bf-brown); color: var(--bf-cream); padding-top: clamp(32px, 5vw, 64px); overflow: hidden; }
+.bf-hero { background: var(--bf-brown); color: var(--bf-cream); padding-top: clamp(32px, 5vw, 64px); overflow-x: clip; }
 .bf-hero__pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: clamp(16px, 2vw, 24px); }
 .bf-pill { padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--bf-cream); }
 .bf-pill--solid { background: var(--bf-yellow); border-color: var(--bf-yellow); color: var(--bf-brown); }
@@ -93,7 +93,7 @@ html:not([data-bf-phase="live"]) .bf [data-bf-live] { display: none !important; 
 .bf-photo:nth-child(4n+3) { --tilt: -2deg; }
 .bf-photo:nth-child(4n+4) { --tilt: 4deg; }
 
-.bf-marquee { background: var(--bf-orange); color: var(--bf-brown); overflow: hidden; padding: 112px 0 16px; }
+.bf-marquee { position: relative; z-index: 1; background: var(--bf-orange); color: var(--bf-brown); overflow: hidden; padding: 112px 0 16px; }
 .bf-marquee__track { display: flex; width: max-content; animation: bf-marquee 40s linear infinite; }
 .bf-marquee__item {
   font-family: var(--bf-display); font-size: clamp(18px, 1.8vw, 24px); text-transform: uppercase;
