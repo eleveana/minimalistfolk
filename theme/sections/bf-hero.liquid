@@ -17,7 +17,7 @@
   assign photo_blocks = section.blocks | where: 'type', 'photo'
 -%}
 
-<div class="bf" data-bf-hero data-start="{{ section.settings.start | escape }}" data-end="{{ section.settings.end | escape }}">
+<div class="bf" data-bf-hero data-start="{{ section.settings.start | escape }}" data-end="{{ section.settings.end | escape }}" data-countdown-to="{{ section.settings.countdown_to }}">
   <section class="bf-hero">
     <div class="bf__wrap">
       <div class="bf-hero__pills">
@@ -46,8 +46,12 @@
 
         <div class="bf-countdown">
           <span class="bf__eyebrow bf-countdown__label">
-            <span data-bf-pre>{{ section.settings.countdown_pre }}</span>
-            <span data-bf-live>{{ section.settings.countdown_live }}</span>
+            {%- if section.settings.countdown_to == 'end' -%}
+              {{ section.settings.countdown_live }}
+            {%- else -%}
+              <span data-bf-pre>{{ section.settings.countdown_pre }}</span>
+              <span data-bf-live>{{ section.settings.countdown_live }}</span>
+            {%- endif -%}
           </span>
           <div class="bf-countdown__tiles" data-bf-countdown>
             <div class="bf-tile" style="background: {{ accents[0] }}"><span class="bf-tile__num" data-bf-days>00</span><span class="bf-tile__unit">Days</span></div>
@@ -123,8 +127,16 @@
     { "type": "text", "id": "button_pre", "label": "Button before the sale", "default": "Preview the sale" },
     { "type": "text", "id": "button_live", "label": "Button during the sale", "default": "Shop the sale" },
     { "type": "text", "id": "link_text", "label": "Secondary link", "default": "Shop by category" },
-    { "type": "text", "id": "countdown_pre", "label": "Countdown label before the sale", "default": "Black Friday starts in" },
-    { "type": "text", "id": "countdown_live", "label": "Countdown label during the sale", "default": "Sale ends in" },
+    {
+      "type": "select", "id": "countdown_to", "label": "Countdown",
+      "options": [
+        { "value": "end", "label": "Always count to the sale end" },
+        { "value": "start_then_end", "label": "Count to the start, then to the end" }
+      ],
+      "default": "end"
+    },
+    { "type": "text", "id": "countdown_live", "label": "Countdown label (to the end)", "default": "Black Friday ends in" },
+    { "type": "text", "id": "countdown_pre", "label": "Countdown label (to the start)", "default": "Black Friday starts in", "visible_if": "{{ section.settings.countdown_to == 'start_then_end' }}" },
     { "type": "text", "id": "ended_message", "label": "Message after the sale", "default": "Black Friday has ended" },
     { "type": "header", "content": "Marquee" },
     { "type": "text", "id": "marquee", "label": "Marquee messages", "info": "Separate with commas.", "default": "Black Friday, Everything on sale, No code needed, Ends Dec 1" }

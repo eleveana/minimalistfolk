@@ -21,7 +21,7 @@
     var phase = now < start ? 'pre' : 'live';
     root.setAttribute('data-bf-phase', phase);
 
-    var target = phase === 'pre' ? start : end;
+    var target = phase === 'pre' && hero.dataset.countdownTo !== 'end' ? start : end;
     var diff = target - now;
     if (diff <= 0) {
       countdown.hidden = true;
