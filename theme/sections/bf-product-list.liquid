@@ -10,19 +10,26 @@
   if source == blank
     assign source = collection
   endif
+  assign products = source.products
+  if section.settings.products != blank
+    assign products = section.settings.products
+  endif
 -%}
 
 <div class="bf">
   <section class="bf-list">
     <div class="bf__wrap">
       <div class="bf-list__head">
-        <h2 class="bf__display bf-list__title">{{ section.settings.title }}</h2>
+        <div>
+          <h2 class="bf__display bf-list__title">{{ section.settings.title }}</h2>
+          {%- if section.settings.text != blank -%}<p class="bf-list__text">{{ section.settings.text }}</p>{%- endif -%}
+        </div>
         {%- if section.settings.button_text != blank -%}
-          <a class="bf-btn bf-btn--outline" href="#bf-shop">{{ section.settings.button_text }}</a>
+          <a class="bf-btn bf-btn--outline" href="{{ section.settings.button_link | default: '#bf-shop' }}">{{ section.settings.button_text }}</a>
         {%- endif -%}
       </div>
       <div class="bf-list__grid">
-        {%- for product in source.products limit: section.settings.count -%}
+        {%- for product in products limit: section.settings.count -%}
           {%- assign current_variant = product.selected_or_first_available_variant -%}
           {%- assign accent_index = forloop.index0 | modulo: 4 -%}
           <a class="bf-card" href="{{ product.url }}" style="--accent: {{ accents[accent_index] }}">
@@ -44,7 +51,7 @@
     </div>
   </section>
 </div>
-<div id="bf-shop"></div>
+{%- if section.settings.shop_anchor -%}<div id="bf-shop"></div>{%- endif -%}
 
 {% schema %}
 {
@@ -52,11 +59,15 @@
   "tag": "div",
   "settings": [
     { "type": "text", "id": "title", "label": "Heading", "default": "On the list" },
-    { "type": "collection", "id": "collection", "label": "Collection", "info": "Leave empty to use this page's collection (best sellers first)." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "product_list", "id": "products", "label": "Products", "limit": 8, "info": "Hand-pick products. Leave empty to use the collection below." },
+    { "type": "collection", "id": "collection", "label": "Collection", "info": "Used when no products are picked. Leave empty to use this page's collection (best sellers first)." },
     { "type": "range", "id": "count", "label": "Products", "min": 2, "max": 8, "step": 2, "default": 4 },
     { "type": "text", "id": "button_text", "label": "Button", "default": "View all products" },
-    { "type": "text", "id": "badge_pre", "label": "Badge before the sale", "default": "On sale Nov 20" },
-    { "type": "text", "id": "badge_live", "label": "Badge during the sale", "default": "On sale" }
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Leave empty to jump to the full product grid on this page." },
+    { "type": "text", "id": "badge_pre", "label": "Label before the sale", "default": "40% off Nov 20" },
+    { "type": "text", "id": "badge_live", "label": "Label during the sale", "default": "40% off" },
+    { "type": "checkbox", "id": "shop_anchor", "label": "Full product grid follows this section", "default": true, "info": "Lets 'View all' and the hero button scroll to the grid. Turn on for only one row." }
   ],
   "presets": [{ "name": "Black Friday product row" }]
 }

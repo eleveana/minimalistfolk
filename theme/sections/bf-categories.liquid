@@ -1,8 +1,11 @@
-{%- comment -%} Black Friday: big colored category tiles. {%- endcomment -%}
+{%- comment -%}
+  Black Friday: shop-by links, as circle images ("Shop by type") or big colored tiles.
+  A circle uses its own image, else the collection image, else the collection's first product photo.
+{%- endcomment -%}
 {{ 'black-friday.css' | asset_url | stylesheet_tag }}
 
-<div class="bf" id="bf-categories">
-  <section class="bf-cats">
+<div class="bf"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
+  <section class="bf-cats bf-cats--{{ section.settings.style }}">
     <div class="bf__wrap">
       <div class="bf-cats__head">
         <h2 class="bf__display bf-cats__title">{{ section.settings.title }}</h2>
@@ -11,16 +14,37 @@
       <div class="bf-cats__grid">
         {%- for block in section.blocks -%}
           {%- liquid
+            assign c = block.settings.collection
             assign url = block.settings.link
-            if url == blank and block.settings.collection != blank
-              assign url = block.settings.collection.url
+            if url == blank and c != blank
+              assign url = c.url
             endif
-            assign name = block.settings.title | default: block.settings.collection.title
+            assign name = block.settings.title | default: c.title
+            assign img = block.settings.image
+            if img == blank and c.featured_image
+              assign img = c.featured_image
+            endif
+            if img == blank and c.products.first.featured_media
+              assign img = c.products.first.featured_media
+            endif
           -%}
-          <a class="bf-cat" href="{{ url | default: '#' }}" style="--tile: {{ block.settings.color }}" {{ block.shopify_attributes }}>
-            <span class="bf-cat__name">{{ name }}</span>
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
-          </a>
+          {%- if section.settings.style == 'circles' -%}
+            <a class="bf-circle" href="{{ url | default: '#' }}" style="--ring: {{ block.settings.color }}" {{ block.shopify_attributes }}>
+              <span class="bf-circle__img">
+                {%- if img -%}
+                  {{ img | image_url: width: 360 | image_tag: loading: 'lazy', sizes: '180px', alt: name | escape }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag }}
+                {%- endif -%}
+              </span>
+              <span class="bf-circle__name bf__display">{{ name }}</span>
+            </a>
+          {%- else -%}
+            <a class="bf-cat" href="{{ url | default: '#' }}" style="--tile: {{ block.settings.color }}" {{ block.shopify_attributes }}>
+              <span class="bf-cat__name">{{ name }}</span>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+            </a>
+          {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
@@ -29,24 +53,34 @@
 
 {% schema %}
 {
-  "name": "Black Friday categories",
+  "name": "Black Friday shop by",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "title", "label": "Heading", "default": "Shop the sale by category" },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Every category is included. Pick a lane and start filling your cart." }
+    { "type": "text", "id": "title", "label": "Heading", "default": "Shop by type" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Every type is 40% off. Pick a lane and start filling your cart." },
+    {
+      "type": "select", "id": "style", "label": "Style",
+      "options": [
+        { "value": "circles", "label": "Circle images" },
+        { "value": "tiles", "label": "Color tiles" }
+      ],
+      "default": "circles"
+    },
+    { "type": "text", "id": "anchor", "label": "Anchor", "default": "bf-types", "info": "The hero's secondary link jumps to 'bf-types'." }
   ],
   "blocks": [
     {
       "type": "category",
-      "name": "Category tile",
+      "name": "Item",
       "settings": [
         { "type": "text", "id": "title", "label": "Title", "info": "Leave empty to use the collection name." },
         { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Circles only. Leave empty to use a photo from the collection." },
         { "type": "url", "id": "link", "label": "Custom link", "info": "Overrides the collection link." },
-        { "type": "color", "id": "color", "label": "Tile color", "default": "#ecb935" }
+        { "type": "color", "id": "color", "label": "Color", "info": "Ring color for circles, background for tiles.", "default": "#ecb935" }
       ]
     }
   ],
-  "presets": [{ "name": "Black Friday categories" }]
+  "presets": [{ "name": "Black Friday shop by" }]
 }
 {% endschema %}

@@ -1,0 +1,72 @@
+{%- comment -%}
+  Black Friday: featured collections as tall photo cards with a colored offset shadow.
+  A card uses its own image, else the collection image, else the collection's first product photo.
+{%- endcomment -%}
+{{ 'black-friday.css' | asset_url | stylesheet_tag }}
+
+{%- assign accents = '#ecb935,#de8d9b,#d1def9,#8b904d' | split: ',' -%}
+
+<div class="bf"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
+  <section class="bf-cols">
+    <div class="bf__wrap">
+      <div class="bf-cats__head">
+        <h2 class="bf__display bf-cats__title">{{ section.settings.title }}</h2>
+        {%- if section.settings.text != blank -%}<p class="bf-cats__text">{{ section.settings.text }}</p>{%- endif -%}
+      </div>
+      <div class="bf-cols__grid">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign c = block.settings.collection
+            assign name = block.settings.title | default: c.title
+            assign img = block.settings.image
+            if img == blank and c.featured_image
+              assign img = c.featured_image
+            endif
+            if img == blank and c.products.first.featured_media
+              assign img = c.products.first.featured_media
+            endif
+            assign accent_index = forloop.index0 | modulo: 4
+            assign accent = block.settings.color | default: accents[accent_index]
+          -%}
+          <a class="bf-col" href="{{ c.url | default: '#' }}" style="--accent: {{ accent }}" {{ block.shopify_attributes }}>
+            <span class="bf-col__media">
+              {%- if img -%}
+                {{ img | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 25vw, 50vw', alt: name | escape }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag }}
+              {%- endif -%}
+              {%- if block.settings.label != blank -%}<span class="bf-card__badge bf__eyebrow">{{ block.settings.label }}</span>{%- endif -%}
+            </span>
+            <span class="bf-col__name bf__display">{{ name }} <span aria-hidden="true">&rarr;</span></span>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Black Friday collections",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Shop the collections" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Our favorite drops, all 40% off." },
+    { "type": "text", "id": "anchor", "label": "Anchor", "default": "bf-collections" }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Title", "info": "Leave empty to use the collection name." },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Leave empty to use a photo from the collection." },
+        { "type": "text", "id": "label", "label": "Label", "default": "40% off" },
+        { "type": "color", "id": "color", "label": "Shadow color" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Black Friday collections" }]
+}
+{% endschema %}

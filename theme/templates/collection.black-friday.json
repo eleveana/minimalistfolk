@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -42,7 +33,7 @@
           "settings": {
             "default_open": false,
             "title": "Do I need a discount code?",
-            "content": "<p>No code needed. The Black Friday price is already shown on every piece and applied automatically in your cart.</p>",
+            "content": "<p>No code needed. The 40% is already shown on every piece and applied automatically in your cart.</p>",
             "show_icon": false,
             "icon_name": "icon-award",
             "icon_size": 20,
@@ -60,11 +51,24 @@
             "icon_size": 20,
             "icon_color": ""
           }
+        },
+        "q_stack": {
+          "type": "question",
+          "settings": {
+            "default_open": false,
+            "title": "Does the 40% apply to items already on sale?",
+            "content": "<p>Yes. Clearance pieces get the extra 40% off on top of their sale price — that's our sale on sale.</p>",
+            "show_icon": false,
+            "icon_name": "icon-award",
+            "icon_size": 20,
+            "icon_color": ""
+          }
         }
       },
       "block_order": [
         "heading",
         "q_code",
+        "q_stack",
         "q_dates"
       ],
       "settings": {
@@ -118,12 +122,48 @@
     },
     "bf_hero": {
       "type": "bf-hero",
+      "blocks": {
+        "photo_0": {
+          "type": "photo",
+          "settings": {
+            "product": "creative-director-in-black-oversized-drop-shoulder-kids",
+            "label": "40% off"
+          }
+        },
+        "photo_1": {
+          "type": "photo",
+          "settings": {
+            "product": "strong-like-a-girl-pullover-in-black-oversized-drop-shoulder-kids",
+            "label": "40% off"
+          }
+        },
+        "photo_2": {
+          "type": "photo",
+          "settings": {
+            "product": "santa-world-tour-in-charcoal-oversized-drop-shoulder-kids",
+            "label": "40% off"
+          }
+        },
+        "photo_3": {
+          "type": "photo",
+          "settings": {
+            "product": "pinky-promise-to-love-you-forever-kids-tee",
+            "label": "40% off"
+          }
+        }
+      },
+      "block_order": [
+        "photo_0",
+        "photo_1",
+        "photo_2",
+        "photo_3"
+      ],
       "settings": {}
     },
     "bf_categories": {
       "type": "bf-categories",
       "blocks": {
-        "cat_0": {
+        "type_0": {
           "type": "category",
           "settings": {
             "title": "Tees",
@@ -131,15 +171,15 @@
             "color": "#ecb935"
           }
         },
-        "cat_1": {
+        "type_1": {
           "type": "category",
           "settings": {
-            "title": "Swim",
-            "collection": "ma-me-mi",
+            "title": "Sweatshirts",
+            "collection": "kids-pullovers",
             "color": "#de8d9b"
           }
         },
-        "cat_2": {
+        "type_2": {
           "type": "category",
           "settings": {
             "title": "Dresses",
@@ -147,40 +187,79 @@
             "color": "#d1def9"
           }
         },
-        "cat_3": {
-          "type": "category",
-          "settings": {
-            "title": "Sweatshirts",
-            "collection": "kids-pullovers",
-            "color": "#dc954d"
-          }
-        },
-        "cat_4": {
+        "type_3": {
           "type": "category",
           "settings": {
             "title": "Sets",
             "collection": "ss26-part-2",
+            "color": "#dc954d"
+          }
+        },
+        "type_4": {
+          "type": "category",
+          "settings": {
+            "title": "Joggers",
+            "collection": "joggers",
+            "color": "#8b904d"
+          }
+        },
+        "type_5": {
+          "type": "category",
+          "settings": {
+            "title": "Pajamas",
+            "collection": "pajamas",
             "color": "#be979f"
           }
         },
-        "cat_5": {
+        "type_6": {
+          "type": "category",
+          "settings": {
+            "title": "Skirts",
+            "collection": "midi-skirts",
+            "color": "#ecb935"
+          }
+        },
+        "type_7": {
+          "type": "category",
+          "settings": {
+            "title": "Socks",
+            "collection": "socks",
+            "color": "#de8d9b"
+          }
+        },
+        "type_8": {
           "type": "category",
           "settings": {
             "title": "Accessories",
             "collection": "two-piece-set",
-            "color": "#8b904d"
+            "color": "#d1def9"
+          }
+        },
+        "type_9": {
+          "type": "category",
+          "settings": {
+            "title": "Adult",
+            "collection": "adult-pullovers",
+            "color": "#dc954d"
           }
         }
       },
       "block_order": [
-        "cat_0",
-        "cat_1",
-        "cat_2",
-        "cat_3",
-        "cat_4",
-        "cat_5"
+        "type_0",
+        "type_1",
+        "type_2",
+        "type_3",
+        "type_4",
+        "type_5",
+        "type_6",
+        "type_7",
+        "type_8",
+        "type_9"
       ],
-      "settings": {}
+      "settings": {
+        "style": "circles",
+        "anchor": "bf-types"
+      }
     },
     "bf_perks": {
       "type": "bf-perks",
@@ -188,8 +267,8 @@
         "perk_0": {
           "type": "perk",
           "settings": {
-            "title": "Everything",
-            "text": "The whole store is on sale, not a hand-picked rack.",
+            "title": "40% off everything",
+            "text": "The whole store, not a hand-picked rack.",
             "color": "#ecb935"
           }
         },
@@ -228,20 +307,73 @@
     },
     "bf_list": {
       "type": "bf-product-list",
+      "settings": {
+        "shop_anchor": false
+      }
+    },
+    "bf_collections": {
+      "type": "bf-collections",
+      "blocks": {
+        "col_0": {
+          "type": "collection",
+          "settings": {
+            "collection": "christmas-2026",
+            "label": "40% off"
+          }
+        },
+        "col_1": {
+          "type": "collection",
+          "settings": {
+            "collection": "halloween-2026",
+            "label": "40% off"
+          }
+        },
+        "col_2": {
+          "type": "collection",
+          "settings": {
+            "collection": "ma-me-mi",
+            "label": "40% off"
+          }
+        },
+        "col_3": {
+          "type": "collection",
+          "settings": {
+            "collection": "sets-and-dresses",
+            "label": "40% off"
+          }
+        }
+      },
+      "block_order": [
+        "col_0",
+        "col_1",
+        "col_2",
+        "col_3"
+      ],
       "settings": {}
     },
-    "bf_band": {
-      "type": "bf-cta-band",
-      "settings": {}
+    "bf_sale_on_sale": {
+      "type": "bf-product-list",
+      "settings": {
+        "title": "Sale on sale",
+        "text": "Already-reduced pieces from our clearance, now an extra 40% off on top.",
+        "collection": "online-warehouse-sale",
+        "count": 8,
+        "button_text": "Shop all clearance",
+        "button_link": "shopify://collections/online-warehouse-sale",
+        "badge_pre": "Extra 40% off Nov 20",
+        "badge_live": "Extra 40% off",
+        "shop_anchor": true
+      }
     }
   },
   "order": [
     "bf_hero",
+    "bf_collections",
     "bf_categories",
     "bf_perks",
     "bf_list",
+    "bf_sale_on_sale",
     "main",
-    "bf_band",
     "faq",
     "newsletter"
   ]
