@@ -13,6 +13,7 @@
 
 {%- liquid
   assign accents = '#ecb935,#de8d9b,#d1def9,#dc954d' | split: ','
+  assign photo_accents = '#ecb935,#de8d9b,#d1def9,#8b904d' | split: ','
   assign photo_blocks = section.blocks | where: 'type', 'photo'
 -%}
 
@@ -61,7 +62,7 @@
       <div class="bf-hero__photos">
         {%- if photo_blocks.size > 0 -%}
           {%- for block in photo_blocks limit: 4 -%}
-            {%- assign accent = block.settings.accent | default: accents[forloop.index0] -%}
+            {%- assign accent = block.settings.accent | default: photo_accents[forloop.index0] -%}
             {%- liquid
               assign tag = 'div'
               if block.settings.link != blank
@@ -78,7 +79,7 @@
           {%- endfor -%}
         {%- elsif collection.products.size > 0 -%}
           {%- for product in collection.products limit: 4 -%}
-            <a class="bf-photo" style="--accent: {{ accents[forloop.index0] }}" href="{{ product.url }}">
+            <a class="bf-photo" style="--accent: {{ photo_accents[forloop.index0] }}" href="{{ product.url }}">
               {%- if product.featured_media -%}
                 {{ product.featured_media | image_url: width: 700 | image_tag: loading: 'eager', sizes: '(min-width: 750px) 25vw, 50vw', alt: product.title | escape }}
               {%- endif -%}

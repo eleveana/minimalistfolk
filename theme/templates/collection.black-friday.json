@@ -159,7 +159,7 @@
           "settings": {
             "title": "Accessories",
             "collection": "two-piece-set",
-            "color": "#eed9c2"
+            "color": "#8b904d"
           }
         }
       },
@@ -205,7 +205,7 @@
           "settings": {
             "title": "Free shipping",
             "text": "On domestic orders over $100.",
-            "color": "#dc954d"
+            "color": "#8b904d"
           }
         }
       },

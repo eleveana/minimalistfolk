@@ -6,6 +6,7 @@
   --bf-pink: #de8d9b;
   --bf-blue: #d1def9;
   --bf-orange: #dc954d;
+  --bf-green: #8b904d; /* from the logo */
   --bf-display: var(--FONT-STACK-HEADING);
   --bf-body: var(--FONT-STACK-BODY);
   --bf-gutter: clamp(16px, 4vw, 48px);

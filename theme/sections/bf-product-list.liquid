@@ -5,7 +5,7 @@
 {{ 'black-friday.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign accents = '#ecb935,#de8d9b,#d1def9,#dc954d' | split: ','
+  assign accents = '#ecb935,#de8d9b,#d1def9,#8b904d' | split: ','
   assign source = section.settings.collection
   if source == blank
     assign source = collection
