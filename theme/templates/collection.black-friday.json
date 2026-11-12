@@ -368,8 +368,8 @@
   },
   "order": [
     "bf_hero",
-    "bf_collections",
     "bf_categories",
+    "bf_collections",
     "bf_perks",
     "bf_list",
     "bf_sale_on_sale",

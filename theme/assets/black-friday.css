@@ -169,7 +169,10 @@ html:not([data-bf-phase="live"]) .bf [data-bf-live] { display: none !important; 
 .bf-circle__name { font-size: clamp(18px, 1.8vw, 24px); text-align: center; }
 
 /* ---------- Collections ---------- */
-.bf-cols { padding: clamp(48px, 7vw, 96px) 0 0; }
+.bf-cols { padding: clamp(48px, 7vw, 96px) 0; }
+/* Back-to-back light sections: don't double the gap. */
+.shopify-section:has(.bf-cats) + .shopify-section .bf-cols,
+.shopify-section:has(.bf-cols) + .shopify-section .bf-cats { padding-top: 0; }
 .bf-cols__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 2vw, 24px); }
 .bf-col { display: block; text-decoration: none; color: var(--bf-brown); }
 .bf-col__media {
