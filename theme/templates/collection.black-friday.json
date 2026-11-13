@@ -19,68 +19,6 @@
         "padding_bottom": 60
       }
     },
-    "faq": {
-      "type": "section-accordion-group",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "title": "Black Friday questions"
-          }
-        },
-        "q_code": {
-          "type": "question",
-          "settings": {
-            "default_open": false,
-            "title": "Do I need a discount code?",
-            "content": "<p>No code needed. The 40% is already shown on every piece and applied automatically in your cart.</p>",
-            "show_icon": false,
-            "icon_name": "icon-award",
-            "icon_size": 20,
-            "icon_color": ""
-          }
-        },
-        "q_dates": {
-          "type": "question",
-          "settings": {
-            "default_open": false,
-            "title": "How long does the sale last?",
-            "content": "<p>From Friday, November 20 through the end of Tuesday, December 1 — or while sizes last.</p>",
-            "show_icon": false,
-            "icon_name": "icon-award",
-            "icon_size": 20,
-            "icon_color": ""
-          }
-        },
-        "q_stack": {
-          "type": "question",
-          "settings": {
-            "default_open": false,
-            "title": "Does the 40% apply to items already on sale?",
-            "content": "<p>Yes. Clearance pieces get the extra 40% off on top of their sale price — that's our sale on sale.</p>",
-            "show_icon": false,
-            "icon_name": "icon-award",
-            "icon_size": 20,
-            "icon_color": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "q_code",
-        "q_stack",
-        "q_dates"
-      ],
-      "settings": {
-        "heading_font_size": "heading-medium",
-        "question_font_size": "heading-small",
-        "width": "wrapper--narrow",
-        "columns": "1",
-        "color_scheme": "",
-        "padding_top": 20,
-        "padding_bottom": 60
-      }
-    },
     "newsletter": {
       "type": "section-newsletter",
       "blocks": {
@@ -364,6 +302,44 @@
         "badge_live": "Extra 40% off",
         "shop_anchor": true
       }
+    },
+    "bf_faq": {
+      "type": "bf-faq",
+      "blocks": {
+        "q_0": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need a discount code?",
+            "answer": "<p>No code needed. The 40% is already shown on every piece and applied automatically in your cart.</p>",
+            "open": true
+          }
+        },
+        "q_1": {
+          "type": "question",
+          "settings": {
+            "question": "Does the 40% apply to items already on sale?",
+            "answer": "<p>Yes. Clearance pieces get the extra 40% off on top of their sale price — that's our sale on sale.</p>",
+            "open": false
+          }
+        },
+        "q_2": {
+          "type": "question",
+          "settings": {
+            "question": "How long does the sale last?",
+            "answer": "<p>From Friday, November 20 through the end of Tuesday, December 1 — or while sizes last.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "q_0",
+        "q_1",
+        "q_2"
+      ],
+      "settings": {
+        "link_1_url": "shopify://pages/frequently-asked-questions",
+        "link_2_url": "shopify://pages/contact-us"
+      }
     }
   },
   "order": [
@@ -374,7 +350,7 @@
     "bf_list",
     "bf_sale_on_sale",
     "main",
-    "faq",
+    "bf_faq",
     "newsletter"
   ]
 }
