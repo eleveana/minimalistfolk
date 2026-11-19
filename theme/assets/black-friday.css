@@ -141,6 +141,8 @@ html:not([data-bf-phase="live"]) .bf [data-bf-live] { display: none !important; 
 .bf-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
 .bf-card:hover .bf-card__media img { transform: scale(1.04); }
 .bf-card__title { font-size: clamp(20px, 1.8vw, 24px); }
+.bf-card__badge.bf-card__badge--sale { background: var(--COLOR-SALE, #c64113); color: var(--bf-white); font-size: 12px; text-transform: none; letter-spacing: .02em; }
+.bf-card .product__checkout-promo { margin-top: 4px; font-size: 13px; }
 .bf-card__type { font-size: 11px; margin: 4px 0 8px; opacity: .8; }
 .bf-card .price, .bf-card .product__price { font-size: 13px; }
 
@@ -149,9 +151,9 @@ html:not([data-bf-phase="live"]) .bf [data-bf-live] { display: none !important; 
 .bf-sticker {
   position: absolute; z-index: 3; top: -8px; right: var(--bf-gutter);
   width: clamp(96px, 12vw, 172px); aspect-ratio: 1; border-radius: 50%;
-  background: var(--bf-terracotta); color: var(--bf-white);
+  background: var(--bf-terracotta); color: var(--bf-cream);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  transform: rotate(12deg); box-shadow: 6px 6px 0 var(--bf-white);
+  transform: rotate(12deg); box-shadow: 6px 6px 0 var(--bf-cream);
 }
 .bf-sticker__big { font-family: var(--bf-display); font-size: clamp(38px, 5vw, 72px); line-height: .85; }
 .bf-sticker__small { font: 600 clamp(8px, .9vw, 12px)/1.1 var(--bf-body); letter-spacing: .12em; text-transform: uppercase; text-align: center; margin-top: 4px; }

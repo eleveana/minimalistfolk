@@ -71,7 +71,7 @@
         "sub_1": "40% off everything.",
         "sub_2": "Sitewide.",
         "sub_3": "No code needed.",
-        "button_pre": "Shop Christmas",
+        "button_pre": "Shop Now",
         "button_live": "Shop the sale",
         "link_text": "Shop by category",
         "countdown_to": "end",
@@ -325,6 +325,7 @@
         "button_link": "",
         "badge_pre": "40% off Nov 20",
         "badge_live": "40% off",
+        "sos_live": "40% + 25% off",
         "shop_anchor": false
       }
     },
@@ -335,7 +336,7 @@
       ],
       "settings": {
         "title": "Sale on sale",
-        "text": "Already-reduced pieces from our clearance, now an extra 65% off on top.",
+        "text": "Clearance pieces at 40% off, plus an extra 25% off at checkout.",
         "products": [],
         "collection": "online-warehouse-sale",
         "count": 4,
@@ -343,6 +344,7 @@
         "button_link": "shopify://collections/online-warehouse-sale",
         "badge_pre": "Extra 40% off Nov 20",
         "badge_live": "Extra 40% off",
+        "sos_live": "40% + 25% off",
         "shop_anchor": true
       }
     },
@@ -354,6 +356,68 @@
         "award_text": "Inc. 5000 fastest-growing companies, 2026",
         "reviews_text": "Happy reviews from parents",
         "press_title": "As seen in"
+      }
+    },
+    "bf_reviews_Jcd883": {
+      "type": "bf-reviews",
+      "blocks": {
+        "review_HMwt36": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "So incredibly soft and snug for the Christmas season. You can't go wrong purchasing from Minimalist Folk. They are incredible, and worth every penny!",
+            "name": "Pam",
+            "product": "santa-world-tour-in-charcoal-oversized-drop-shoulder-kids",
+            "product_label": "Reviewed:",
+            "color": ""
+          }
+        },
+        "review_47L7Kp": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "This set is so cute and the quality of the items are well worth the money!",
+            "name": "Athena",
+            "product": "the-aspen-set-in-bubblegum-pop",
+            "product_label": "Reviewed:",
+            "color": ""
+          }
+        },
+        "review_qYr3kT": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Socks are amazing! The toddler knee highs go just above my 4 year old's knees, they stay up! Awesome quality and so cute!",
+            "name": "Patricia",
+            "product": "purple-green-checkered-knee-high-socks",
+            "product_label": "Reviewed:",
+            "color": ""
+          }
+        },
+        "review_DEzctC": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "So cute. Granddaughter loved the outfit. Comfy and stylish.",
+            "name": "Stephanie",
+            "product": "cloves-oversized-drop-shoulder-kids",
+            "product_label": "Reviewed:",
+            "color": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_HMwt36",
+        "review_47L7Kp",
+        "review_qYr3kT",
+        "review_DEzctC"
+      ],
+      "name": "Black Friday reviews",
+      "settings": {
+        "eyebrow": "Real families",
+        "title": "Loved by parents",
+        "rating_text": "",
+        "text": ""
       }
     },
     "main": {
@@ -410,7 +474,7 @@
           "type": "question",
           "settings": {
             "question": "Does the 40% apply to items already on sale?",
-            "answer": "<p>Yes. Clearance pieces get the extra 40% off on top of their sale price — that's our sale on sale.</p>",
+            "answer": "<p>Yes. Clearance pieces are 40% off during Black Friday, plus an extra 25% off at checkout — that's our sale on sale.</p>",
             "open": false,
             "color": ""
           }
@@ -490,6 +554,7 @@
     "bf_list",
     "bf_sale_on_sale",
     "bf_proof_M3dwmt",
+    "bf_reviews_Jcd883",
     "main",
     "bf_faq",
     "newsletter"

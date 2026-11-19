@@ -34,7 +34,7 @@
         "show_text_background": false,
         "overlay_type": "disabled",
         "show_image": true,
-        "banner_layout": "overlay",
+        "banner_layout": "split",
         "height": "screen-height-one-third",
         "mobile_height": "screen-height-one-half--mobile",
         "padding_top": 0,
@@ -57,70 +57,6 @@
     },
     "main": {
       "type": "collection",
-      "blocks": {
-        "featured_image_UiH3cE": {
-          "type": "featured_image",
-          "settings": {
-            "featured_image": "shopify://shop_images/IMG_4357.jpg",
-            "position": 10,
-            "featured_heading": "Summer Days",
-            "heading_font_size": "heading-small",
-            "featured_text": "<p>up to 60% off all summer collection</p>",
-            "featured_button_text": "shop summer",
-            "featured_button_link": "shopify://collections/ss26",
-            "button_type": "btn--white",
-            "button_size": "",
-            "button_style": "btn--solid",
-            "show_arrow": false,
-            "featured_color_text": "#ffffff",
-            "overlay_type": "disabled",
-            "heading_tag": "automatic"
-          }
-        },
-        "featured_image_CdLUmq": {
-          "type": "featured_image",
-          "settings": {
-            "featured_image": "shopify://shop_images/Tezza-2416.jpg",
-            "position": 24,
-            "featured_heading": "From court to playground",
-            "heading_font_size": "heading-x-small",
-            "featured_text": "<p>and everything in between</p>",
-            "featured_button_text": "shop MA-ME-MI",
-            "featured_button_link": "shopify://collections/ma-me-mi-athletics",
-            "button_type": "btn--white",
-            "button_size": "",
-            "button_style": "btn--solid",
-            "show_arrow": true,
-            "featured_color_text": "#ffffff",
-            "overlay_type": "disabled",
-            "heading_tag": "automatic"
-          }
-        },
-        "featured_image_GDUWgj": {
-          "type": "featured_image",
-          "settings": {
-            "featured_image": "shopify://shop_images/6A9A3070.jpg",
-            "position": 13,
-            "featured_heading": "class of 2027",
-            "heading_font_size": "heading-small",
-            "featured_text": "<p>now enrolling </p>",
-            "featured_button_text": "back to school",
-            "featured_button_link": "shopify://collections/back-to-school-collection",
-            "button_type": "btn--white",
-            "button_size": "",
-            "button_style": "btn--solid",
-            "show_arrow": true,
-            "featured_color_text": "#ffffff",
-            "overlay_type": "disabled",
-            "heading_tag": "automatic"
-          }
-        }
-      },
-      "block_order": [
-        "featured_image_UiH3cE",
-        "featured_image_CdLUmq",
-        "featured_image_GDUWgj"
-      ],
       "custom_css": [
         ".collection__products .grid {column-gap: 5px;}"
       ],

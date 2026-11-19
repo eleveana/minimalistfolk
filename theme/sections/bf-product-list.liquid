@@ -30,21 +30,68 @@
       </div>
       <div class="bf-list__grid">
         {%- for product in products limit: section.settings.count -%}
-          {%- assign current_variant = product.selected_or_first_available_variant -%}
-          {%- assign accent_index = forloop.index0 | modulo: 4 -%}
+          {%- liquid
+            assign current_variant = product.selected_or_first_available_variant
+            assign accent_index = forloop.index0 | modulo: 4
+
+            # Sale on sale: name the product's own markdown plus the extra checkout discount
+            # ("48% + 25% off"), built from the same settings as the clearance collection grid.
+            assign sos_label = ''
+            if settings.checkout_promo_enabled and settings.checkout_promo_badge_text_2 != blank and settings.checkout_promo_collection != blank
+              assign in_promo = false
+              for c in product.collections
+                if c.id == settings.checkout_promo_collection.id
+                  assign in_promo = true
+                endif
+              endfor
+              for t in product.tags
+                assign tag = t | downcase | strip
+                if tag == 'no-sale'
+                  assign in_promo = false
+                endif
+              endfor
+              if in_promo
+                assign best_off = 0
+                for v in product.variants
+                  if v.available and v.compare_at_price > v.price
+                    assign off = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price
+                    if off > best_off
+                      assign best_off = off
+                    endif
+                  endif
+                endfor
+                if best_off > 0
+                  assign sos_discount = best_off | append: '%'
+                  assign sos_label = settings.checkout_promo_badge_text_2 | replace: '{{ discount }}', sos_discount
+                endif
+              endif
+            endif
+          -%}
           <a class="bf-card" href="{{ product.url }}" style="--accent: {{ accents[accent_index] }}">
             <div class="bf-card__media">
               {%- if product.featured_media -%}
                 {{ product.featured_media | image_url: width: 700 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 25vw, 50vw', alt: product.title | escape }}
               {%- endif -%}
-              <span class="bf-card__badge bf__eyebrow">
-                <span data-bf-pre>{{ section.settings.badge_pre }}</span>
-                <span data-bf-live>{{ section.settings.badge_live }}</span>
-              </span>
+              {%- if sos_label != blank -%}
+                <span class="bf-card__badge bf-card__badge--sale bf__eyebrow">
+                  {%- if section.settings.sos_live != blank -%}
+                    <span data-bf-pre>{{ sos_label }}</span>
+                    <span data-bf-live>{{ section.settings.sos_live }}</span>
+                  {%- else -%}
+                    {{ sos_label }}
+                  {%- endif -%}
+                </span>
+              {%- else -%}
+                <span class="bf-card__badge bf__eyebrow">
+                  <span data-bf-pre>{{ section.settings.badge_pre }}</span>
+                  <span data-bf-live>{{ section.settings.badge_live }}</span>
+                </span>
+              {%- endif -%}
             </div>
             <h3 class="bf__display bf-card__title">{{ product.title | split: '|' | first | strip }}</h3>
             {%- if product.type != blank -%}<p class="bf-card__type">{{ product.type | downcase | capitalize }}</p>{%- endif -%}
             {%- render 'product-grid-price', product: product, current_variant: current_variant -%}
+            {%- render 'checkout-promo-note', product: product -%}
           </a>
         {%- endfor -%}
       </div>
@@ -66,7 +113,8 @@
     { "type": "text", "id": "button_text", "label": "Button", "default": "View all products" },
     { "type": "url", "id": "button_link", "label": "Button link", "info": "Leave empty to jump to the full product grid on this page." },
     { "type": "text", "id": "badge_pre", "label": "Label before the sale", "default": "40% off Nov 20" },
-    { "type": "text", "id": "badge_live", "label": "Label during the sale", "default": "40% off" },
+    { "type": "text", "id": "badge_live", "label": "Label during the sale", "default": "40% off", "info": "Sale on sale products show their own label instead, e.g. '48% + 25% off', from the Sale on Sale theme settings." },
+    { "type": "text", "id": "sos_live", "label": "Sale on sale label during the sale", "default": "40% + 25% off", "info": "For products in the Sale on Sale collection. Before the sale they show their current markdown, e.g. '50% + 25% off'. Leave empty to always show the current markdown." },
     { "type": "checkbox", "id": "shop_anchor", "label": "Full product grid follows this section", "default": true, "info": "Lets 'View all' and the hero button scroll to the grid. Turn on for only one row." }
   ],
   "presets": [{ "name": "Black Friday product row" }]
