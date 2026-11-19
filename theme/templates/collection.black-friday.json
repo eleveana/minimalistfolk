@@ -1,63 +1,14 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "main": {
-      "type": "collection",
-      "custom_css": [
-        ".collection__products .grid {column-gap: 5px;}"
-      ],
-      "settings": {
-        "enable_sort": true,
-        "enable_filters": true,
-        "filter_layout": "inline-open",
-        "default_open": true,
-        "collection_linklist": "minimalist-menu-v2",
-        "grid": 4,
-        "grid_mobile": "2",
-        "products_per_page": 24,
-        "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 60
-      }
-    },
-    "newsletter": {
-      "type": "section-newsletter",
-      "blocks": {
-        "newsletter": {
-          "type": "newsletter",
-          "settings": {
-            "subheading": "Join our mailing list",
-            "heading": "Be first to hear about the next drop",
-            "heading_font_size": "heading-small",
-            "text": "",
-            "text_font_size": "body-medium",
-            "text_columns": 1,
-            "align_text": "text-center",
-            "button_text": "Join",
-            "show_arrow": false,
-            "terms": false,
-            "show_name": false,
-            "button_type": "btn--primary",
-            "button_size": "",
-            "button_style": "btn--solid",
-            "show_social_links": false,
-            "bg_color": "",
-            "color": "",
-            "heading_tag": "automatic"
-          }
-        }
-      },
-      "block_order": [
-        "newsletter"
-      ],
-      "settings": {
-        "width": "wrapper--full-padded",
-        "height": "three-fifty-height-hero",
-        "mobile_height": "screen-height-one-half--mobile",
-        "color_scheme": "scheme-2",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "bf_hero": {
       "type": "bf-hero",
       "blocks": {
@@ -65,28 +16,36 @@
           "type": "photo",
           "settings": {
             "product": "creative-director-in-black-oversized-drop-shoulder-kids",
-            "label": "40% off"
+            "link": "",
+            "label": "40% off",
+            "accent": ""
           }
         },
         "photo_1": {
           "type": "photo",
           "settings": {
             "product": "strong-like-a-girl-pullover-in-black-oversized-drop-shoulder-kids",
-            "label": "40% off"
+            "link": "",
+            "label": "40% off",
+            "accent": ""
           }
         },
         "photo_2": {
           "type": "photo",
           "settings": {
             "product": "santa-world-tour-in-charcoal-oversized-drop-shoulder-kids",
-            "label": "40% off"
+            "link": "",
+            "label": "40% off",
+            "accent": ""
           }
         },
         "photo_3": {
           "type": "photo",
           "settings": {
             "product": "pinky-promise-to-love-you-forever-kids-tee",
-            "label": "40% off"
+            "link": "",
+            "label": "40% off",
+            "accent": ""
           }
         }
       },
@@ -96,7 +55,32 @@
         "photo_2",
         "photo_3"
       ],
-      "settings": {}
+      "custom_css": [
+        ".bf-marquee__track {background: #fff9e1; padding: 10px; margin-top: 20px;}",
+        ".bf-marquee {padding-bottom: 0;}"
+      ],
+      "settings": {
+        "start": "2026-11-20T00:00:00-08:00",
+        "end": "2026-11-30T23:59:59-08:00",
+        "pill_1": "40% off sitewide",
+        "pill_2": "Nov 20 - Nov 30",
+        "sticker_big": "40%",
+        "sticker_small": "Off sitewide",
+        "title_1": "Black",
+        "title_2": "Friday",
+        "sub_1": "40% off everything.",
+        "sub_2": "Sitewide.",
+        "sub_3": "No code needed.",
+        "button_pre": "Shop Christmas",
+        "button_live": "Shop the sale",
+        "link_text": "Shop by category",
+        "countdown_to": "end",
+        "countdown_live": "Black Friday ends in",
+        "countdown_pre": "Black Friday starts in",
+        "ended_message": "Black Friday has ended",
+        "photo_label": "40% off",
+        "marquee": "Black Friday, 40% off sitewide, No code needed"
+      }
     },
     "bf_categories": {
       "type": "bf-categories",
@@ -106,6 +90,8 @@
           "settings": {
             "title": "Tees",
             "collection": "kids-tees",
+            "image": "shopify://shop_images/6A9A5202.jpg",
+            "link": "",
             "color": "#ecb935"
           }
         },
@@ -114,6 +100,8 @@
           "settings": {
             "title": "Sweatshirts",
             "collection": "kids-pullovers",
+            "image": "shopify://shop_images/37E44E78-0454-4B98-AF04-CC56A1772093.jpg",
+            "link": "",
             "color": "#de8d9b"
           }
         },
@@ -122,15 +110,29 @@
           "settings": {
             "title": "Dresses",
             "collection": "dresses",
+            "image": "shopify://shop_images/6A9A7311.jpg",
+            "link": "",
             "color": "#d1def9"
           }
         },
         "type_3": {
           "type": "category",
           "settings": {
-            "title": "Sets",
-            "collection": "ss26-part-2",
+            "title": "Maya Sets",
+            "collection": "mfco-sets",
+            "image": "shopify://shop_images/Candycaneharlequinholidayoutfit_9c497c9e-34cf-40cc-ba12-d71d41beabe8.png",
+            "link": "",
             "color": "#dc954d"
+          }
+        },
+        "type_8": {
+          "type": "category",
+          "settings": {
+            "title": "Aspen Sets",
+            "collection": "ss26-part-2",
+            "image": "shopify://shop_images/BlueFleeceSkateboarderinaSunlitAlley.jpg",
+            "link": "",
+            "color": "#d1def9"
           }
         },
         "type_4": {
@@ -138,6 +140,8 @@
           "settings": {
             "title": "Joggers",
             "collection": "joggers",
+            "image": "shopify://shop_images/6A9A7201.jpg",
+            "link": "",
             "color": "#8b904d"
           }
         },
@@ -146,31 +150,29 @@
           "settings": {
             "title": "Pajamas",
             "collection": "pajamas",
+            "image": "shopify://shop_images/6A9A6137.jpg",
+            "link": "",
             "color": "#be979f"
           }
         },
         "type_6": {
           "type": "category",
           "settings": {
-            "title": "Skirts",
-            "collection": "midi-skirts",
+            "title": "Athletics & Swim",
+            "collection": "ma-me-mi",
+            "image": "shopify://shop_images/277A9584-2.jpg",
+            "link": "",
             "color": "#ecb935"
           }
         },
         "type_7": {
           "type": "category",
           "settings": {
-            "title": "Socks",
-            "collection": "socks",
-            "color": "#de8d9b"
-          }
-        },
-        "type_8": {
-          "type": "category",
-          "settings": {
             "title": "Accessories",
             "collection": "two-piece-set",
-            "color": "#d1def9"
+            "image": "shopify://shop_images/6A9A7097.jpg",
+            "link": "",
+            "color": "#de8d9b"
           }
         },
         "type_9": {
@@ -178,6 +180,8 @@
           "settings": {
             "title": "Adult",
             "collection": "adult-pullovers",
+            "image": "shopify://shop_images/6A9A6585.jpg",
+            "link": "",
             "color": "#dc954d"
           }
         }
@@ -187,16 +191,81 @@
         "type_1",
         "type_2",
         "type_3",
+        "type_8",
         "type_4",
         "type_5",
         "type_6",
         "type_7",
-        "type_8",
         "type_9"
       ],
+      "custom_css": [
+        ".bf {background: #dc954d;}",
+        ".bf-cats {padding-top: 50px;}"
+      ],
       "settings": {
+        "title": "Shop by Category",
+        "text": "Every type is 40% off. Pick a lane and start filling your cart.",
         "style": "circles",
+        "background": "black",
         "anchor": "bf-types"
+      }
+    },
+    "bf_collections": {
+      "type": "bf-collections",
+      "blocks": {
+        "col_0": {
+          "type": "collection",
+          "settings": {
+            "collection": "christmas-2026",
+            "title": "",
+            "label": "40% off",
+            "color": ""
+          }
+        },
+        "col_2": {
+          "type": "collection",
+          "settings": {
+            "collection": "ma-me-mi",
+            "title": "",
+            "image": "shopify://shop_images/277A9584-2.jpg",
+            "label": "40% off",
+            "color": ""
+          }
+        },
+        "col_3": {
+          "type": "collection",
+          "settings": {
+            "collection": "sets-and-dresses",
+            "title": "",
+            "image": "shopify://shop_images/Bakingtogetherinmatchinggreenstripes_be0f38c3-6b4a-4f36-bac9-4fab5dbc0cb7.png",
+            "label": "40% off",
+            "color": ""
+          }
+        },
+        "col_1": {
+          "type": "collection",
+          "settings": {
+            "collection": "online-warehouse-sale",
+            "title": "",
+            "image": "shopify://shop_images/6A9A9908.jpg",
+            "label": "40% off",
+            "color": ""
+          }
+        }
+      },
+      "block_order": [
+        "col_0",
+        "col_2",
+        "col_3",
+        "col_1"
+      ],
+      "custom_css": [
+        ".bf-cols {padding-top: 50px;}"
+      ],
+      "settings": {
+        "title": "Shop the collections",
+        "text": "Our favorite drops, all 40% off.",
+        "anchor": "bf-collections"
       }
     },
     "bf_perks": {
@@ -221,8 +290,8 @@
         "perk_2": {
           "type": "perk",
           "settings": {
-            "title": "Ends Dec 1",
-            "text": "Twelve days, then prices go back.",
+            "title": "Ends Nov 30th",
+            "text": "Eleven days, then prices go back.",
             "color": "#d1def9"
           }
         },
@@ -230,7 +299,7 @@
           "type": "perk",
           "settings": {
             "title": "Free shipping",
-            "text": "On domestic orders over $100.",
+            "text": "On domestic orders over $125.",
             "color": "#8b904d"
           }
         }
@@ -245,57 +314,31 @@
     },
     "bf_list": {
       "type": "bf-product-list",
+      "disabled": true,
       "settings": {
+        "title": "SALE ON SALE",
+        "text": "",
+        "products": [],
+        "collection": "online-warehouse-sale",
+        "count": 4,
+        "button_text": "View all products",
+        "button_link": "",
+        "badge_pre": "40% off Nov 20",
+        "badge_live": "40% off",
         "shop_anchor": false
       }
     },
-    "bf_collections": {
-      "type": "bf-collections",
-      "blocks": {
-        "col_0": {
-          "type": "collection",
-          "settings": {
-            "collection": "christmas-2026",
-            "label": "40% off"
-          }
-        },
-        "col_1": {
-          "type": "collection",
-          "settings": {
-            "collection": "halloween-2026",
-            "label": "40% off"
-          }
-        },
-        "col_2": {
-          "type": "collection",
-          "settings": {
-            "collection": "ma-me-mi",
-            "label": "40% off"
-          }
-        },
-        "col_3": {
-          "type": "collection",
-          "settings": {
-            "collection": "sets-and-dresses",
-            "label": "40% off"
-          }
-        }
-      },
-      "block_order": [
-        "col_0",
-        "col_1",
-        "col_2",
-        "col_3"
-      ],
-      "settings": {}
-    },
     "bf_sale_on_sale": {
       "type": "bf-product-list",
+      "custom_css": [
+        ".bf-list {padding-top: 50px;}"
+      ],
       "settings": {
         "title": "Sale on sale",
-        "text": "Already-reduced pieces from our clearance, now an extra 40% off on top.",
+        "text": "Already-reduced pieces from our clearance, now an extra 65% off on top.",
+        "products": [],
         "collection": "online-warehouse-sale",
-        "count": 8,
+        "count": 4,
         "button_text": "Shop all clearance",
         "button_link": "shopify://collections/online-warehouse-sale",
         "badge_pre": "Extra 40% off Nov 20",
@@ -303,15 +346,64 @@
         "shop_anchor": true
       }
     },
+    "bf_proof_M3dwmt": {
+      "type": "bf-proof",
+      "name": "Black Friday social proof",
+      "settings": {
+        "rank": "Nº 1127",
+        "award_text": "Inc. 5000 fastest-growing companies, 2026",
+        "reviews_text": "Happy reviews from parents",
+        "press_title": "As seen in"
+      }
+    },
+    "main": {
+      "type": "collection",
+      "disabled": true,
+      "custom_css": [
+        ".collection__products .grid {column-gap: 5px;}"
+      ],
+      "settings": {
+        "enable_sort": true,
+        "enable_filters": true,
+        "filter_layout": "inline-open",
+        "default_open": true,
+        "collection_linklist": "minimalist-menu-v2",
+        "grid": 4,
+        "grid_mobile": "2",
+        "products_per_page": 24,
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 60
+      }
+    },
     "bf_faq": {
       "type": "bf-faq",
       "blocks": {
+        "question_eCKJJ7": {
+          "type": "question",
+          "settings": {
+            "question": "How long until my order ships?",
+            "answer": "<p>Please allow up to 14 business days for us to process your order before it ships.</p>",
+            "open": false,
+            "color": ""
+          }
+        },
+        "question_MytNnk": {
+          "type": "question",
+          "settings": {
+            "question": "Is processing time the same as shipping time?",
+            "answer": "<p>No — they're separate. Processing is the time we take to get your order ready (up to 14 business days). Shipping time starts once it leaves us and depends on the method you choose at checkout.</p>",
+            "open": false,
+            "color": ""
+          }
+        },
         "q_0": {
           "type": "question",
           "settings": {
             "question": "Do I need a discount code?",
             "answer": "<p>No code needed. The 40% is already shown on every piece and applied automatically in your cart.</p>",
-            "open": true
+            "open": true,
+            "color": ""
           }
         },
         "q_1": {
@@ -319,26 +411,74 @@
           "settings": {
             "question": "Does the 40% apply to items already on sale?",
             "answer": "<p>Yes. Clearance pieces get the extra 40% off on top of their sale price — that's our sale on sale.</p>",
-            "open": false
+            "open": false,
+            "color": ""
           }
         },
         "q_2": {
           "type": "question",
           "settings": {
             "question": "How long does the sale last?",
-            "answer": "<p>From Friday, November 20 through the end of Tuesday, December 1 — or while sizes last.</p>",
-            "open": false
+            "answer": "<p>From Friday, November 20 through the end of Monday, November 30 — or while sizes last.</p>",
+            "open": false,
+            "color": ""
           }
         }
       },
       "block_order": [
+        "question_eCKJJ7",
+        "question_MytNnk",
         "q_0",
         "q_1",
         "q_2"
       ],
       "settings": {
+        "eyebrow": "Good to know",
+        "title": "Black Friday questions",
+        "text": "The short version: 40% off everything, no code, through November 30.",
+        "link_1_text": "All FAQs",
         "link_1_url": "shopify://pages/frequently-asked-questions",
+        "link_2_text": "Contact us",
         "link_2_url": "shopify://pages/contact-us"
+      }
+    },
+    "newsletter": {
+      "type": "section-newsletter",
+      "blocks": {
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "subheading": "Join our mailing list",
+            "heading": "Be first to hear about the next drop",
+            "heading_font_size": "heading-x-small",
+            "text": "",
+            "text_font_size": "body-medium",
+            "text_columns": 1,
+            "align_text": "text-center",
+            "button_text": "Join",
+            "show_arrow": false,
+            "terms": false,
+            "show_name": false,
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_social_links": false,
+            "bg_color": "",
+            "color": "",
+            "heading_tag": "automatic"
+          }
+        }
+      },
+      "block_order": [
+        "newsletter"
+      ],
+      "settings": {
+        "width": "wrapper--full-padded",
+        "height": "two-fifty-height-hero",
+        "mobile_height": "screen-height-one-half--mobile",
+        "color_scheme": "scheme-10",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     }
   },
@@ -349,6 +489,7 @@
     "bf_perks",
     "bf_list",
     "bf_sale_on_sale",
+    "bf_proof_M3dwmt",
     "main",
     "bf_faq",
     "newsletter"

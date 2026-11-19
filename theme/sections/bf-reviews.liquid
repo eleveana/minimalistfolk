@@ -1,0 +1,101 @@
+{%- comment -%}
+  Black Friday: hand-picked customer reviews as photo cards.
+  A card uses its own photo, else the linked product's photo.
+{%- endcomment -%}
+{{ 'black-friday.css' | asset_url | stylesheet_tag }}
+
+{%- assign accents = '#ecb935,#de8d9b,#d1def9,#8b904d' | split: ',' -%}
+
+<div class="bf">
+  <section class="bf-reviews">
+    <div class="bf__wrap">
+      <div class="bf-reviews__head">
+        <div>
+          {%- if section.settings.eyebrow != blank -%}<span class="bf-pill bf-pill--solid bf__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+          <h2 class="bf__display bf-reviews__title">{{ section.settings.title }}</h2>
+        </div>
+        {%- if section.settings.rating_text != blank or section.settings.text != blank -%}
+          <div class="bf-reviews__meta">
+            {%- if section.settings.rating_text != blank -%}
+              <p class="bf-reviews__rating">
+                <span class="bf-stars" aria-hidden="true">{% render 'bf-stars', rating: 5 %}</span>
+                {{ section.settings.rating_text }}
+              </p>
+            {%- endif -%}
+            {%- if section.settings.text != blank -%}<p class="bf-reviews__text">{{ section.settings.text }}</p>{%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="bf-reviews__grid">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign accent_index = forloop.index0 | modulo: 4
+            assign p = block.settings.product
+            assign img = block.settings.image
+            if img == blank and p.featured_media
+              assign img = p.featured_media
+            endif
+          -%}
+          <figure class="bf-review" style="--accent: {{ block.settings.color | default: accents[accent_index] }}" {{ block.shopify_attributes }}>
+            <div class="bf-review__media">
+              {%- if img -%}
+                {{ img | image_url: width: 720 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 25vw, 75vw', alt: block.settings.name | escape }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </div>
+            <figcaption class="bf-review__body">
+              <span class="bf-stars" role="img" aria-label="{{ block.settings.rating }} out of 5 stars">{% render 'bf-stars', rating: block.settings.rating %}</span>
+              {%- if block.settings.quote != blank -%}<blockquote class="bf-review__quote">{{ block.settings.quote }}</blockquote>{%- endif -%}
+              <p class="bf-review__name bf__eyebrow">{{ block.settings.name }}</p>
+              {%- if p != blank -%}
+                <a class="bf-review__product" href="{{ p.url }}">{{ block.settings.product_label }} {{ p.title | split: '|' | first | strip }}</a>
+              {%- endif -%}
+            </figcaption>
+          </figure>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Black Friday reviews",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Pill", "default": "Real families" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Loved by parents" },
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.9 from 1,000+ reviews", "info": "Shown next to five stars. Leave empty to hide." },
+    { "type": "textarea", "id": "text", "label": "Text" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Customer photo", "info": "Leave empty to use the product photo." },
+        { "type": "range", "id": "rating", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Review", "default": "Softest tee we own. She asks to wear it every day." },
+        { "type": "text", "id": "name", "label": "Name", "default": "Sarah M." },
+        { "type": "product", "id": "product", "label": "Product", "info": "Optional. Adds a link to the product." },
+        { "type": "text", "id": "product_label", "label": "Product link prefix", "default": "Wearing:" },
+        { "type": "color", "id": "color", "label": "Color", "info": "Photo shadow. Leave empty to rotate the page colors." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Black Friday reviews",
+      "settings": { "rating_text": "" },
+      "blocks": [
+        { "type": "review", "settings": {"quote": "So incredibly soft and snug for the Christmas season. You can't go wrong purchasing from Minimalist Folk. They are incredible, and worth every penny!", "name": "Pam", "rating": 5, "product_label": "Reviewed:"} },
+        { "type": "review", "settings": {"quote": "This set is so cute and the quality of the items are well worth the money!", "name": "Athena", "rating": 5, "product_label": "Reviewed:"} },
+        { "type": "review", "settings": {"quote": "Socks are amazing! The toddler knee highs go just above my 4 year old's knees, they stay up! Awesome quality and so cute!", "name": "Patricia", "rating": 5, "product_label": "Reviewed:"} },
+        { "type": "review", "settings": {"quote": "So cute. Granddaughter loved the outfit. Comfy and stylish.", "name": "Stephanie", "rating": 5, "product_label": "Reviewed:"} }
+      ]
+    }
+  ]
+}
+{% endschema %}

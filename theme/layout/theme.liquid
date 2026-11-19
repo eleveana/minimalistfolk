@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-touch supports-no-cookies" lang="{{ request.locale.iso_code }}">
   <head>
+    {%- render 'bf-home-redirect' -%}
     {%- render 'head' -%}
 
     {{ content_for_header }}

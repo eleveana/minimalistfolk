@@ -1,0 +1,22 @@
+{%- comment -%}
+  Black Friday: during the sale, send people who land on the homepage from outside the site
+  to the Black Friday page. Visitors already browsing (internal referrer) still reach the
+  normal homepage, so the logo never traps them. Checked in the browser, not in Liquid,
+  because Shopify caches rendered pages. Keeps query params (utm_*, etc.).
+  Add ?home to the homepage URL to skip it. Dates match the hero countdown (Pacific time).
+{%- endcomment -%}
+{%- if template.name == 'index' and request.design_mode == false -%}
+  <script>
+    (function () {
+      var start = Date.parse('2026-11-20T00:00:00-08:00');
+      var end = Date.parse('2026-11-30T23:59:59-08:00');
+      var now = Date.now();
+      if (now < start || now > end) return;
+      if (/[?&]home\b/.test(location.search)) return;
+      try {
+        if (document.referrer && new URL(document.referrer).host === location.host) return;
+      } catch (e) {}
+      location.replace('{{ routes.collections_url }}/black-friday' + location.search + location.hash);
+    })();
+  </script>
+{%- endif -%}

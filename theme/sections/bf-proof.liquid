@@ -1,0 +1,116 @@
+{%- comment -%}
+  Black Friday: social proof band — Inc. 5000 badge, live Judge.me review count, "As seen in" logos.
+  Review numbers come from Judge.me's shop metafields, so they stay current on their own.
+  With no logo blocks, falls back to the press logos used on the homepage.
+  The positive count is rounded down to the hundred ("1,600+") with the comma added by hand.
+{%- endcomment -%}
+{{ 'black-friday.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign summary = shop.metafields.judgeme.store_summary_widget_data.value
+  assign positive = 0
+  for row in summary.histogram
+    if row.rating >= 4
+      assign positive = positive | plus: row.frequency
+    endif
+  endfor
+  if positive == 0
+    assign positive = shop.metafields.judgeme.all_reviews_count | plus: 0
+  endif
+
+  assign rounded = positive | divided_by: 100 | times: 100
+  if rounded >= 1000
+    assign thousands = rounded | divided_by: 1000
+    assign rest = rounded | modulo: 1000 | plus: 1000 | append: '' | slice: 1, 3
+    assign count_label = thousands | append: ',' | append: rest
+  else
+    assign count_label = rounded | append: ''
+  endif
+  if rounded < positive
+    assign count_label = count_label | append: '+'
+  endif
+
+  assign rating = shop.metafields.judgeme.all_reviews_rating | default: summary.average_rating
+  assign badge = section.settings.badge | default: images['Inc._5000_Black_Medallion.png']
+-%}
+
+<div class="bf">
+  <section class="bf-proof">
+    <div class="bf__wrap bf-proof__grid">
+      <div class="bf-proof__item bf-proof__award">
+        {%- if badge -%}
+          <span class="bf-proof__badge">{{ badge | image_url: width: 240 | image_tag: loading: 'lazy', sizes: '96px', alt: 'Inc. 5000 honoree' }}</span>
+        {%- endif -%}
+        <div>
+          {%- if section.settings.rank != blank -%}<p class="bf__display bf-proof__big">{{ section.settings.rank }}</p>{%- endif -%}
+          <p class="bf-proof__label">{{ section.settings.award_text }}</p>
+        </div>
+      </div>
+
+      {%- if positive > 0 -%}
+        <div class="bf-proof__item">
+          <div>
+            <span class="bf-stars bf-proof__stars" role="img" aria-label="{{ rating }} out of 5 stars">{% render 'bf-stars', rating: 5 %}</span>
+            <p class="bf__display bf-proof__big">{{ count_label }}</p>
+            <p class="bf-proof__label">
+              {{- section.settings.reviews_text -}}
+              {%- if rating != blank %} · {{ rating | times: 1.0 | round: 1 }} average{% endif -%}
+            </p>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div class="bf-proof__item bf-proof__press">
+        <p class="bf__eyebrow bf-proof__eyebrow">{{ section.settings.press_title }}</p>
+        <div class="bf-proof__logos">
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.settings.image -%}
+                <span class="bf-proof__logo" style="--w: {{ block.settings.width }}px" {{ block.shopify_attributes }}>
+                  {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', alt: block.settings.image.alt }}
+                </span>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- assign fallback = 'usweekly.svg:100,British_Vogue_logo_white.svg:180,milkmagazine.svg:100' | split: ',' -%}
+            {%- for item in fallback -%}
+              {%- assign parts = item | split: ':' -%}
+              {%- assign logo = images[parts[0]] -%}
+              {%- if logo -%}
+                <span class="bf-proof__logo" style="--w: {{ parts[1] }}px">{{ logo | image_url: width: 400 | image_tag: loading: 'lazy', alt: '' }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Black Friday social proof",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Award" },
+    { "type": "image_picker", "id": "badge", "label": "Badge", "info": "Leave empty to use the Inc. 5000 medallion." },
+    { "type": "text", "id": "rank", "label": "Big text", "default": "Nº 1127" },
+    { "type": "text", "id": "award_text", "label": "Text", "default": "Inc. 5000 fastest-growing companies, 2026" },
+    { "type": "header", "content": "Reviews", "info": "The count and rating come from Judge.me and update on their own." },
+    { "type": "text", "id": "reviews_text", "label": "Text", "default": "Happy reviews from parents" },
+    { "type": "header", "content": "Press" },
+    { "type": "text", "id": "press_title", "label": "Heading", "default": "As seen in" }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Press logo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logo", "info": "Use a white logo. With no logos added, the homepage ones show." },
+        { "type": "range", "id": "width", "label": "Width", "min": 40, "max": 240, "step": 10, "unit": "px", "default": 120 }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Black Friday social proof" }]
+}
+{% endschema %}

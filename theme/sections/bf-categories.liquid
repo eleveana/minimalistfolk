@@ -5,7 +5,7 @@
 {{ 'black-friday.css' | asset_url | stylesheet_tag }}
 
 <div class="bf"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
-  <section class="bf-cats bf-cats--{{ section.settings.style }}">
+  <section class="bf-cats bf-cats--{{ section.settings.style }} bf-cats--{{ section.settings.background }}">
     <div class="bf__wrap">
       <div class="bf-cats__head">
         <h2 class="bf__display bf-cats__title">{{ section.settings.title }}</h2>
@@ -32,7 +32,7 @@
             <a class="bf-circle" href="{{ url | default: '#' }}" style="--ring: {{ block.settings.color }}" {{ block.shopify_attributes }}>
               <span class="bf-circle__img">
                 {%- if img -%}
-                  {{ img | image_url: width: 360 | image_tag: loading: 'lazy', sizes: '180px', alt: name | escape }}
+                  {{ img | image_url: width: 480 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 240px, 104px', alt: name | escape }}
                 {%- else -%}
                   {{ 'collection-1' | placeholder_svg_tag }}
                 {%- endif -%}
@@ -65,6 +65,14 @@
         { "value": "tiles", "label": "Color tiles" }
       ],
       "default": "circles"
+    },
+    {
+      "type": "select", "id": "background", "label": "Background",
+      "options": [
+        { "value": "light", "label": "Light" },
+        { "value": "black", "label": "Black, light blue text" }
+      ],
+      "default": "light"
     },
     { "type": "text", "id": "anchor", "label": "Anchor", "default": "bf-types", "info": "The hero's secondary link jumps to 'bf-types'." }
   ],
