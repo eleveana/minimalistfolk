@@ -48,7 +48,7 @@ html:not([data-bf-phase="live"]) .bf [data-bf-live] { display: none !important; 
   text-decoration: none; transition: transform .15s ease;
 }
 .bf-btn:hover { transform: translateY(-2px); color: var(--bf-white); }
-.bf-btn--outline { background: transparent; border: 1.5px solid currentColor; padding: 12px 22px; font-size: 11px; }
+.bf-btn--outline, .bf-btn--outline:hover { background: transparent; color: var(--bf-black); border: 1.5px solid currentColor; padding: 12px 22px; font-size: 11px; white-space: nowrap; }
 .bf-link {
   color: inherit; font: 600 12px/1 var(--bf-body); letter-spacing: .1em;
   text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px;

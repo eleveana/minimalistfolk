@@ -129,7 +129,7 @@
           "type": "category",
           "settings": {
             "title": "Aspen Sets",
-            "collection": "ss26-part-2",
+            "collection": "aspen-sets",
             "image": "shopify://shop_images/BlueFleeceSkateboarderinaSunlitAlley.jpg",
             "link": "",
             "color": "#d1def9"
@@ -340,7 +340,7 @@
         "products": [],
         "collection": "online-warehouse-sale",
         "count": 4,
-        "button_text": "Shop all clearance",
+        "button_text": "View all",
         "button_link": "shopify://collections/online-warehouse-sale",
         "badge_pre": "Extra 40% off Nov 20",
         "badge_live": "Extra 40% off",
